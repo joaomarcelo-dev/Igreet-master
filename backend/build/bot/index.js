@@ -17,6 +17,7 @@ const venom_bot_1 = require("venom-bot");
 const schedule_1 = __importDefault(require("../schedule"));
 const dayjs_utils_1 = __importDefault(require("../utils/dayjs.utils"));
 const services_model_1 = __importDefault(require("../app/models/services.model"));
+const conf_1 = require("../conf");
 const initVenom = () => (0, venom_bot_1.create)({
     session: 'bot-atendimento',
 }).then((client) => {
@@ -29,16 +30,19 @@ const start = (client) => __awaiter(void 0, void 0, void 0, function* () {
         yield services_model_1.default.createService({
             expirationTime: dayjs_utils_1.default.createTimeExpiry(),
             phone: message.from,
-            time: dayjs_utils_1.default.nowTime()
+            time: dayjs_utils_1.default.nowTime(),
         });
         client.sendText(message.from, 'Olá tudo bem? Deseja argendar um atendimento?');
         client.sendButtons(message.from, '', 'Não', true);
         client.sendButtons(message.from, '', 'Sim', true);
-        if ((yield services_model_1.default.getServiceByPhone(message.from)) && message.body === 'Sim') {
-            client.sendText(message.from, 'Por favor, preencha seus dados para agendar um atendimento: http://10.0.0.227:5173');
+        const includesInService = yield services_model_1.default.getServiceByPhone(message.from);
+        if (includesInService && message.body === 'Sim') {
+            client.sendText(message.from, `Por favor, preencha seus dados para agendar um atendimento: ${conf_1.baseUrlServer}/new-appoinment/${includesInService.id}`);
+            yield services_model_1.default.deleteServiceByPhone(message.from);
         }
-        else if (message.body === 'Não') {
+        else if (includesInService && message.body === 'Não') {
             client.sendText(message.from, 'Ok, até a próxima');
+            yield services_model_1.default.deleteServiceByPhone(message.from);
         }
     }));
 });

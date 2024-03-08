@@ -6,7 +6,7 @@ import serviceModel from '../app/models/services.model';
 import { baseUrlServer } from '../conf';
 
 const initVenom = () => create({
-  session: 'bot-atendimento',
+  session: 'bot-atendimento',  
 }).then((client) => {
   start(client)
   scheduleJobs(client);
@@ -23,8 +23,8 @@ const start = async (client: Whatsapp) => {
       });
 
       client.sendText(message.from, 'Olá tudo bem? Deseja argendar um atendimento?');
-      client.sendButtons(message.from, '', 'Não', true);
-      client.sendButtons(message.from, '', 'Sim', true);
+      client.sendButtons(message.from, 'Alguma coisa', 'Não', true);
+      client.sendButtons(message.from, 'Alguma coisa', 'Sim', true);
 
       const includesInService = await serviceModel.getServiceByPhone(message.from);
 

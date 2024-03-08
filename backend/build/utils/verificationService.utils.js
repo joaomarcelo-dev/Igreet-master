@@ -17,16 +17,11 @@ const services_model_1 = __importDefault(require("../app/models/services.model")
 const dayjs_1 = __importDefault(require("dayjs"));
 const verificationExpirationServiceTime = (client) => __awaiter(void 0, void 0, void 0, function* () {
     const allServices = yield services_model_1.default.getAllServices();
-    const serviceExpireds = allServices.map((service) => {
+    const serviceExpireds = allServices.map((service) => __awaiter(void 0, void 0, void 0, function* () {
         if ((0, dayjs_1.default)().isAfter((0, dayjs_1.default)(service.expirationTime))) {
-            services_model_1.default.deleteService(service.expirationTime);
-            return service;
+            yield services_model_1.default.deleteService(service.id);
+            client.sendText(service.phone, 'Seu atendimento expirou');
         }
-    });
-    serviceExpireds.forEach((service) => {
-        if (service === null || service === void 0 ? void 0 : service.phone) {
-            client.sendText(service.phone, `Olá, tudo bem? devido ao tempo de espera, seu atendimento foi cancelado.`);
-        }
-    });
+    }));
 });
 exports.verificationExpirationServiceTime = verificationExpirationServiceTime;
