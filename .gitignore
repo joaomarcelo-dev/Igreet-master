@@ -1,4 +1,4 @@
-/backend/node_modules
-/backend/build
-/backend/.env
-/backend/tokens
+node_modules
+build
+.env
+tokens
