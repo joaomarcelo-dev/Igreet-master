@@ -3,6 +3,7 @@ import scheduleJobs from '../schedule';
 import messageTemp from '../temp/messageTemp.temp';
 import dayJsUtils from '../utils/dayjs.utils';
 import serviceModel from '../app/models/services.model';
+import { baseUrlServer } from '../conf';
 
 const initVenom = () => create({
   session: 'bot-atendimento',
@@ -18,18 +19,22 @@ const start = async (client: Whatsapp) => {
       await serviceModel.createService({
         expirationTime: dayJsUtils.createTimeExpiry(),
         phone: message.from,
-        time: dayJsUtils.nowTime()
+        time: dayJsUtils.nowTime(),
       });
 
       client.sendText(message.from, 'Olá tudo bem? Deseja argendar um atendimento?');
       client.sendButtons(message.from, '', 'Não', true);
       client.sendButtons(message.from, '', 'Sim', true);
 
-      if (await serviceModel.getServiceByPhone(message.from) && message.body === 'Sim') {
-        client.sendText(message.from, 'Por favor, preencha seus dados para agendar um atendimento: http://10.0.0.227:5173');
+      const includesInService = await serviceModel.getServiceByPhone(message.from);
+
+      if (includesInService && message.body === 'Sim') {
+        client.sendText(message.from, `Por favor, preencha seus dados para agendar um atendimento: ${baseUrlServer}/new-appoinment/${includesInService.id}`);
+        await serviceModel.deleteServiceByPhone(message.from);
         
-      } else if (message.body === 'Não') {
+      } else if (includesInService && message.body === 'Não') {
         client.sendText(message.from, 'Ok, até a próxima');
+        await serviceModel.deleteServiceByPhone(message.from);
       }
   });
 }

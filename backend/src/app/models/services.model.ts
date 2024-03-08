@@ -1,8 +1,8 @@
 import prisma from "../../providers/prisma.provider";
 import { ServiceInputType } from "../../types/Service.type";
 
-const createService = ({ expirationTime, phone, time }: ServiceInputType) => {
-  const newService = prisma.services.create({
+const createService = async ({ expirationTime, phone, time }: ServiceInputType) => {
+  const newService = await prisma.services.create({
     data: {
       expirationTime,
       phone,
@@ -13,14 +13,14 @@ const createService = ({ expirationTime, phone, time }: ServiceInputType) => {
   return newService;
 };
 
-const getAllServices = () => {
-  const services = prisma.services.findMany();
+const getAllServices = async () => {
+  const services = await prisma.services.findMany();
 
   return services;
 };
 
-const deleteService = (id: string) => {
-  const service = prisma.services.delete({
+const deleteService = async (id: string) => {
+  const service = await prisma.services.delete({
     where: {
       id
     }
@@ -30,8 +30,8 @@ const deleteService = (id: string) => {
 };
 
 
-const getServiceByPhone = (phone: string) => {
-  const service = prisma.services.findFirst({
+const getServiceByPhone = async (phone: string) => {
+  const service = await prisma.services.findFirst({
     where: {
       phone
     }
@@ -40,11 +40,32 @@ const getServiceByPhone = (phone: string) => {
   return service;
 };
 
+const deleteServiceByPhone = async (phone: string) => {
+  const service = await prisma.services.findFirst({
+    where: {
+      phone
+    }
+  });
+
+  if (!service) {
+    return null;
+  }
+
+  const serviceDeleted = await prisma.services.delete({
+    where: {
+      id: service.id
+    }
+  });
+
+  return serviceDeleted;
+}
+
 const serviceModel = {
   createService,
   getAllServices,
   deleteService,
-  getServiceByPhone
+  getServiceByPhone,
+  deleteServiceByPhone,
 };
 
 export default serviceModel;

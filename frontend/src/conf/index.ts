@@ -1,0 +1,1 @@
+export const baseUrlServer = 'http://localhost:3333';

@@ -5,16 +5,10 @@ import dayjs from 'dayjs';
 const verificationExpirationServiceTime = async (client: Whatsapp) => {
   const allServices = await serviceModel.getAllServices();
 
-  const serviceExpireds = allServices.map((service) => {
+  const serviceExpireds = allServices.map(async(service) => {
     if (dayjs().isAfter(dayjs(service.expirationTime))) {
-      serviceModel.deleteService(service.expirationTime);
-      return service;
-    }
-  });
-
-  serviceExpireds.forEach((service) => {
-    if (service?.phone) {
-      client.sendText(service.phone, `Olá, tudo bem? devido ao tempo de espera, seu atendimento foi cancelado.`);
+      await serviceModel.deleteService(service.id);
+      client.sendText(service.phone, 'Seu atendimento expirou');
     }
   });
 }
