@@ -10,6 +10,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Adms {
+  id       String @id @default(uuid())
+  photo    String
+  name     String
+  email    String
+  password String
+}
+
 model Patients {
   id           String         @id @default(uuid())
   name         String
@@ -33,4 +41,10 @@ model Services {
   phone          String
   time           String
   expirationTime String
+}
+
+model DaysOfAtendence {
+  id   String @id @default(uuid())
+  date String
+  hour String
 }
