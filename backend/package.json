@@ -7,7 +7,8 @@
     "dev": "tsnd --transpile-only --ignore-watch node_modules src/server.ts",
     "build": "tsc",
     "start": "node build/server.js",
-    "init": "npm run build && npm start"
+    "init": "npm run build && npm start",
+    "vercel-build": "npm run build"
   },
   "keywords": [],
   "author": "",
