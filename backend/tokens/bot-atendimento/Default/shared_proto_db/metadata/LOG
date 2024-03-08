@@ -1,2 +1,3 @@
-2024/03/08-10:25:29.343 10124 Creating DB /home/jm-linux/Documentos/projects/Igreet-master/backend/tokens/bot-atendimento/Default/shared_proto_db/metadata since it was missing.
-2024/03/08-10:25:29.352 10124 Reusing MANIFEST /home/jm-linux/Documentos/projects/Igreet-master/backend/tokens/bot-atendimento/Default/shared_proto_db/metadata/MANIFEST-000001
+2024/03/08-11:08:06.930 14359 Reusing MANIFEST /home/jm-linux/Documentos/projects/Igreet-master/backend/tokens/bot-atendimento/Default/shared_proto_db/metadata/MANIFEST-000001
+2024/03/08-11:08:06.930 14359 Recovering log #3
+2024/03/08-11:08:06.930 14359 Reusing old log /home/jm-linux/Documentos/projects/Igreet-master/backend/tokens/bot-atendimento/Default/shared_proto_db/metadata/000003.log 
