@@ -16,10 +16,16 @@ const deleteService = (id: string) => {
   return service;
 };
 
+const getServiceByPhone = (phone: string) => {
+  const service = serviceModel.getServiceByPhone(phone);
+  return service;
+}
+
 const serviceService = {
   createService,
   getAllServices,
-  deleteService
+  deleteService,
+  getServiceByPhone
 };
 
 export default serviceService;

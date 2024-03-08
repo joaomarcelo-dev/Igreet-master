@@ -29,10 +29,22 @@ const deleteService = (id: string) => {
   return service;
 };
 
+
+const getServiceByPhone = (phone: string) => {
+  const service = prisma.services.findFirst({
+    where: {
+      phone
+    }
+  });
+
+  return service;
+};
+
 const serviceModel = {
   createService,
   getAllServices,
-  deleteService
+  deleteService,
+  getServiceByPhone
 };
 
 export default serviceModel;
