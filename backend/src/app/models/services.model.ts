@@ -60,12 +60,23 @@ const deleteServiceByPhone = async (phone: string) => {
   return serviceDeleted;
 }
 
+const getServiceById = async (id: string) => {
+  const service = await prisma.services.findFirst({
+    where: {
+      id
+    }
+  });  
+  
+  return service;
+};
+
 const serviceModel = {
   createService,
   getAllServices,
   deleteService,
   getServiceByPhone,
   deleteServiceByPhone,
+  getServiceById,
 };
 
 export default serviceModel;
