@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
   methods: [ 'GET', 'POST', 'PUT', 'UPDATE' ],
-  origin: '*'
+  origin: [ 'http://localhost:3000', 'https://igreet-master-dtw8.vercel.app/', '*'],
 }))
 
 app.get('/', (req, res) => {
