@@ -59,11 +59,20 @@ const deleteServiceByPhone = (phone) => __awaiter(void 0, void 0, void 0, functi
     });
     return serviceDeleted;
 });
+const getServiceById = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const service = yield prisma_provider_1.default.services.findFirst({
+        where: {
+            id
+        }
+    });
+    return service;
+});
 const serviceModel = {
     createService,
     getAllServices,
     deleteService,
     getServiceByPhone,
     deleteServiceByPhone,
+    getServiceById,
 };
 exports.default = serviceModel;

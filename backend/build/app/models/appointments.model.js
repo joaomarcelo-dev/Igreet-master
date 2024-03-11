@@ -42,9 +42,20 @@ const deleteAppointment = (id) => __awaiter(void 0, void 0, void 0, function* ()
     });
     return appointment;
 });
+const getAppointmentByDateEndPhone = (_b) => __awaiter(void 0, [_b], void 0, function* ({ date, phone }) {
+    const appoinmet = yield prisma_provider_1.default.appointments.findFirst({
+        where: {
+            date,
+            patient: {
+                phone
+            }
+        }
+    });
+});
 const appointmentModel = {
     createAppointment,
     getAllAppointments,
-    deleteAppointment
+    deleteAppointment,
+    getAppointmentByDateEndPhone,
 };
 exports.default = appointmentModel;

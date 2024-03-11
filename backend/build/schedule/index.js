@@ -14,10 +14,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_schedule_1 = __importDefault(require("node-schedule"));
 const conf_1 = require("../conf");
-const verificationService_utils_1 = require("../utils/verificationService.utils");
-const scheduleJobs = (client) => __awaiter(void 0, void 0, void 0, function* () {
-    node_schedule_1.default.scheduleJob(`*/${conf_1.timeScheduleInMinuts} * * * *`, function () {
-        (0, verificationService_utils_1.verificationExpirationServiceTime)(client);
-    });
-});
-exports.default = scheduleJobs;
+const services_model_1 = __importDefault(require("../app/models/services.model"));
+const dayjs_provider_1 = require("../providers/dayjs.provider");
+node_schedule_1.default.scheduleJob(`*/${conf_1.timeScheduleInMinuts} * * * *`, () => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('Executando a função a cada', conf_1.timeScheduleInMinuts, 'minutos.');
+    const allService = yield services_model_1.default.getAllServices();
+    allService.forEach((service) => __awaiter(void 0, void 0, void 0, function* () {
+        const timeIsExpired = dayjs_provider_1.dayjsProvider.verifyExpiredTime(service.expirationTime);
+        if (timeIsExpired) {
+            yield services_model_1.default.deleteService(service.id);
+            console.log('Mensagem expirada:', service.id);
+        }
+    }));
+}));

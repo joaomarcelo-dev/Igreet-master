@@ -13,8 +13,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const appointments_model_1 = __importDefault(require("../models/appointments.model"));
-const createAppointment = (_a) => __awaiter(void 0, [_a], void 0, function* ({ date, hour, patientId }) {
-    const newAppointment = yield appointments_model_1.default.createAppointment({ date, hour, patientId });
+const patients_model_1 = __importDefault(require("../models/patients.model"));
+const services_model_1 = __importDefault(require("../models/services.model"));
+const createAppointment = (_a) => __awaiter(void 0, [_a], void 0, function* ({ date, hour, address, birthDate, cpf, name, serviceId }) {
+    const service = yield services_model_1.default.getServiceById(serviceId);
+    if (!service) {
+        return {
+            data: {
+                message: 'Nehum serviço foi agendado vai whatsapp para vc'
+            },
+            status: 401,
+        };
+    }
+    const patient = yield patients_model_1.default.getPatientByCpf(cpf);
+    if (!patient) {
+        const newPatient = yield patients_model_1.default.createPatients({ address, birthDate, cpf, name, phone: service.phone });
+        const newAppointment = yield appointments_model_1.default.createAppointment({ date, hour, patientId: newPatient.id });
+        yield services_model_1.default.deleteService(service.id);
+        return {
+            data: newAppointment,
+            status: 201,
+        };
+    }
+    const newAppointment = yield appointments_model_1.default.createAppointment({ date, hour, patientId: patient.id });
+    yield services_model_1.default.deleteService(service.id);
     return {
         status: 201,
         data: newAppointment
@@ -27,16 +49,21 @@ const getAllAppointments = () => __awaiter(void 0, void 0, void 0, function* () 
         data: appointments
     };
 });
-const deleteAppointment = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const appointment = yield appointments_model_1.default.deleteAppointment(id);
+const getAppointmentByDateEndPhone = (_b) => __awaiter(void 0, [_b], void 0, function* ({ date, phone }) {
+    const appoinmet = yield appointments_model_1.default.getAppointmentByDateEndPhone({ date, phone });
+    if (appoinmet == null) {
+        return {
+            status: 404,
+            data: null
+        };
+    }
     return {
+        data: appoinmet,
         status: 200,
-        data: appointment
     };
 });
 const appointmentService = {
     createAppointment,
     getAllAppointments,
-    deleteAppointment
 };
 exports.default = appointmentService;

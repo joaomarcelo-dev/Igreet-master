@@ -4,6 +4,7 @@ import cors from 'cors';
 // import '../schedule';
 import appointmentsRouter from './router/appointments.router';
 import patientRouter from './router/patient.router';
+import admsRouter from './router/adms.router';
 
 const app = express();
 app.use(express.json());
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 app.use('/service', serviceRouter);
 app.use('/appointment', appointmentsRouter);
 app.use('/patient', patientRouter);
+app.use('/adms', admsRouter);
 
 export {
   app,
