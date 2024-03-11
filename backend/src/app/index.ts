@@ -1,7 +1,7 @@
 import express from 'express';
 import serviceRouter from './router/service.router';
 import cors from 'cors';
-import '../schedule';
+// import '../schedule';
 import appointmentsRouter from './router/appointments.router';
 import patientRouter from './router/patient.router';
 
