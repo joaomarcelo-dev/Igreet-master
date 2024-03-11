@@ -10,9 +10,9 @@ import loginRouter from './router/login.router';
 const app = express();
 app.use(express.json());
 app.use(cors({
-  methods: [ 'GET', 'POST', 'PUT', 'UPDATE' ],
-  origin: [ 'http://localhost:3000', 'https://igreet-master-dtw8.vercel.app/', '*'],
-}))
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD', 'PATCH', 'CONNECT', 'TRACE', 'PURGE', 'LINK', 'UNLINK', 'COPY', 'LOCK', 'UNLOCK', 'VIEW'],
+}));
 
 app.get('/', (req, res) => {
  return res.json({ message: 'Hello World' });
