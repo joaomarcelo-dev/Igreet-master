@@ -3,7 +3,7 @@ import { BASE_URL, request } from "./request.server"
 
 const appointmentRoute = `${BASE_URL}/appointment`
 
-const getAppointment = async (id: string) => {
+const getAppointmentById = async (id: string) => {
   const response = await request({
     method: 'get',
     url: appointmentRoute,
@@ -36,9 +36,22 @@ const createAppointment = async ({ address, birthDate, cpf, date, hour, name, se
   };
 }
 
+const getAllAppointments = async ({ token }: { token: string }) => {
+  const response = await request({
+    method: 'get',
+    url: appointmentRoute,
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  return response.data;
+}
+
 const appointmentServer = {
-  getAppointment,
+  getAppointmentById,
   createAppointment,
+  getAllAppointments,
 }
 
 export default appointmentServer;

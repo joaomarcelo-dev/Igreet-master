@@ -1,0 +1,18 @@
+.appointment-card.flex_center {
+  justify-content: start;
+  padding: 10px 20px;
+  gap: 10px;
+  margin: 10px 10px;
+  background-color: #777777;
+  border-radius: 20px;
+}
+
+.img-profile-appointment-card {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.name-appointment-card {
+  font-size: 1.2rem;
+}
