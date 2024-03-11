@@ -4,6 +4,7 @@ import './style.scss';
 import { useDispatch } from 'react-redux';
 import appActions from '../../redux/actions/app.actions';
 import { useNavigate } from 'react-router-dom';
+import localStorageUtils from '../../utils/localStorage.utils';
 
 
 export default function Login() {
@@ -22,6 +23,7 @@ export default function Login() {
 
     if (response.token) {
       dispatch(appActions.setToken(response.token))
+      localStorageUtils.token.set(response.token);
       navigation('/');
     }
     
