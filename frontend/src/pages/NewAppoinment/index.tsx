@@ -162,12 +162,15 @@ export default function NewAppoinment() {
               >
                 <input
                   name='dateOfBirth'
-                  type="date"
+                  type="text"
                   className="form-control"
                   id="basic-url"
                   aria-describedby="basic-addon3 basic-addon4"
                   onChange={handleChange}
-                  value={dataForm.dateOfBirth}
+                  maxLength={10}
+                  value={
+                    formatInputUtils.formatInputDate(dataForm.dateOfBirth)
+                  }
                 />
               </div>
             </div>
