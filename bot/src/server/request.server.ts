@@ -11,7 +11,7 @@ type RequestServer = {
 };
 
 
-const BASE_URL = process.env.PORT || 'http://localhost:3000';
+const BASE_URL = process.env.PORT || 'http://localhost:3333';
 
 
 export const requestServer = async ({ method, url, data }: RequestServer) => {

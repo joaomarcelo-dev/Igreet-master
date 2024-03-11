@@ -37,10 +37,22 @@ const deleteAppointment = async (id: string) => {
   return appointment;
 };  
 
+const getAppointmentByDateEndPhone = async ({ date, phone }:{date: string, phone: string}) => {
+  const appoinmet = await prisma.appointments.findFirst({
+    where: {
+      date,
+      patient: {
+        phone
+      }
+    }
+  })
+}
+
 const appointmentModel = {
   createAppointment,
   getAllAppointments,
-  deleteAppointment
+  deleteAppointment,
+  getAppointmentByDateEndPhone,
 };
 
 export default appointmentModel;

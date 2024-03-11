@@ -26,7 +26,7 @@ const createAppointment = async ({
       status: 401,
     }
   }
-
+  
   const patient = await patientsModel.getPatientByCpf(cpf);
 
   if (!patient) {
@@ -59,6 +59,22 @@ const getAllAppointments = async (): Promise<ServiceReturnType> => {
     status: 200,
     data: appointments
   };
+}
+
+const getAppointmentByDateEndPhone = async ({ date, phone }:{date: string, phone: string}): Promise<ServiceReturnType> => {
+  const appoinmet = await appointmentModel.getAppointmentByDateEndPhone({date, phone})
+
+  if (appoinmet == null) {
+    return {
+      status: 404,
+      data: null
+    }
+  }
+
+  return {
+    data: appoinmet,
+    status: 200,
+  }
 }
 
 const appointmentService = {

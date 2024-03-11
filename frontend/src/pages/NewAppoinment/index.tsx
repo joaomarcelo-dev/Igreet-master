@@ -3,6 +3,8 @@ import './style.scss';
 import {  useParams } from "react-router-dom";
 import serviceServer from '../../server/service.server';
 import formatInputUtils from '../../utils/formatInput.utils';
+import SweetAlert from '../../components/SweetAlert/SweetAlert';
+import appointmentServer from '../../server/appointment.server';
 
 export default function NewAppoinment() {
   const { id } = useParams();
@@ -14,22 +16,43 @@ export default function NewAppoinment() {
     address: ''
   })
 
+  const date = new Date();
+
   useEffect(() => {
     const getService = async () => {
       if (id) {
         const response  = await serviceServer.getServerById(id);
         setAppoinment(response);
-        console.log(response);
       }
     }
 
     getService();
   }, [id]);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(dataForm);
+    if (!id) return;
+
+    const response = await appointmentServer.createAppointment({
+      address: dataForm.address,
+      birthDate: dataForm.dateOfBirth,
+      cpf: dataForm.cpf,
+      date: date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString(),
+      hour: date.getHours().toString() + ':' + date.getMinutes().toString(),
+      name: dataForm.name,
+      serviceId: id
+    });
+
+    console.log(response);
+    
+
+    if (response.status !== 201) {
+      SweetAlert().error('Erro', 'Ocorreu um erro ao agendar a sua consulta');
+    } else {
+      SweetAlert().success('Agendado!', 'Sua consulta foi agendada com sucesso!');
+    }
+
   }
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
@@ -50,12 +73,15 @@ export default function NewAppoinment() {
 
   const submitIsDisabled = dataForm.address && dataForm.cpf && dataForm.dateOfBirth && dataForm.name ? false : true;
 
+  console.log();
+  
+
   return (
     <div
       id="content-page-new-appoinment"
     >
       {
-        !appoinment ?
+        !Object.keys(appoinment).length ?
         <section
           id='content-not-appoinment'
           className='flex_center'
