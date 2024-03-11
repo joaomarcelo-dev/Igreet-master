@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import loginServer from '../../server/login.server';
 import './style.scss';
+import { useDispatch } from 'react-redux';
+import appActions from '../../redux/actions/app.actions';
+
 
 export default function Login() {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({ name: '', password: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,7 +17,8 @@ export default function Login() {
     e.preventDefault();
 
     const response = await loginServer.loginAdm({ name: formData.name, password: formData.password});
-    console.log(response);
+    dispatch(appActions.setToken(response.token))
+    
   }
   return (
     <div
