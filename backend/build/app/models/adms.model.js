@@ -32,8 +32,18 @@ const deleteAdm = (id) => __awaiter(void 0, void 0, void 0, function* () {
     });
     return adm;
 });
+const getAdmByCredentials = (_b) => __awaiter(void 0, [_b], void 0, function* ({ name, password }) {
+    const adm = yield prisma_provider_1.default.adms.findFirst({
+        where: {
+            name,
+            password
+        }
+    });
+    return adm;
+});
 const admsModel = {
     createAdm,
-    deleteAdm
+    deleteAdm,
+    getAdmByCredentials,
 };
 exports.default = admsModel;
