@@ -25,18 +25,7 @@ const deleteAdm = async (id: string) => {
   return adm
 }
 
-const getAdmByCredentials = async ({ email, name, password }: LoginTypeInput) => {
-  if (email) {
-    const adm = await prisma.adms.findFirst({
-      where: {
-        email,
-        password
-      }
-    })
-
-    return adm
-  }
-
+const getAdmByCredentials = async ({ name, password }: LoginTypeInput) => {
   const adm = await prisma.adms.findFirst({
     where: {
       name,
