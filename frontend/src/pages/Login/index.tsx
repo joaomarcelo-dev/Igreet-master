@@ -3,9 +3,11 @@ import loginServer from '../../server/login.server';
 import './style.scss';
 import { useDispatch } from 'react-redux';
 import appActions from '../../redux/actions/app.actions';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Login() {
+  const navigation = useNavigate()
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({ name: '', password: '' });
 
@@ -17,7 +19,11 @@ export default function Login() {
     e.preventDefault();
 
     const response = await loginServer.loginAdm({ name: formData.name, password: formData.password});
-    dispatch(appActions.setToken(response.token))
+
+    if (response.token) {
+      dispatch(appActions.setToken(response.token))
+      navigation('/');
+    }
     
   }
   return (
