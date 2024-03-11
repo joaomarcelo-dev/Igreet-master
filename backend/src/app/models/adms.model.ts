@@ -1,5 +1,6 @@
 import prisma from "../../providers/prisma.provider";
 import { AdmsInput } from "../../types/Adms.type";
+import { LoginTypeInput } from "../../types/Login.type";
 
 const createAdm = async ({ email, name, password, photo }: AdmsInput) => {
   const newAdm = await prisma.adms.create({
@@ -24,9 +25,32 @@ const deleteAdm = async (id: string) => {
   return adm
 }
 
+const getAdmByCredentials = async ({ email, name, password }: LoginTypeInput) => {
+  if (email) {
+    const adm = await prisma.adms.findFirst({
+      where: {
+        email,
+        password
+      }
+    })
+
+    return adm
+  }
+
+  const adm = await prisma.adms.findFirst({
+    where: {
+      name,
+      password
+    }
+  })
+
+  return adm
+}
+
 const admsModel = {
   createAdm,
-  deleteAdm
+  deleteAdm,
+  getAdmByCredentials,
 }
 
 export default admsModel

@@ -10,6 +10,7 @@ const cors_1 = __importDefault(require("cors"));
 // import '../schedule';
 const appointments_router_1 = __importDefault(require("./router/appointments.router"));
 const patient_router_1 = __importDefault(require("./router/patient.router"));
+const adms_router_1 = __importDefault(require("./router/adms.router"));
 const app = (0, express_1.default)();
 exports.app = app;
 app.use(express_1.default.json());
@@ -23,3 +24,4 @@ app.get('/', (req, res) => {
 app.use('/service', service_router_1.default);
 app.use('/appointment', appointments_router_1.default);
 app.use('/patient', patient_router_1.default);
+app.use('/adms', adms_router_1.default);
