@@ -35,8 +35,8 @@ export default function Login() {
       <div className="login-form">
         <h1 className="login-form-title">Login</h1>
         <form action="" className="login-form-form" onSubmit={handleSubmit}>
-          <input type="text" placeholder="Namo de Usuário" className="login-form-form-input" name='name' onChange={handleChange} />
-          <input type="password" placeholder="Password" className="login-form-form-input" name='password' onChange={handleChange} />
+          <input type="text" placeholder="Nome de Usuário" className="login-form-form-input" name='name' onChange={handleChange} />
+          <input type="password" placeholder="Senha" className="login-form-form-input" name='password' onChange={handleChange} />
           <button type="submit" className="login-form-form-button">Login</button>
         </form>
       </div>
