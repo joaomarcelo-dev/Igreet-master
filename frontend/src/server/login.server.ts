@@ -10,7 +10,7 @@ const loginAdm = async ({ name, password }: LoginTypeInput) => {
     data: { name, password }
   });
 
-  return response.data;
+  return response;
 }
 
 const loginServer = {

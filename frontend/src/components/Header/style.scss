@@ -1,0 +1,15 @@
+@import '../../global//index.scss';
+
+.content-header.flex_center {
+  background-color: $primary-color;
+  padding: 20px 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+}
+
+.header-img-profile {
+  width: 50px;
+  height: 50px;
+  border: 1px solid white;
+  border-radius: 50%;
+}

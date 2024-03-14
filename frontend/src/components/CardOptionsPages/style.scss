@@ -1,0 +1,21 @@
+.content-card-options-pages.flex_center {
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  width: 150px;
+  flex-direction: column;
+}
+
+.card-options-page-title {
+  font-size: 1rem;
+  text-align: center;
+  color: #000;
+  margin-top: 15px;
+}
+
+.content-card-options-pages.flex_center.disabled {
+  // opacity: 0.5;
+  pointer-events: none;
+  background-color: #f5f5f5;
+  box-shadow: none;
+}
