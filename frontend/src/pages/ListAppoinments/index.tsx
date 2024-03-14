@@ -14,9 +14,6 @@ export default function ListAppoinments() {
   useEffect(() => {
     const getAllAppiments = async () => {
       const response = await appointmentServer.getAllAppointments({ token })
-
-      console.log(response);
-      
       dispatch(appActions.setAppointments(response));
     }
 
