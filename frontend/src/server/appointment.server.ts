@@ -1,4 +1,4 @@
-import { AppoinmentsCreated, AppointmentDataSubmit } from "../types/Appoinments.type";
+import { AppoinmentsCreated, AppointmentDataSubmit, UpdateStatusAppointment } from "../types/Appoinments.type";
 import { BASE_URL, request } from "./request.server"
 
 const appointmentRoute = `${BASE_URL}/appointment`
@@ -48,10 +48,23 @@ const getAllAppointments = async ({ token }: { token: string }) => {
   return response.data;
 }
 
+const updateAppointment = async ({ complet, id }: UpdateStatusAppointment) => {
+  const response = await request({
+    method: 'put',
+    url: appointmentRoute,
+    data: {
+      complet, id
+    },
+  });
+
+  return response
+}
+
 const appointmentServer = {
   getAppointmentById,
   createAppointment,
   getAllAppointments,
+  updateAppointment,
 }
 
 export default appointmentServer;

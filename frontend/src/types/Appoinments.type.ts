@@ -20,7 +20,13 @@ export type Appointment = {
     cpf: string,
     birthDate: string,
     address: string,
-  }
+  },
+  complet: boolean,
+}
+
+export type UpdateStatusAppointment = {
+  id: string,
+  complet: boolean,
 }
 
 export type AppoinmentsCreated = {

@@ -14,6 +14,10 @@ export default function ListAppoinments() {
   useEffect(() => {
     const getAllAppiments = async () => {
       const response = await appointmentServer.getAllAppointments({ token })
+
+      console.log(response);
+      
+
       dispatch(appActions.setAppointments(response));
     }
 
@@ -28,10 +32,12 @@ export default function ListAppoinments() {
           appointments.length ? (
             appointments.map((appointment, index) => (
               <CardAppointment
+                yourTime={ index === 0}
                 key={index}
                 name={appointment.patient.name}
                 phone={appointment.patient.phone}
                 id={appointment.id}
+                complet={appointment.complet}
               />
             ))
 

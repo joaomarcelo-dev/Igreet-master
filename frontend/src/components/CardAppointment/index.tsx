@@ -5,20 +5,22 @@ type CardAppointmentProps = {
   name: string;
   phone: string;
   id: string;
+  complet: boolean;
+  yourTime: boolean;
 }
 
 const imgNotFound = 'https://www.thermaxglobal.com/wp-content/uploads/2020/05/image-not-found.jpg'
 
-export default function CardAppointment({ name, phone, id }: CardAppointmentProps) {
+export default function CardAppointment({ name, phone, id, complet, yourTime }: CardAppointmentProps) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/appoinment/${id}`);
+    navigate(`/appoinment/${id}?status=${complet}`);
   }
 
   return (
     <div
-      className="appointment-card flex_center"
+      className={`appointment-card flex_center ${complet ? 'complet' : yourTime ? 'your-time' : ''}`}
       onClick={handleClick}
     >
       <img src={ imgNotFound } alt="" className='img-profile-appointment-card' />

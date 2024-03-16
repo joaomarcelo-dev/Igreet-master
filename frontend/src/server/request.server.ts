@@ -1,7 +1,7 @@
 import axios from "axios"
 
 type RequesType = {
-  method: 'get' | 'post' | 'delete',
+  method: 'get' | 'post' | 'delete' | 'put',
   url: string,
   data?: object,
   headers?: object
