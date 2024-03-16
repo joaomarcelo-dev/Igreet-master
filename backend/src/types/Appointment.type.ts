@@ -3,6 +3,7 @@ export type AppointmentType = {
   date: string
   hour: string
   patientId: string
+  complet?: boolean;
 }
 
 export type AppointmentInputType = Omit<AppointmentType, 'id'>

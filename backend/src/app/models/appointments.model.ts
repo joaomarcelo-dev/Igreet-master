@@ -2,7 +2,7 @@ import e from "express";
 import prisma from "../../providers/prisma.provider";
 import { AppointmentInputType } from "../../types/Appointment.type";
 
-const createAppointment = async ({ date, hour, patientId }: AppointmentInputType) => {
+const createAppointment = async ({ date, hour, patientId, complet }: AppointmentInputType) => {
   const newAppointment = await prisma.appointments.create({
     data: {
       date,
