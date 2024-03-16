@@ -12,9 +12,16 @@ const getAllAppointments = async (req: Request, res: Response) => {
   return res.status(status).json(data);
 }
 
+const updateAppointment = async (req: Request, res: Response) => {
+  const { id, complet } = req.body;
+  const { data, status } = await appointmentService.updateAppointment(id, complet);
+  return res.status(status).json(data);
+}
+
 const appointmentController = {
   createAppointment,
   getAllAppointments,
+  updateAppointment,
 }
 
 export default appointmentController;

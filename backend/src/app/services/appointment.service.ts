@@ -61,25 +61,19 @@ const getAllAppointments = async (): Promise<ServiceReturnType> => {
   };
 }
 
-const getAppointmentByDateEndPhone = async ({ date, phone }:{date: string, phone: string}): Promise<ServiceReturnType> => {
-  const appoinmet = await appointmentModel.getAppointmentByDateEndPhone({date, phone})
-
-  if (appoinmet == null) {
-    return {
-      status: 404,
-      data: null
-    }
-  }
-
+const updateAppointment = async (id: string, complet: boolean): Promise<ServiceReturnType> => {
+  const appointment = await appointmentModel.updateAppointment(id, complet);
   return {
-    data: appoinmet,
     status: 200,
-  }
+    data: appointment
+  };
+
 }
 
 const appointmentService = {
   createAppointment,
   getAllAppointments,
+  updateAppointment,
 };
 
 export default appointmentService;

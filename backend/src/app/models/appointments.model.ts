@@ -48,11 +48,25 @@ const getAppointmentByDateEndPhone = async ({ date, phone }:{date: string, phone
   })
 }
 
+const updateAppointment = async (id: string, complet: boolean) => {
+  const appointment = await prisma.appointments.update({
+    where: {
+      id
+    },
+    data: {
+      complet
+    }
+  });
+
+  return appointment;
+}
+
 const appointmentModel = {
   createAppointment,
   getAllAppointments,
   deleteAppointment,
   getAppointmentByDateEndPhone,
+  updateAppointment
 };
 
 export default appointmentModel;
