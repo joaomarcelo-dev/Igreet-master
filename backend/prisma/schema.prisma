@@ -26,6 +26,7 @@ model Patients {
   birthDate    String
   address      String
   Appointments Appointments[]
+  complet      Boolean        @default(false)
 }
 
 model Appointments {
