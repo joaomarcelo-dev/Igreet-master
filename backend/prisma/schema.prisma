@@ -26,7 +26,6 @@ model Patients {
   birthDate    String
   address      String
   Appointments Appointments[]
-  complet      Boolean        @default(false)
 }
 
 model Appointments {
@@ -35,6 +34,7 @@ model Appointments {
   hour      String
   patientId String
   patient   Patients @relation(fields: [patientId], references: [id])
+  complet   Boolean  @default(false)
 }
 
 model Services {
