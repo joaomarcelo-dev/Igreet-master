@@ -1,0 +1,25 @@
+.section-buttons-filter-of-complet {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px
+}
+
+.section-buttons-filter-of-complet button {
+  margin-right: 10px;
+  background-color: transparent;
+  flex: 1;
+  border: none;
+  border-bottom: 2px solid #ccc;
+}
+
+.section-search {
+  padding: 10px 20px;
+}
+
+.input-search {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
