@@ -71,7 +71,9 @@ export default function NewAppoinment() {
     });
   }
 
-  const submitIsDisabled = dataForm.address && dataForm.cpf && dataForm.dateOfBirth && dataForm.name ? false : true;  
+  const submitIsDisabled = dataForm.address && dataForm.cpf && dataForm.dateOfBirth && dataForm.name ? false : true;
+  
+  
 
   return (
     <div
