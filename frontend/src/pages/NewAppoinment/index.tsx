@@ -71,10 +71,7 @@ export default function NewAppoinment() {
     });
   }
 
-  const submitIsDisabled = dataForm.address && dataForm.cpf && dataForm.dateOfBirth && dataForm.name ? false : true;
-
-  console.log();
-  
+  const submitIsDisabled = dataForm.address && dataForm.cpf && dataForm.dateOfBirth && dataForm.name ? false : true;  
 
   return (
     <div
@@ -83,12 +80,9 @@ export default function NewAppoinment() {
       {
         !Object.keys(appoinment).length ?
         <section
-          id='content-not-appoinment'
-          className='flex_center'
+          className='content-not-appoinment flex_center'
         >
-          <div>
-            <h2>Aparentemente você não fez nenhum atendimento via whatsapp</h2>
-          </div>
+          <h2 className='text-not-appoinment'>Aparentemente você não fez nenhum atendimento via whatsapp</h2>
         </section>
         :
         <>
