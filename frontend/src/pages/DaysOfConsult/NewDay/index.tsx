@@ -5,6 +5,7 @@ import { useState } from 'react';
 import daysOfAtendenceServer from '../../../server/daysOfAtendence.server';
 import SweetAlert from '../../../components/SweetAlert/SweetAlert';
 import { useNavigate } from 'react-router-dom';
+import InputMask from 'react-input-mask';
 
 export default function NewDayOfConsult() {
   const navigation = useNavigate();
@@ -19,20 +20,23 @@ export default function NewDayOfConsult() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const response  = await daysOfAtendenceServer.createDayOfAtendence(formData);
-
-    if (response.status === 201) {
-      SweetAlert().success('Concluido!', 'Consulta adicionada com sucesso!');
-
-      setTimeout(() => {
-        navigation('/list-days-of-consult')
-      }, 1000);
-
-      return;
-    } else {
-      SweetAlert().error('Erro!', 'Erro ao adicionar consulta!');
-      return;
+    if (verificationFormData()) {
+      const response  = await daysOfAtendenceServer.createDayOfAtendence(formData);
+  
+      if (response.status === 201) {
+        SweetAlert().success('Concluido!', 'Consulta adicionada com sucesso!');
+  
+        setTimeout(() => {
+          navigation('/list-days-of-consult')
+        }, 1000);
+  
+        return;
+      } else {
+        SweetAlert().error('Erro!', 'Erro ao adicionar consulta!');
+        return;
+      }
     }
+
   }
 
   const submitIsDisabled = formData.title === '' || formData.date === '' || formData.hourStart === '' || formData.hourEnd === '';
@@ -53,6 +57,20 @@ export default function NewDayOfConsult() {
       ...formData,
       [name]: value
     });
+  }
+
+  const verificationFormData = () => {
+    if (formData.date < new Date().toLocaleDateString()) {
+      SweetAlert().error('Erro!', 'Data não pode ser menor que a data atual!');
+      return false;
+    }
+
+    if (formData.hourEnd < formData.hourStart) {
+      SweetAlert().error('Erro!', 'Horario de fim não pode ser menor que o horario de inicio!');
+      return false;
+    }
+
+    return true
   }
 
   return (
@@ -114,9 +132,10 @@ export default function NewDayOfConsult() {
             <div
               className="input-group"
             >
-              <input
+              <InputMask
                 name='date'
-                type="date"
+                mask="99/99/9999"
+                placeholder="DD/MM/AAAA"
                 className="form-control"
                 id="basic-url"
                 aria-describedby="basic-addon3 basic-addon4"

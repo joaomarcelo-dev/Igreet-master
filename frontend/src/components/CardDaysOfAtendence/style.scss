@@ -7,6 +7,17 @@
   height: 120px;
   padding: 20px;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.button-delete-card-days-of-atendence {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgb(255, 115, 115);
+  border: none;
+  border-bottom-left-radius: 10px;
 }
 
 .title-card-days-of-atendence {

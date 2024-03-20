@@ -1,16 +1,43 @@
 import { FcCalendar, FcClock } from 'react-icons/fc';
 import './style.scss';
+import { BsTrash } from 'react-icons/bs';
+import daysOfAtendenceServer from '../../server/daysOfAtendence.server';
+import SweetAlert from '../SweetAlert/SweetAlert';
 
 type CardDaysOfAtendenceProps = {
   date: string;
   hourStart: string;
   hourEnd: string;
   title: string;
+  id: string;
 }
 
-export default function CardDaysOfAtendence({ date, hourEnd, hourStart, title }: CardDaysOfAtendenceProps) {
+export default function CardDaysOfAtendence({ date, hourEnd, hourStart, title, id }: CardDaysOfAtendenceProps) {
+  const deleteAtendence = async () => {
+    const response = confirm('Deseja realmente excluir?');
+
+    if (response) {
+      await daysOfAtendenceServer.deleteDayOfAtendence(id)
+      .then(() => {
+        alert('Excluido com sucesso');
+        window.location.reload();
+      }).catch(() => {
+        SweetAlert().error('Falha', 'Erro ao excluir');
+      });
+    }
+  }
   return (
-    <div className='content-card-days-of-atendence flex_center'>
+    <div
+      className='content-card-days-of-atendence flex_center'
+    >
+      
+      <button
+        className='button-delete-card-days-of-atendence'
+        onClick={deleteAtendence}
+      >
+        <BsTrash size={15} />
+      </button>
+
       <h4
         className='title-card-days-of-atendence'
       >
@@ -28,6 +55,7 @@ export default function CardDaysOfAtendence({ date, hourEnd, hourStart, title }:
           <span className='hour'>: { hourStart } - { hourEnd }</span>
         </h5>
       </div>
+      
     </div>
   )
 }

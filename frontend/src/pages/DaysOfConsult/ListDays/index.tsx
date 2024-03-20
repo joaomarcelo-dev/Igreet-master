@@ -39,6 +39,7 @@ export default function ListDaysOfConsult() {
                 daysOfAtendence.map((day) => (
                   <CardDaysOfAtendence
                     key={day.id}
+                    id={day.id}
                     date={day.date}
                     hourStart={day.hourStart}
                     hourEnd={day.hourEnd}

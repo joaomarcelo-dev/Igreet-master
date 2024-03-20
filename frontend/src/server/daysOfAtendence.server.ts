@@ -23,9 +23,21 @@ const createDayOfAtendence = async (data: DaysOfAtendenceInputType) => {
 
 }
 
+const deleteDayOfAtendence = async (id: string) => {
+  const response = await request({
+    method: 'delete',
+    url: `${daysOfAtendenceRouter}`,
+    data: { id },
+  });
+
+  return response;
+
+}
+
 const daysOfAtendenceServer = {
   getAllDaysOfAtendence,
   createDayOfAtendence,
+  deleteDayOfAtendence,
 }
 
 export default daysOfAtendenceServer;
