@@ -45,7 +45,8 @@ model Services {
 }
 
 model DaysOfAtendence {
-  id   String @id @default(uuid())
-  date String
-  hour String
+  id        String @id @default(uuid())
+  date      String
+  hourStart String
+  hourEnd   String
 }
