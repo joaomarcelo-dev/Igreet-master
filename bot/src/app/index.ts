@@ -3,7 +3,10 @@ import serviceServer from "../server/service.server";
 
 const date = new Date()
 const getIdFromUrl = async ({ phone }: {phone: string }, client: Whatsapp) => {
-  const response = await serviceServer.postService({ phone, time: `${date.getHours()}:${date.getMinutes()}` }).catch(() => client.sendText(phone, 'Ocorreu um erro ao tentar marcar a consulta, por favor tente novamente mais tarde ou mande uma nova mensagem.'))
+  const response = await serviceServer.postService({ phone, time: `${date.getHours()}:${date.getMinutes()}` }).catch((error) => client.sendText(
+    phone,
+    error.message || 'Erro ao gerar link para formulário de agendamento. Por favor, tente novamente.'
+  ))
 
   return response.id
 }

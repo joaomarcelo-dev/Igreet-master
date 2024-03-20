@@ -37,15 +37,16 @@ const deleteAppointment = async (id: string) => {
   return appointment;
 };  
 
-const getAppointmentByDateEndPhone = async ({ date, phone }:{date: string, phone: string}) => {
+const getAppointmentByPhone = async ({ phone }:{ phone: string}) => {
   const appoinmet = await prisma.appointments.findFirst({
     where: {
-      date,
       patient: {
-        phone
+        phone,
       }
     }
-  })
+  });
+
+  return appoinmet;
 }
 
 const updateAppointment = async (id: string, complet: boolean) => {
@@ -65,7 +66,7 @@ const appointmentModel = {
   createAppointment,
   getAllAppointments,
   deleteAppointment,
-  getAppointmentByDateEndPhone,
+  getAppointmentByPhone,
   updateAppointment
 };
 

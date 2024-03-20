@@ -1,15 +1,28 @@
 import { ServiceInputType } from "../../types/Service.type";
 import { ServiceReturnType } from "../../types/ServiceReturnType";
+import appointmentModel from "../models/appointments.model";
 import serviceModel from "../models/services.model";
 
 const createService = async ({ expirationTime, phone, time }: ServiceInputType): Promise<ServiceReturnType> => {
   const existService = await serviceModel.getServiceByPhone(phone);
+  const existAppointment = await appointmentModel.getAppointmentByPhone({ phone });
+
+  if (existAppointment) {
+    return {
+      status: 400,
+      data: {
+        message: 'Aparentemente você já tem um agendamento, por favor, cancele o agendamento para poder agendar outro.'
+      }
+    }
+  }
+
   if (existService) {
     return {
       data: existService,
       status: 200,
     }
   }
+
   const newService = await serviceModel.createService({ expirationTime, phone, time })
   
   return {
