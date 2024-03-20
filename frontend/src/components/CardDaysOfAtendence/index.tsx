@@ -11,7 +11,11 @@ type CardDaysOfAtendenceProps = {
 export default function CardDaysOfAtendence({ date, hourEnd, hourStart, title }: CardDaysOfAtendenceProps) {
   return (
     <div className='content-card-days-of-atendence flex_center'>
-      <h4>{ title }</h4>
+      <h4
+        className='title-card-days-of-atendence'
+      >
+        { title }
+      </h4>
 
       <div>
         <h5 className='text-date-of-atendence'>

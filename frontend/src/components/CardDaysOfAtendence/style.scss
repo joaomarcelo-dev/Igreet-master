@@ -3,11 +3,16 @@
 .content-card-days-of-atendence.flex_center {
   background-color: $secondary-color;
   border-radius: 20px;
-  width: fit-content;
+  width: auto;
+  height: 120px;
   padding: 20px;
   flex-direction: column;
 }
 
+.title-card-days-of-atendence {
+  text-align: center;
+  font-size: 1.2rem;
+}
 
 .text-date-of-atendence {
   font-size: 1rem;
