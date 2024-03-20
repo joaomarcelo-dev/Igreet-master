@@ -49,4 +49,5 @@ model DaysOfAtendence {
   date      String
   hourStart String
   hourEnd   String
+  title     String
 }

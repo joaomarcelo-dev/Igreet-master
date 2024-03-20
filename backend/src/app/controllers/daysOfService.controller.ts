@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import daysOfAtendenceService from "../services/daysOfAtendence.service";
 
 const createDaysOfAtendence = async (req: Request, res: Response) => {
-  const { date, hourEnd, hourStart } = req.body;
+  const { date, hourEnd, hourStart, title } = req.body;
 
-  const newDayOfAtendence = await daysOfAtendenceService.createDaysOfAtendence({ date, hourEnd, hourStart });
+  const newDayOfAtendence = await daysOfAtendenceService.createDaysOfAtendence({ date, hourEnd, hourStart, title });
 
   return res.status(newDayOfAtendence.status).json(newDayOfAtendence.data);
 }

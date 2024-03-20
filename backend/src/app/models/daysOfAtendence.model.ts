@@ -1,12 +1,13 @@
 import prisma from "../../providers/prisma.provider";
 import { DaysOfAtendenceInputType } from "../../types/DaysOfAtendence.type";
 
-const createDaysOfAtendence = async ({ date, hourEnd, hourStart }: DaysOfAtendenceInputType) => {
+const createDaysOfAtendence = async ({ date, hourEnd, hourStart, title }: DaysOfAtendenceInputType) => {
   const newDayOfAtendence = await prisma.daysOfAtendence.create({
     data: {
       date,
       hourEnd,
-      hourStart
+      hourStart,
+      title,
     }
   });
 

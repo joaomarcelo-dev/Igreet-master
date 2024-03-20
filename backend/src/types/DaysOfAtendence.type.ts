@@ -3,6 +3,7 @@ export type DaysOfAtendenceType = {
   date: string;
   hourStart: string;
   hourEnd: string;
+  title: string;
 }
 
 export type DaysOfAtendenceInputType = Omit<DaysOfAtendenceType, 'id'>;

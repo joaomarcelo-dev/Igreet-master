@@ -2,8 +2,8 @@ import { DaysOfAtendenceInputType } from "../../types/DaysOfAtendence.type";
 import { ServiceReturnType } from "../../types/ServiceReturnType";
 import daysOfAtendenceModel from "../models/daysOfAtendence.model";
 
-const createDaysOfAtendence = async ({ date, hourEnd, hourStart }: DaysOfAtendenceInputType): Promise<ServiceReturnType> => {
-  const newDayOfAtendence = await daysOfAtendenceModel.createDaysOfAtendence({ date, hourEnd, hourStart });
+const createDaysOfAtendence = async ({ date, hourEnd, hourStart, title }: DaysOfAtendenceInputType): Promise<ServiceReturnType> => {
+  const newDayOfAtendence = await daysOfAtendenceModel.createDaysOfAtendence({ date, hourEnd, hourStart, title });
 
   return {
     data: newDayOfAtendence,
