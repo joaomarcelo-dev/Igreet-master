@@ -1,6 +1,7 @@
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { CardsOfPages } from "../types/CardsOfPages.type";
 import { CiBoxList } from 'react-icons/ci';
+import { FcCalendar } from "react-icons/fc";
 
 const listOfCardsPages: CardsOfPages = [
   {
@@ -10,13 +11,15 @@ const listOfCardsPages: CardsOfPages = [
     icon: CiBoxList,
     uri: '/appoinments',
   },
-  // {
-  //   id: 2,
-  //   title: 'Lista de atendidos',
-  //   active: false,
-  //   icon: CiBoxList,
-  //   uri: '/appoinments',
-  // },
+
+  {
+    id: 2,
+    title: 'Dias de atendimento',
+    active: true,
+    icon: FcCalendar,
+    uri: '/list-days-of-consult',
+  },
+
   {
     id: 3,
     title: 'Enviar Documento',

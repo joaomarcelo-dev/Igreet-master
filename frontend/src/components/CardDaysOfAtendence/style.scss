@@ -1,0 +1,22 @@
+@import "../../global/index.scss";
+
+.content-card-days-of-atendence.flex_center {
+  background-color: $secondary-color;
+  border-radius: 20px;
+  width: fit-content;
+  padding: 20px;
+  flex-direction: column;
+}
+
+
+.text-date-of-atendence {
+  font-size: 1rem;
+}
+
+.text-date-of-atendence .date {
+  color: $font-color-secondary;
+}
+
+.text-date-of-atendence .hour {
+  color: $font-color-secondary;
+}
