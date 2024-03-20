@@ -18,10 +18,17 @@ const updateAppointment = async (req: Request, res: Response) => {
   return res.status(status).json(data);
 }
 
+const deleteAppointment = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { data, status } = await appointmentService.deleteAppointment(id);
+  return res.status(status).json(data);
+}
+
 const appointmentController = {
   createAppointment,
   getAllAppointments,
   updateAppointment,
+  deleteAppointment,
 }
 
 export default appointmentController;

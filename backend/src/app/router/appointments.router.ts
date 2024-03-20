@@ -13,5 +13,8 @@ appointmentsRouter.route('/')
 .put(
   appointmentController.updateAppointment,
 )
+.delete(
+  appointmentController.deleteAppointment,
+);
 
 export default appointmentsRouter;

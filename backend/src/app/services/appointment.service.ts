@@ -70,10 +70,20 @@ const updateAppointment = async (id: string, complet: boolean): Promise<ServiceR
 
 }
 
+const deleteAppointment = async (id: string): Promise<ServiceReturnType> => {
+  const appointment = await appointmentModel.deleteAppointment(id);
+  return {
+    status: 200,
+    data: appointment
+  };
+
+}
+
 const appointmentService = {
   createAppointment,
   getAllAppointments,
   updateAppointment,
+  deleteAppointment,
 };
 
 export default appointmentService;
