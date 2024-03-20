@@ -35,7 +35,7 @@ const deleteAppointment = async (id: string) => {
   });
 
   return appointment;
-};  
+};
 
 const getAppointmentByPhone = async ({ phone }:{ phone: string}) => {
   const appoinmet = await prisma.appointments.findFirst({

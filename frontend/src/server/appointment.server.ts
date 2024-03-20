@@ -60,11 +60,25 @@ const updateAppointment = async ({ complet, id }: UpdateStatusAppointment) => {
   return response
 }
 
+const deleteAppointment = async (id: string) => {
+  const response = await request({
+    method: 'delete',
+    url: appointmentRoute,
+    data: {
+      id
+    }
+  });
+
+  return response
+
+}
+
 const appointmentServer = {
   getAppointmentById,
   createAppointment,
   getAllAppointments,
   updateAppointment,
+  deleteAppointment,
 }
 
 export default appointmentServer;

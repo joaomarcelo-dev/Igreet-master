@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import './style.scss';
+import formatInputUtils from '../../utils/formatInput.utils';
 
 type CardAppointmentProps = {
   name: string;
@@ -26,7 +27,9 @@ export default function CardAppointment({ name, phone, id, complet, yourTime }: 
       <img src={ imgNotFound } alt="" className='img-profile-appointment-card' />
       <div>
         <h3 className='name-appointment-card'>{name}</h3>
-        <p>Tel: {phone}</p>
+        <p>Tel: {
+          formatInputUtils.formatNumberPhoneVenom(phone)
+        }</p>
       </div>
     </div>
   )
