@@ -1,7 +1,7 @@
 import { AppoinmentsCreated, AppointmentDataSubmit, UpdateStatusAppointment } from "../types/Appoinments.type";
-import { BASE_URL, request } from "./request.server"
+import { request } from "./request.server"
 
-const appointmentRoute = `${BASE_URL}/appointment`
+const appointmentRoute = '/appointment'
 
 const getAppointmentById = async (id: string) => {
   const response = await request({
@@ -63,10 +63,7 @@ const updateAppointment = async ({ complet, id }: UpdateStatusAppointment) => {
 const deleteAppointment = async (id: string) => {
   const response = await request({
     method: 'delete',
-    url: appointmentRoute,
-    data: {
-      id
-    }
+    url: `${appointmentRoute}/${id}`,
   });
 
   return response

@@ -22,10 +22,7 @@ export default function ListDaysOfConsult() {
     };
 
     getAllDaysOfAtendence();
-  }, []);
-
-  console.log(daysOfAtendence);
-  
+  }, []);  
 
   return (
     <>
@@ -34,6 +31,12 @@ export default function ListDaysOfConsult() {
       {
         loading ? <Loading /> : (
           <>
+            {
+              daysOfAtendence.length === 0 && (
+                <h1 className='title-no-days-of-atendence'>Nenhum dia de atendimento cadastrado</h1>
+              )
+            }
+
             <section className='section-list-days-of-atendence'>
               {
                 daysOfAtendence.map((day) => (
@@ -61,7 +64,6 @@ export default function ListDaysOfConsult() {
             />
           </>
         )
-
       }
     </>
   );

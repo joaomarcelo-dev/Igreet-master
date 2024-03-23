@@ -17,7 +17,6 @@ const getAllDaysOfAtendence = async (_: Request, res: Response) => {
 
 const deleteDaysOfAtendenceById = async (req: Request, res: Response) => {
   const { id } = req.params;
-
   const deletedDayOfAtendence = await daysOfAtendenceService.deleteDaysOfAtendenceById(id);
 
   return res.status(deletedDayOfAtendence.status).json(deletedDayOfAtendence.data);

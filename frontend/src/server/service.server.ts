@@ -1,6 +1,6 @@
-import { BASE_URL, request } from "./request.server"
+import { request } from "./request.server"
 
-const serviceRoute = `${BASE_URL}/service`
+const serviceRoute = '/service'
 
 const getServerById = async (id: string) => {
   const response = await request({

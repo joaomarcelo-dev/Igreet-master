@@ -1,7 +1,7 @@
 import { DaysOfAtendenceInputType } from "../types/DaysOfAtendence.type";
-import { BASE_URL, request } from "./request.server"
+import { request } from "./request.server"
 
-const daysOfAtendenceRouter = `${BASE_URL}/days-of-atendence`
+const daysOfAtendenceRouter = '/days-of-atendence';
 
 const getAllDaysOfAtendence = async () => {
   const response = await request({
@@ -26,9 +26,10 @@ const createDayOfAtendence = async (data: DaysOfAtendenceInputType) => {
 const deleteDayOfAtendence = async (id: string) => {
   const response = await request({
     method: 'delete',
-    url: `${daysOfAtendenceRouter}`,
-    data: { id },
+    url: `${daysOfAtendenceRouter}/${id}`
   });
+
+  
 
   return response;
 

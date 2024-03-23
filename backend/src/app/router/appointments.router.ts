@@ -12,7 +12,9 @@ appointmentsRouter.route('/')
 )
 .put(
   appointmentController.updateAppointment,
-)
+);
+
+appointmentsRouter.route('/:id')
 .delete(
   appointmentController.deleteAppointment,
 );

@@ -19,8 +19,10 @@ export default function CardDaysOfAtendence({ date, hourEnd, hourStart, title, i
     if (response) {
       await daysOfAtendenceServer.deleteDayOfAtendence(id)
       .then(() => {
-        alert('Excluido com sucesso');
-        window.location.reload();
+        SweetAlert().success('Sucesso', 'Excluído com sucesso');
+
+        setTimeout(() => window.location.reload(), 2000)
+        
       }).catch(() => {
         SweetAlert().error('Falha', 'Erro ao excluir');
       });

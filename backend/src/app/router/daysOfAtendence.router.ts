@@ -10,6 +10,8 @@ daysOfAtendenceRouter.route('/')
   .post(
     daysOfAtendenceController.createDaysOfAtendence
   )
+
+daysOfAtendenceRouter.route('/:id')
   .delete(
     daysOfAtendenceController.deleteDaysOfAtendenceById
   );
