@@ -60,7 +60,7 @@ export default function NewDayOfConsult() {
   }
 
   const verificationFormData = () => {
-    if (formData.date < new Date().toLocaleDateString()) {
+    if (new Date(formData.date) < new Date()) {
       SweetAlert().error('Erro!', 'Data não pode ser menor que a data atual!');
       return false;
     }
