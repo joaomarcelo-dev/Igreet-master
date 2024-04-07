@@ -2,6 +2,7 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 import { CardsOfPages } from "../types/CardsOfPages.type";
 import { CiBoxList } from 'react-icons/ci';
 import { FcCalendar } from "react-icons/fc";
+import { MdPeopleOutline } from "react-icons/md";
 
 const listOfCardsPages: CardsOfPages = [
   {
@@ -26,6 +27,14 @@ const listOfCardsPages: CardsOfPages = [
     active: false,
     icon: IoDocumentTextOutline,
     uri: '/appoinments',
+  },
+
+  {
+    id: 4,
+    title: 'Lista de clientes',
+    active: true,
+    icon: MdPeopleOutline,
+    uri: '/all-clients',
   }
 ]
 

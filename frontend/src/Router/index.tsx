@@ -12,7 +12,7 @@ import localStorageUtils from "../utils/localStorage.utils";
 import ListDaysOfConsult from "../pages/DaysOfConsult/ListDays";
 import Error404 from "../pages/404";
 import NewDayOfConsult from "../pages/DaysOfConsult/NewDay";
-import AllClients from "../pages/Clients/AllClients";
+import AllClients from "../pages/Patients/AllPatient";
 
 
 export default function Router() {
