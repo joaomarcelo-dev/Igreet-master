@@ -7,5 +7,8 @@ patientRouter.route('/')
 .post(
   patientController.createPatient,
 )
+.get(
+  patientController.getAllPatients,
+);
 
 export default patientRouter;

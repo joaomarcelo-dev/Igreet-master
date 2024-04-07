@@ -24,7 +24,7 @@ export default function CardOptionsPages({ title, uri, active, Icon }: CardOptio
       }
     >
       <Icon
-        size={30}
+        size={25}
       />
 
       <h4 className='card-options-page-title'>

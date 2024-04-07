@@ -24,8 +24,18 @@ const createPatient = async ({ address, birthDate, cpf, name, serviceId }: Omit<
   }
 }
 
+const getAllPatients = async (): Promise<ServiceReturnType> => {
+  const patients = await patientsModel.getAllPatients();
+
+  return {
+    data: patients,
+    status: 200,
+  }
+}
+
 const patientService = {
   createPatient,
+  getAllPatients,
 }
 
 export default patientService;

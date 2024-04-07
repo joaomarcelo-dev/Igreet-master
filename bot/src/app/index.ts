@@ -19,7 +19,7 @@ const sendUrlAppointment = async (client: Whatsapp, phone: string) => {
   if (!id) return
 
   await client.sendText(phone, 'Link gerado com sucesso! Clique no link a seguir para preencher o formulário de agendamento.')
-  await client.sendLinkPreview(phone, `https://igreet-master-dtw8.vercel.app/new-appoinment/${id}`, 'Link para realizar o preenchimento do form')
+  await client.sendLinkPreview(phone, `https://igreet-master-dtw8.vercel.app/new-appoinment/${id}`, 'Link para realizar o preenchimento do form', '')
 }
 
 const startVenom = async (client: Whatsapp) => {

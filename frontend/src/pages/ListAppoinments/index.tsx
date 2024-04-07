@@ -9,6 +9,8 @@ import Header from "../../components/Header";
 import { RootReducerType } from '../../types/Reducers.type';
 import { Appointment } from '../../types/Appoinments.type';
 import Loading from '../../components/Loading';
+import FaqButton from '../../components/FaqButton';
+import { FcPlus } from 'react-icons/fc';
 
 type FilterType = 'fila' | 'atendidos';
 
@@ -121,8 +123,12 @@ export default function ListAppointments() {
                       />
                     ))
                 ) : (
-                  <section>
-                    <h2>Nenhum Atendimento Encontrado</h2>
+                  <section className='section-not-appoiments'>
+                    <h2>
+                      Nenhum Atendimento Encontrado
+                      {''}
+                      🥱
+                    </h2>
                   </section>
                 )
               }
@@ -130,6 +136,18 @@ export default function ListAppointments() {
           </>
         )
       }
+
+      <FaqButton
+        buttons={[
+          {
+            Icon: FcPlus,
+            backgroundButton: '#00a86b',
+            router: '/new-appoinment/test',
+            sizeIcon: 30,
+
+          },
+        ]}
+      />
     </>
   );
 }

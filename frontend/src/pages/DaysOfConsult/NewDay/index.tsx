@@ -108,7 +108,7 @@ export default function NewDayOfConsult() {
 
               <option
                 selected
-                value='Consulta Mádica'
+                value='Consulta Médica'
               >
                 Consulta Mádica
               </option>

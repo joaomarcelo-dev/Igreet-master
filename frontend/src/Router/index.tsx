@@ -12,6 +12,7 @@ import localStorageUtils from "../utils/localStorage.utils";
 import ListDaysOfConsult from "../pages/DaysOfConsult/ListDays";
 import Error404 from "../pages/404";
 import NewDayOfConsult from "../pages/DaysOfConsult/NewDay";
+import AllClients from "../pages/Clients/AllClients";
 
 
 export default function Router() {
@@ -43,6 +44,7 @@ export default function Router() {
       <Route path="/appoinment/:id" element={<AppoinmentPage />} />
       <Route path="/list-days-of-consult" element={<ListDaysOfConsult />} />
       <Route path="/days-of-consult/create" element={<NewDayOfConsult />} />
+      <Route path='/all-clients' element={<AllClients />} />
       <Route path="/login" element={<Login />} />
       <Route path="*" element={<Error404 />} />
     </Routes>
