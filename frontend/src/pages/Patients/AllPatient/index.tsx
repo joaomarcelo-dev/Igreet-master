@@ -35,22 +35,19 @@ export default function AllPatients() {
               {
                 patients.length ? (
                   <>
-                    {
-      
-                      patients.length === 0 && (
-                        patients.map((patient) => (
-                          <CardPatients
-                            key={patient.id}
-                            address={patient.address}
-                            birthDate={patient.birthDate}
-                            cpf={patient.cpf}
-                            id={patient.id}
-                            name={patient.name}
-                            phone={patient.phone}
-                          />
-                        ))
-                      )
-                    }
+                    {  
+                      patients.map((patient) => (
+                        <CardPatients
+                          key={patient.id}
+                          address={patient.address}
+                          birthDate={patient.birthDate}
+                          cpf={patient.cpf}
+                          id={patient.id}
+                          name={patient.name}
+                          phone={patient.phone}
+                        />
+                      ))
+                    } 
                   </>
                 ) : (
                   <section className='section-patients-not-found'>
