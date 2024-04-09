@@ -6,3 +6,5 @@ export type PatientsType = {
   birthDate: string;
   address: string;
 }
+
+export type PatientInputType = Omit<PatientsType, 'id'>;

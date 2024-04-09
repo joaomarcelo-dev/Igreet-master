@@ -13,6 +13,7 @@ import ListDaysOfConsult from "../pages/DaysOfConsult/ListDays";
 import Error404 from "../pages/404";
 import NewDayOfConsult from "../pages/DaysOfConsult/NewDay";
 import AllClients from "../pages/Patients/AllPatient";
+import NewPatient from "../pages/Patients/NewPatient";
 
 
 export default function Router() {
@@ -45,6 +46,7 @@ export default function Router() {
       <Route path="/list-days-of-consult" element={<ListDaysOfConsult />} />
       <Route path="/days-of-consult/create" element={<NewDayOfConsult />} />
       <Route path='/all-clients' element={<AllClients />} />
+      <Route path="/new-patient" element={<NewPatient />} />
       <Route path="/login" element={<Login />} />
       <Route path="*" element={<Error404 />} />
     </Routes>

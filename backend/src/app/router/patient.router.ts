@@ -11,4 +11,5 @@ patientRouter.route('/')
   patientController.getAllPatients,
 );
 
+
 export default patientRouter;

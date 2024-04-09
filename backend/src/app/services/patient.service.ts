@@ -4,19 +4,23 @@ import patientsModel from "../models/patients.model";
 import serviceModel from "../models/services.model";
 import serviceService from "./service.service";
 
-const createPatient = async ({ address, birthDate, cpf, name, serviceId }: Omit<PatientTypeInput, 'phone'>): Promise<ServiceReturnType> => {
+
+type ExtendedPatientTypeInput = PatientTypeInput & { authorization: string | undefined };
+
+
+const createPatient = async ({ address, birthDate, cpf, name, serviceId, authorization, phone }: ExtendedPatientTypeInput): Promise<ServiceReturnType> => {
   const service = await serviceModel.getServiceById(serviceId);
 
-  if (!service) {
+  if (!service && !authorization) {
     return {
       data: {
-        message: 'No agendamente in Service'
+        message: 'Sem autorização para criar um paciente.'
       },
       status: 401,
     }
   }
 
-  const newPatient = await patientsModel.createPatients({ address, birthDate, cpf, name, phone: service?.phone });
+  const newPatient = await patientsModel.createPatients({ address, birthDate, cpf, name, phone: service?.phone || phone });
 
   return {
     data: newPatient,

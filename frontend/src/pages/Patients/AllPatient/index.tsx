@@ -1,5 +1,6 @@
-import { useEffect, useState  } from 'react';
 import './style.scss';
+
+import { useEffect, useState  } from 'react';
 import patientsServer from '../../../server/patientes.server';
 import { PatientsType } from '../../../types/Patients.type';
 import CardPatients from '../../../components/CardPatients';
@@ -21,7 +22,7 @@ export default function AllPatients() {
     }
 
     get();
-  });
+  }, []);
 
   return (
     <>
@@ -35,7 +36,7 @@ export default function AllPatients() {
               {
                 patients.length ? (
                   <>
-                    {  
+                    {
                       patients.map((patient) => (
                         <CardPatients
                           key={patient.id}
@@ -47,7 +48,7 @@ export default function AllPatients() {
                           phone={patient.phone}
                         />
                       ))
-                    } 
+                    }
                   </>
                 ) : (
                   <section className='section-patients-not-found'>
@@ -57,8 +58,8 @@ export default function AllPatients() {
                   </section>
                 )
               }
-
             </section>
+
             <FaqButton
               buttons={[
                 {
@@ -72,7 +73,6 @@ export default function AllPatients() {
           </>
         )
       }
-
     </>
   )
 }
