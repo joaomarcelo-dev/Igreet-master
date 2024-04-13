@@ -12,12 +12,23 @@ const createAppointment = async ({
   birthDate,
   cpf,
   name,
-  serviceId
+  serviceId,
+  patientId,
 }:
-  Omit<AppointmentInputType, 'patientId'> &
+  AppointmentInputType &
   Omit<PatientTypeInput, 'phone'>
 ): Promise<ServiceReturnType> => {
+  if (patientId) {
+    const newAppointment = await appointmentModel.createAppointment({ date, hour, patientId });
+    
+    return {
+      status: 201,
+      data: newAppointment
+    };
+  }
+
   const service = await serviceModel.getServiceById(serviceId);
+
   if (!service) {
     return {
       data: {

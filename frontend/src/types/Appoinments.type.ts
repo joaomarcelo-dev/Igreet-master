@@ -1,11 +1,12 @@
 export type AppointmentDataSubmit = {
-  address: string,
-  birthDate: string,
-  cpf: string,
+  address?: string,
+  birthDate?: string,
+  cpf?: string,
   date: string,
   hour: string,
-  name: string,
-  serviceId: string,
+  name?: string,
+  serviceId?: string,
+  patientId?: string,
 }
 
 export type Appointment = {

@@ -14,6 +14,7 @@ import Error404 from "../pages/404";
 import NewDayOfConsult from "../pages/DaysOfConsult/NewDay";
 import AllClients from "../pages/Patients/AllPatient";
 import NewPatient from "../pages/Patients/NewPatient";
+import AddNewAppoinment from "../pages/AddNewAppoinmet";
 
 
 export default function Router() {
@@ -43,6 +44,7 @@ export default function Router() {
       <Route path="/new-appoinment/:id" element={<NewAppoinment />} />
       <Route path="/appoinments" element={<ListAppoinments />} />
       <Route path="/appoinment/:id" element={<AppoinmentPage />} />
+      <Route path="/add-new-appointment" element={<AddNewAppoinment />} />
       <Route path="/list-days-of-consult" element={<ListDaysOfConsult />} />
       <Route path="/days-of-consult/create" element={<NewDayOfConsult />} />
       <Route path='/all-clients' element={<AllClients />} />

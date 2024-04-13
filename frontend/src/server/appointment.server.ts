@@ -15,7 +15,7 @@ const getAppointmentById = async (id: string) => {
   return response.data;
 }
 
-const createAppointment = async ({ address, birthDate, cpf, date, hour, name, serviceId }: AppointmentDataSubmit): Promise<AppoinmentsCreated> => {
+const createAppointment = async ({ address, birthDate, cpf, date, hour, name, serviceId, patientId }: AppointmentDataSubmit): Promise<AppoinmentsCreated> => {
   const response = await request({
     method: 'post',
     url: appointmentRoute,
@@ -27,6 +27,8 @@ const createAppointment = async ({ address, birthDate, cpf, date, hour, name, se
       hour,
       name,
       serviceId,
+      patientId
+
     }
   });
 

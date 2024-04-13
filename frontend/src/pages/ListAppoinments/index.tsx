@@ -142,7 +142,7 @@ export default function ListAppointments() {
           {
             Icon: FcPlus,
             backgroundButton: '#00a86b',
-            router: '/new-appoinment/test',
+            router: '/add-new-appointment',
             sizeIcon: 30,
 
           },
