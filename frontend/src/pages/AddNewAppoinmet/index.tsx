@@ -79,11 +79,11 @@ export default function AddNewAppoinment() {
           className="form-add-new-appoinment"
         >
           <div>
-              <label
-                className="form-label"
-              >
-                Selecione o paciente
-              </label>
+            <label
+              className="form-label"
+            >
+              Selecione o paciente
+            </label>
             <select
               className="form-select mt-0"
               aria-label="Default select example"
@@ -111,11 +111,11 @@ export default function AddNewAppoinment() {
           </div>
 
           <div className='div-type-atendence'>
-              <label
-                className="form-label"
-              >
-                Selecione o tipo de atendimento
-              </label>
+            <label
+              className="form-label"
+            >
+              Selecione o tipo de atendimento
+            </label>
             <select
               className="form-select mt-0"
               aria-label="Default select example"
