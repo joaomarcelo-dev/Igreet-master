@@ -1,23 +1,31 @@
 @import '../../global/index.scss';
 
 .content-card-options-pages.flex_center {
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-  width: 150px;
   flex-direction: column;
+  padding: 10px;
+  border-radius: 20px;
 }
 
 .card-options-page-title {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   text-align: center;
   color: #000;
   margin-top: 15px;
 }
 
+.icon-card-option-page {
+  background-color: $tertiary-color;
+  border-radius: 50%;
+  padding: 10px;
+}
+
 .content-card-options-pages.flex_center.disabled {
-  // opacity: 0.5;
+  opacity: 0.6;
   pointer-events: none;
   background-color: $color-disabled;
   box-shadow: none;
+}
+
+.icon-calendar-home {
+  color: $primary-color;
 }

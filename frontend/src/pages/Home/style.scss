@@ -1,6 +1,53 @@
-.content-cards-options-pages-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 20px;
+@import '../../global/index.scss';
+
+.header-home.flex_center {
+  background-color: $primary-color;
   padding: 20px;
+  padding-top: 60px;
+  padding-bottom: 40px; 
+}
+
+.content-info-profile-home.flex_center {
+  gap: 15px;
+  justify-content: start;
+  width: 100%;
+}
+
+.img-profile-home {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid $color-white;
+}
+
+.title-name-home {
+  font-size: 1.2rem;
+}
+
+
+.icon-notification-header-home {
+  background-color: $color-white;
+  border-radius: 50%;
+  padding: 7px;
+  border: none;
+}
+
+.content-cards-options-pages-grid {
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: -20px;
+  background-color: $color-white;
+}
+
+.container-buttons-access-speed.flex_center {
+  overflow-x: scroll;
+  margin-top: 20px;
+}
+
+
+.button-agend-new-consult-manual {
+  border: none;
+  border-radius: 10px;
+  background-color: $tertiary-color;padding: 10px 20px;
+  font-size: 1rem;
 }

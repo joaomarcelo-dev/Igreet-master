@@ -1,36 +1,103 @@
 import { Whatsapp } from "venom-bot";
-import serviceServer from "../server/service.server";
 
-const date = new Date()
-const getIdFromUrl = async ({ phone }: {phone: string }, client: Whatsapp) => {
-  const response = await serviceServer.postService({ phone, time: `${date.getHours()}:${date.getMinutes()}` }).catch((error) => client.sendText(
-    phone,
-    error.message || 'Erro ao gerar link para formulário de agendamento. Por favor, tente novamente.'
-  ))
+// const respostasClientes = {};
 
-  return response.id
-}
+const respostasClientes: { [key: string]: any } = {};
 
-const sendUrlAppointment = async (client: Whatsapp, phone: string) => {
-  await client.sendText(phone, 'Aguarde! Estamos gerando o link para o formulário de agendamento.')
+// Definindo as etapas do fluxo de perguntas e respostas
+type OpcaoType = {
+  [key: string]: {
+    mensagem: string;
+    proximo: string;
+  };
+};
 
-  const id = await getIdFromUrl({ phone }, client)
+const fluxoPerguntas: {
+  inicio: {
+    mensagem: string;
+    proximo: string;
+  };
+  opcao: OpcaoType;
+  cpf: {
+    mensagem: string;
+    proximo: string;
+  };
+  cartaoSUS: {
+    mensagem: string;
+    proximo: string;
+  };
+  final: {
+    mensagem: string;
+    proximo: null;
+  };
+} = {
+  inicio: {
+    mensagem: 'Olá! O que você deseja?\n1 - Marcar uma consulta\n2 - Reclame aqui\n3 - Outros',
+    proximo: 'opcao'
+  },
+  opcao: {
+    '1': {
+      mensagem: 'Por favor, digite seu nome:',
+      proximo: 'cpf'
+    },
+    '2': {
+      mensagem: 'Por favor, nos envie sua reclamação:',
+      proximo: 'final'
+    },
+    '3': {
+      mensagem: 'Como posso ajudar com "Outros"?',
+      proximo: 'final'
+    }
+  },
+  cpf: {
+    mensagem: 'Por favor, digite seu CPF:',
+    proximo: 'cartaoSUS'
+  },
+  cartaoSUS: {
+    mensagem: 'Por favor, digite o número do seu cartão do SUS:',
+    proximo: 'final'
+  },
+  final: {
+    mensagem: 'Obrigado por fornecer suas informações!',
+    proximo: null
+  }
+};
 
-  if (!id) return
+const startVenom = async (bot: Whatsapp) => {
+  bot.onMessage(async (message) => {
+    const chatId = message.from;
+    const messageText = message.body;
 
-  await client.sendText(phone, 'Link gerado com sucesso! Clique no link a seguir para preencher o formulário de agendamento.')
-  await client.sendLinkPreview(phone, `https://igreet-master-dtw8.vercel.app/new-appoinment/${id}`, 'Link para realizar o preenchimento do form', '')
-}
+    // Verifica se é a primeira interação com o cliente
+    if (!respostasClientes[chatId]) {
+      respostasClientes[chatId] = {
+        etapaAtual: 'inicio'
+      };
+      // Envia a mensagem inicial
+      bot.sendText(chatId, fluxoPerguntas.inicio.mensagem);
+    } else {
+      const etapaAtual = fluxoPerguntas[respostasClientes[chatId].etapaAtual];
+      const proximoPasso = etapaAtual[messageText];
 
-const startVenom = async (client: Whatsapp) => {
-  client.onMessage(async (message) => {
-    if (message.body.toLowerCase() === '!test') {
-      await client.sendText(
-        message.from,
-        'Olá sou um assistente de atendimento. para marcar uma consulta, por favor preencha o formulário no link a seguir:'
-      )
+      // Verifica se a opção escolhida está mapeada para a etapa atual
+      if (proximoPasso) {
+        respostasClientes[chatId][respostasClientes[chatId].etapaAtual] = messageText;
 
-      await sendUrlAppointment(client, message.from)
+        // Verifica se há um próximo passo no fluxo
+        if (proximoPasso.proximo) {
+          respostasClientes[chatId].etapaAtual = proximoPasso.proximo;
+          bot.sendText(chatId, fluxoPerguntas[proximoPasso.proximo].mensagem);
+        } else {
+          // Se não houver próximo passo, finaliza o fluxo
+          bot.sendText(chatId, fluxoPerguntas.final.mensagem);
+          // Aqui você pode fazer algo com as informações armazenadas, como salvar em um banco de dados
+          console.log(respostasClientes[chatId]);
+          // Limpa as respostas do cliente após concluir o fluxo
+          delete respostasClientes[chatId];
+        }
+      } else {
+        bot.sendText(chatId, 'Desculpe, opção inválida.');
+      }
     }
   });
 };

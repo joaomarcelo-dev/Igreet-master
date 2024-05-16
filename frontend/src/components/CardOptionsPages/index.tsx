@@ -7,9 +7,10 @@ type CardOptionsPagesProps = {
   uri: string;
   Icon: IconType;
   active: boolean;
+  size?: number
 }
 
-export default function CardOptionsPages({ title, uri, active, Icon }: CardOptionsPagesProps) {
+export default function CardOptionsPages({ title, uri, active, Icon, size = 25 }: CardOptionsPagesProps) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -23,9 +24,13 @@ export default function CardOptionsPages({ title, uri, active, Icon }: CardOptio
         handleClick
       }
     >
-      <Icon
-        size={25}
-      />
+      <div
+        className='icon-card-option-page'
+      >
+        <Icon
+          size={ size }
+        />
+      </div>
 
       <h4 className='card-options-page-title'>
         { title }
