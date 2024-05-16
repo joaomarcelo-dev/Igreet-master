@@ -6,6 +6,7 @@ import TaskManager from './src/services/taskManager.service';
 
 import * as Notifications from 'expo-notifications';
 import { useEffect } from 'react';
+import { colors } from './src/global';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => {
@@ -26,7 +27,8 @@ export default function App() {
       <Routers />
 
       <StatusBar
-        backgroundColor={'black'}
+        backgroundColor={ colors.primary }
+        barStyle='light-content'
       />
     </>
   );

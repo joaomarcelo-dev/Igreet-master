@@ -14,6 +14,13 @@ const FormStyle = StyleSheet.create({
     alignItems: 'center',
   },
 
+  conatainerSearch: {
+    width: '90%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
   input: {
     width: '90%',
     paddingHorizontal: 10,
@@ -25,7 +32,18 @@ const FormStyle = StyleSheet.create({
   },
 });
 
+const UserListStyle = StyleSheet.create({
+  container: {
+    width: '95%',
+    padding: 10,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    marginVertical: 5,
+  },
+});
+
 export {
   ContainerStyle,
   FormStyle,
+  UserListStyle,
 }

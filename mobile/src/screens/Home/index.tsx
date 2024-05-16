@@ -120,7 +120,7 @@ export default function Home({ navigation }) {
 
               <TouchableOpacity
                 style={ SpeedAccessStyle.buttonArgendConsult }
-                onPress={ () => navigation.navigate('NewAppointment')}
+                onPress={ () => navigation.navigate('Users', { select: true })}
               >
                 <Ionicons
                   name="calendar-clear"

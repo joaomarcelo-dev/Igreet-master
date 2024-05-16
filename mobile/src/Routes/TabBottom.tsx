@@ -3,7 +3,7 @@ import Home from '../screens/Home';
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import ServicesList from '../screens/ServicesList';
-import NewService from '../screens/NewService';
+import Users from '../screens/Users';
 
 export default function TabBottom() {
   const TabBottom = createBottomTabNavigator();
@@ -29,8 +29,8 @@ export default function TabBottom() {
       />
 
       <TabBottom.Screen
-        name="NewService"
-        component={ NewService }
+        name="Users"
+        component={ Users }
       />
     </TabBottom.Navigator>
   )

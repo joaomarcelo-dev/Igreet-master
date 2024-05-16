@@ -91,6 +91,7 @@ const SpeedAccessStyle = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginVertical: 10,
     backgroundColor: colors.blackOpacity,
     padding: 5,
     borderRadius: 10,

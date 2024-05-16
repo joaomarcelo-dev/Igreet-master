@@ -5,7 +5,6 @@ import ServiceCard from "../../components/ServiceCard";
 import { ContainerStyle } from "./styles";
 import AlertBox from "../../components/AlertBox";
 import { useEffect, useState } from "react";
-import ButtonFab from "../../components/ButtonFab";
 import { getServices } from "../../api/web.api";
 
 export default function ServicesList({ navigation }) {
@@ -84,12 +83,6 @@ export default function ServicesList({ navigation }) {
           />
         </View>
       </ScrollView>
-
-      <ButtonFab
-        onPress={() => {
-          navigation.navigate('NewService');
-        }}
-      />
     </>
   )
 }
