@@ -6,10 +6,11 @@ import { useNavigation } from "@react-navigation/native";
 
 type HeaderScreenProps = {
   title: string;
+  selects?: number;
 }
 
 
-export default function HeaderScreen({ title }: HeaderScreenProps) {
+export default function HeaderScreen({ title, selects }: HeaderScreenProps) {
   const navigation = useNavigation();
   return (
     <>
@@ -24,9 +25,19 @@ export default function HeaderScreen({ title }: HeaderScreenProps) {
           />
         </TouchableOpacity>
 
-        <Text style={ HeaderStyles.profileText }>{ title }</Text>
+        { selects ? (
+          <>
+            <View />
+            <Text style={ HeaderStyles.profileText }>Selecionados: { selects }</Text>
+          </>
+        ) : (
+          <>
+            <Text style={ HeaderStyles.profileText }>{ title }</Text>
+            <View />
+          </>
+        )
+        }
 
-        <View />
       </View>
     </>
   );

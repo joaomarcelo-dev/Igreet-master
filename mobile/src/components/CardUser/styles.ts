@@ -4,14 +4,14 @@ import { colors } from "../../global";
 const ContainerStyle = StyleSheet.create({
   container: {
     width: '95%',
-    backgroundColor: colors.color_violet,
+    backgroundColor: colors.blackOpacity,
     padding: 15,
     borderRadius: 10,
     margin: 10,
   },
 
   text: {
-    color: colors.white,
+    color: colors.black,
     fontSize: 15,
     fontWeight: 'bold',
     marginVertical: 2,

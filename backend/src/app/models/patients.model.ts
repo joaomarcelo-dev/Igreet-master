@@ -1,51 +1,16 @@
-import prisma from "../../providers/prisma.provider"
-import { PatientTypeInput } from "../../types/Patients.type"
+import prisma from "../../providers/prisma.provider";
 
-const createPatients = async ({ address, birthDate, cpf, name, phone }: Omit<PatientTypeInput, 'serviceId'>) => {
-  const newPatients = await prisma.patients.create({
-    data: {
-      address,
-      birthDate,
-      cpf,
-      name,
-      phone,
-    }
-  });
+const getAllPatients = async () => prisma.patients.findMany();
 
-  return newPatients;
-}
-
-const getPatientById = async (id: string) => {
-  const patitient = await prisma.patients.findFirst({
-    where: {
-      id
-    }
-  });
-}
-
-const getPatientByCpf = async (cpf: string) => {
-  const patient = await prisma.patients.findFirst({
-    where: {
-      cpf,
-    },
-    include: {
-      Appointments: true,
-    }
-  });
-
-  return patient;
-}
-
-const getAllPatients = async () => {
-  const allPatients = await prisma.patients.findMany();
-  return allPatients;
-}
+const getAllPatientByPhoneNumber = async (phone: string) => prisma.patients.findMany({
+  where: {
+    phone,
+  }
+})
 
 const patientsModel = {
-  createPatients,
   getAllPatients,
-  getPatientById,
-  getPatientByCpf
+  getAllPatientByPhoneNumber
 }
 
 export default patientsModel;

@@ -1,101 +1,39 @@
-import { AppointmentInputType } from "../../types/Appointment.type";
-import { PatientTypeInput } from "../../types/Patients.type";
-import { ServiceReturnType } from "../../types/ServiceReturnType";
-import appointmentModel from "../models/appointments.model";
-import patientsModel from "../models/patients.model";
-import serviceModel from "../models/services.model";
+import { UpdateAppointmentProp } from "../../types/Appointment.type";
+import { ReturnServiceType } from "../../types/ReturnService.type";
+import appointmentModel from "../models/appointment.model";
 
-const createAppointment = async ({
-  date,
-  hour,
-  address,
-  birthDate,
-  cpf,
-  name,
-  serviceId,
-  patientId,
-}:
-  AppointmentInputType &
-  Omit<PatientTypeInput, 'phone'>
-): Promise<ServiceReturnType> => {
-  if (patientId) {
-    const newAppointment = await appointmentModel.createAppointment({ date, hour, patientId });
-    
-    return {
-      status: 201,
-      data: newAppointment
-    };
+const getAllAppointment = async (): Promise<ReturnServiceType> => {
+  const allAppointment = await appointmentModel.getAllAppointment();
+
+  return {
+    data: allAppointment,
+    status: 200,
   }
+} 
 
-  const service = await serviceModel.getServiceById(serviceId);
+const updateAppointment = async ({ id, status }: UpdateAppointmentProp): Promise<ReturnServiceType> => {
+  const appointment = await appointmentModel.getAppointmentById(id);
 
-  if (!service) {
+  if (!appointment) {
     return {
+      status: 404,
       data: {
-        message: 'Nehum serviço foi agendado vai whatsapp para vc'
-      },
-      status: 401,
-    }
-  }
-  
-  const patient = await patientsModel.getPatientByCpf(cpf);
-
-  if (!patient) {
-
-    const newPatient = await patientsModel.createPatients({ address, birthDate, cpf, name, phone: service.phone });
-
-    const newAppointment = await appointmentModel.createAppointment({ date, hour, patientId: newPatient.id });
-
-    await serviceModel.deleteService(service.id);
-
-    return {
-      data: newAppointment,
-      status: 201,
+        message: 'Atendimento não encontrado'
+      }
     }
   }
 
-  const newAppointment = await appointmentModel.createAppointment({ date, hour, patientId: patient.id });
-
-  await serviceModel.deleteService(service.id);
+  const appointmentUpdated = await appointmentModel.updateAppointment({ id, status });
 
   return {
-    status: 201,
-    data: newAppointment
-  };
-}
-
-const getAllAppointments = async (): Promise<ServiceReturnType> => {
-  const appointments = await appointmentModel.getAllAppointments();
-  return {
-    status: 200,
-    data: appointments
-  };
-}
-
-const updateAppointment = async (id: string, complet: boolean): Promise<ServiceReturnType> => {
-  const appointment = await appointmentModel.updateAppointment(id, complet);
-  return {
-    status: 200,
-    data: appointment
-  };
-
-}
-
-const deleteAppointment = async (id: string): Promise<ServiceReturnType> => {
-  const appointment = await appointmentModel.deleteAppointment(id);
-  return {
-    status: 200,
-    data: appointment
-  };
-
+    data: appointmentUpdated,
+    status: 204,
+  }
 }
 
 const appointmentService = {
-  createAppointment,
-  getAllAppointments,
+  getAllAppointment,
   updateAppointment,
-  deleteAppointment,
-};
+}
 
-export default appointmentService;
-
+export default appointmentService

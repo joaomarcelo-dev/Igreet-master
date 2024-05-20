@@ -1,27 +1,32 @@
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { ContainerStyle } from "./styles";
 import { CheckBox } from 'react-native-elements';
-import { useState } from "react";
 import { colors } from "../../global";
 
 type CardUserProps = {
-  check?: boolean,
+  userId: string
+  selectType?: boolean,
   name: string,
   birthDate: string,
   cpf: string,
-  phoneNumber: string
+  phoneNumber: string,
+  hadleChangeSelect: (userId: string, checkState: boolean) => void,
+  checked: boolean,
 }
 
-export default function CardUser({ check, birthDate, cpf, name, phoneNumber }: CardUserProps) {
-  const [checked, setChecked] = useState(false);
+export default function CardUser({ selectType, birthDate, cpf, name, phoneNumber, userId, hadleChangeSelect, checked }: CardUserProps) {
 
 
   const handleCheck = () => {
-    setChecked(!checked);
+    hadleChangeSelect(userId, checked);
   }
 
   return (
-    <View style={ ContainerStyle.container }>
+    <TouchableOpacity
+      style={ ContainerStyle.container }
+      onPress={ handleCheck }
+      disabled={ !selectType }
+    >
       <View>
         <Text style={ ContainerStyle.text }>Nome: { name }</Text>
         <Text style={ ContainerStyle.text }>Nascimento: { birthDate }</Text>
@@ -29,7 +34,7 @@ export default function CardUser({ check, birthDate, cpf, name, phoneNumber }: C
         <Text style={ ContainerStyle.text }>Telefone: { phoneNumber }</Text>
       </View>
       {
-        check &&
+        selectType &&
         <View style={ ContainerStyle.containerCheck }>
             <CheckBox
               checked={ checked }
@@ -39,6 +44,6 @@ export default function CardUser({ check, birthDate, cpf, name, phoneNumber }: C
             />
         </View>
       }
-    </View>
+    </TouchableOpacity>
   );
 }

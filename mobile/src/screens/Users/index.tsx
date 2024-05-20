@@ -1,15 +1,53 @@
+import { useEffect, useState } from "react";
+import { RouteProp, useRoute } from '@react-navigation/native';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ConfirmModalStyle, ContainerStyle, FormStyle, UserListStyle } from "./styles";
+
 import HeaderScreen from "../../components/HeaderScreen";
-import { ContainerStyle, FormStyle, UserListStyle } from "./styles";
-
-
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CardUser from "../../components/CardUser";
 
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { getAllPatients } from "../../api/web.api";
+import { PatientType } from "../../Types/Patient.type";
+
+type ParamList = {
+  Detail: {
+    isSelect: boolean;
+  };
+};
+
 export default function Users({ navigation }) {
+  const [usersSelected, setUsersSelected] = useState([]);
+  const [allPatients, setAllPatients] = useState<PatientType[]>([]);
+  const [handlePatients, setHandlePatients] = useState<PatientType[]>([]);
+
+  const { params } = useRoute<RouteProp<ParamList>>()  
+
+  const handleChangeUserSelected = (userId: string, checkState: boolean) => {
+    if (checkState) {
+      setUsersSelected(usersSelected.filter((users) => users !== userId));
+      return;
+    }
+
+    setUsersSelected([...usersSelected, userId]);
+  };
+
+  const makeAnAppointment = () => {
+    setUsersSelected([]);
+  }
+
+  useEffect(() => {
+    const get = async () => {
+      const { data: allPatients } = await getAllPatients();
+      setAllPatients(allPatients);
+    }
+
+    get()
+  }, []);
+
   return (
     <>
-      <HeaderScreen title="Usuários" />
+      <HeaderScreen title="Usuários" selects={usersSelected.length} />
 
       <View style={ ContainerStyle.container }>
         <View style={ FormStyle.container }>
@@ -29,15 +67,37 @@ export default function Users({ navigation }) {
         </View>
 
         <ScrollView style={ UserListStyle.container }>
-          <CardUser
-            check={ true }
-            birthDate="07/06/2004"
-            cpf="630.350.053-62"
-            name="João Marcelo Lima Oliveira"
-            phoneNumber="(98) 99237-7794"
-          />
+          {
+            allPatients.map((patient) => {
+              return (
+                <CardUser
+                  key={ patient.id }
+                  userId={ patient.id }
+                  selectType={ params?.isSelect }
+                  birthDate={ patient.birthDate }
+                  cpf={ patient.cpf }
+                  name={ patient.name }
+                  phoneNumber={ patient.phone }
+                  hadleChangeSelect={handleChangeUserSelected}
+                  checked={ usersSelected.includes(patient.id) }
+                />
+              )
+            })
+          }
+
         </ScrollView>
       </View>
+      {
+        usersSelected.length > 0 &&
+        <View style={ ConfirmModalStyle.container }>
+          <TouchableOpacity
+            style={ ConfirmModalStyle.buttonConfirm }
+            onPress={ makeAnAppointment }
+          >
+            <Text style={ ConfirmModalStyle.textConfirm }>Marcar consulta</Text>
+          </TouchableOpacity>
+        </View>
+      }
     </>
   );
 }

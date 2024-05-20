@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { UpdateAppointmentProp } from '../Types/Appointment.type';
 
-const BASE_URL = 'http://192.168.1.227:3333';
+const BASE_URL = 'http://10.0.98.5:3333';
 
 type AxiosRequest = {
   data?: any;
@@ -10,7 +11,12 @@ type AxiosRequest = {
 
 const requestAxios = async ({ data, url, method }: AxiosRequest) => axios[method](`${BASE_URL}${url}`, data);
 
-export const getServices = async () => {
-  const response = await requestAxios({ url: '/services', method: 'get' });
-  return response;
-}
+// =========================/ Appointment /================================================================ //
+export const getAllAppointments = async () => requestAxios({ url: '/appointment', method: 'get' });
+export const updateAppointment = async (data: UpdateAppointmentProp) => requestAxios({ url: '/appointment', method: 'put', data, });
+
+// =========================/ Patients /=================================================================== //
+export const getAllPatients = async () => requestAxios({ url: '/patient', method: 'get' });
+
+// =========================/ Days Of Atendence /========================================================== //
+export const getAllDaysOfAtendence = async () => requestAxios({ url: '/days-of-atendence', method: 'get' });

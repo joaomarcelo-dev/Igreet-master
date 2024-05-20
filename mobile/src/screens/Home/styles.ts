@@ -105,9 +105,17 @@ const SpeedAccessStyle = StyleSheet.create({
   },
 });
 
+const ListAppointmentStyle = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+})
+
 export {
   ContainerStyle,
   HeaderStyle,
   SectionStyle,
   SpeedAccessStyle,
+  ListAppointmentStyle,
 };

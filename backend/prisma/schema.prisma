@@ -29,19 +29,16 @@ model Patients {
 }
 
 model Appointments {
-  id        String   @id @default(uuid())
-  date      String
-  hour      String
-  patientId String
-  patient   Patients @relation(fields: [patientId], references: [id])
-  complet   Boolean  @default(false)
-}
+  id               String   @id @default(uuid())
+  patientId        String
+  dayOfAtencenceId String
+  complet          Boolean  @default(false)
+  updateAt         DateTime @updatedAt
+  createAt         DateTime @default(now())
+  imgURL           String?
 
-model Services {
-  id             String @id @default(uuid())
-  phone          String
-  time           String
-  expirationTime String
+  patient        Patients        @relation(fields: [patientId], references: [id])
+  dayofatendence DaysOfAtendence @relation(fields: [dayOfAtencenceId], references: [id])
 }
 
 model DaysOfAtendence {
@@ -50,4 +47,14 @@ model DaysOfAtendence {
   hourStart String
   hourEnd   String
   title     String
+
+  Appointments Appointments[]
+}
+
+model Service {
+  id        String @id @default(uuid())
+  code      String @unique
+  phone     String
+  imgURL    String
+  timestamp String
 }

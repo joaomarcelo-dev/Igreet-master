@@ -41,21 +41,43 @@ const CardPlansStyle = StyleSheet.create({
 
   textNotFoundItens: {
     textAlign: 'center',
-    fontSize: 15,
-    marginBottom: 20
+    fontSize: 17,
+  },
+
+  contentInfo: {
+    width: '100%',
+    alignItems: 'center'
+  },
+
+  imgPatient: {
+    width: 90,
+    height: 90,
+    borderRadius: 50
+  },
+
+  namePatient: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
+
+  infoTextPatient: {
+    marginTop: 10,
+    fontWeight: 'bold',
   },
 
   buttonRedirect: {
     backgroundColor: colors.primary,
     padding: 7,
     borderRadius: 10,
-    width: '80%'
+    width: '80%',
+    marginTop: 20
   },
 
   textButton: {
     textAlign: 'center',
     color: colors.white,
-  }
+  },
 });
 
 export {

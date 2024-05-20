@@ -1,9 +1,4 @@
-export type AppointmentType = {
-  id: string
-  date: string
-  hour: string
-  patientId: string
-  complet?: boolean;
+export type UpdateAppointmentProp = {
+  id: string;
+  status: boolean;
 }
-
-export type AppointmentInputType = Omit<AppointmentType, 'id'>

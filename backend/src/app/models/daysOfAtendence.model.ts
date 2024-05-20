@@ -1,39 +1,9 @@
 import prisma from "../../providers/prisma.provider";
-import { DaysOfAtendenceInputType } from "../../types/DaysOfAtendence.type";
 
-const createDaysOfAtendence = async ({ date, hourEnd, hourStart, title }: DaysOfAtendenceInputType) => {
-  const newDayOfAtendence = await prisma.daysOfAtendence.create({
-    data: {
-      date,
-      hourEnd,
-      hourStart,
-      title,
-    }
-  });
+const getAllDaysOfAtendence = async () => prisma.daysOfAtendence.findMany()
 
-  return newDayOfAtendence;
-}
-
-const getAllDaysOfAtendence = async () => {
-  const daysOfAtendence = await prisma.daysOfAtendence.findMany();
-
-  return daysOfAtendence;
-}
-
-const deleteDaysOfAtendenceById = async (id: string) => {
-  const deletedDayOfAtendence = await prisma.daysOfAtendence.delete({
-    where: {
-      id
-    }
-  });
-
-  return deletedDayOfAtendence;
-}
-
-const daysOfAtendenceModel = {
-  createDaysOfAtendence,
+const DaysOfAtendenceModel = {
   getAllDaysOfAtendence,
-  deleteDaysOfAtendenceById
 }
 
-export default daysOfAtendenceModel;
+export default DaysOfAtendenceModel;

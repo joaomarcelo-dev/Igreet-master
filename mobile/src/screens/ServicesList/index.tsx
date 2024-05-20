@@ -1,14 +1,15 @@
 import { ScrollView, Text } from "react-native";
 import { View } from "react-native-animatable";
 import HeaderScreen from "../../components/HeaderScreen";
-import ServiceCard from "../../components/ServiceCard";
+import ServiceCard from "../../components/AppointmentCard";
 import { ContainerStyle } from "./styles";
 import AlertBox from "../../components/AlertBox";
 import { useEffect, useState } from "react";
-import { getServices } from "../../api/web.api";
+import { getAllAppointments } from "../../api/web.api";
+import { AppointmentType } from "../../Types/Appointment.type";
 
 export default function ServicesList({ navigation }) {
-  const [services, setServices] = useState([]);
+  const [allAppointments, setallAppointments] = useState<AppointmentType[]>([]);
 
   const [alertState, setAlertState] = useState({
     visible: false,
@@ -32,10 +33,10 @@ export default function ServicesList({ navigation }) {
 
   useEffect(() => {
     const get = async () => {
-      const response = await getServices();
-
-      console.log(response);
+      const { data: allAppointments } = await getAllAppointments();
+      console.log(allAppointments);
       
+      setallAppointments(allAppointments);
     };
 
     get();
@@ -54,33 +55,19 @@ export default function ServicesList({ navigation }) {
 
       <ScrollView>
         <View style={ ContainerStyle.container }>
-          <ServiceCard
-            id="1"
-            index={0}
-            funCheck={checkService}
-            funDelet={deleteService}
-          />
-
-          <ServiceCard
-            id="2"
-            index={2}
-            funCheck={checkService}
-            funDelet={deleteService}
-          />
-
-          <ServiceCard
-            id="3"
-            index={3}
-            funCheck={checkService}
-            funDelet={deleteService}
-          />
-
-          <ServiceCard
-            id="4"
-            index={4}
-            funCheck={checkService}
-            funDelet={deleteService}
-          />
+          {
+            allAppointments.map((appointment, index) => {
+              return (
+                <ServiceCard
+                  key={ appointment.id }
+                  id={ appointment.id }
+                  index={ index }
+                  funCheck={checkService}
+                  funDelet={deleteService}
+                />
+              )
+            })
+          }
         </View>
       </ScrollView>
     </>
