@@ -5,6 +5,7 @@ import 'express-async-errors';
 import appointmentRouter from './router/appointment.router';
 import patientsRouter from './router/patients.router';
 import daysOfAtendenceRouter from './router/daysOfAtendence.router';
+import serviceRouter from './router/service.router';
 
 const app = express();
 app.use(express.json());
@@ -31,7 +32,8 @@ app.get('/', (req, res) => {
 
 app.use('/appointment', appointmentRouter);
 app.use('/patient', patientsRouter);
-app.use('/days-of-atendence', daysOfAtendenceRouter)
+app.use('/days-of-atendence', daysOfAtendenceRouter);
+app.use('/service', serviceRouter);
 
 export {
   app,

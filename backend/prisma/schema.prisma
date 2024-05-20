@@ -52,9 +52,9 @@ model DaysOfAtendence {
 }
 
 model Service {
-  id        String @id @default(uuid())
-  code      String @unique
-  phone     String
-  imgURL    String
-  timestamp String
+  id       String   @id @default(uuid())
+  code     String   @unique
+  phone    String
+  imgURL   String
+  createAt DateTime @default(now())
 }
