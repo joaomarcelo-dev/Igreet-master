@@ -21,10 +21,24 @@ const getServiceByCode = async (code: string) => prisma.service.findUnique({
   }
 });
 
+const deleteServiceById = async (id: string) => prisma.service.delete({
+  where: {
+    id,
+  }
+});
+
+const getServiceById = async (id: string) => prisma.service.findUnique({
+  where: {
+    id,
+  }
+})
+
 const serviceModel = {
   createService,
   getServiceByPhone,
   getServiceByCode,
+  deleteServiceById,
+  getServiceById,
 }
 
 export default serviceModel;

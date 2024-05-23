@@ -32,11 +32,12 @@ const CardPlansStyle = StyleSheet.create({
     width: '100%',
     borderRadius: 20,
     backgroundColor: colors.white,
-    paddingHorizontal: 20,
-    paddingVertical: 30,
+    // paddingHorizontal: 20,
+    paddingBottom: 30,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden'
   },
 
   textNotFoundItens: {
@@ -46,13 +47,25 @@ const CardPlansStyle = StyleSheet.create({
 
   contentInfo: {
     width: '100%',
-    alignItems: 'center'
+    alignItems: 'center',
+    position: 'relative',
   },
-
+  
+  buttonDelet: {
+    backgroundColor: 'red',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    zIndex: 9999,
+    padding: 10,
+    borderBottomStartRadius: 8,
+  },
+  
   imgPatient: {
     width: 90,
     height: 90,
-    borderRadius: 50
+    borderRadius: 50,
+    marginTop: 40,
   },
 
   namePatient: {

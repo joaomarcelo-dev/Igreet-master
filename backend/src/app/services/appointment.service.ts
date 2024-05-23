@@ -1,8 +1,12 @@
 import { AppointmentInputType, UpdateAppointmentProp } from "../../types/Appointment.type";
+import { PatientInputType } from "../../types/Patient.type";
 import { ReturnServiceType } from "../../types/ReturnService.type";
 import appointmentModel from "../models/appointment.model";
 import DaysOfAtendenceModel from "../models/daysOfAtendence.model";
 import patientsModel from "../models/patients.model";
+
+import {query} from 'express';
+import serviceModel from "../models/service.model";
 
 const getAllAppointment = async (): Promise<ReturnServiceType> => {
   const allAppointment = await appointmentModel.getAllAppointment();
@@ -33,16 +37,45 @@ const updateAppointment = async ({ id, status }: UpdateAppointmentProp): Promise
   }
 }
 
-const createAppointment = async ({ dayOfAtencenceId, patientId, imgURL}: AppointmentInputType): Promise<ReturnServiceType> => {
-  const patient = await patientsModel.getPatientById(patientId);
+const createAppointment = async ({ dayOfAtencenceId = '', patientId = '', imgURL, address, birthDate, cpf, name, phone, serviceId = '' }: AppointmentInputType & PatientInputType & { serviceId: string }): Promise<ReturnServiceType> => {
   const dayOfAtencence = await DaysOfAtendenceModel.getDaysOfAtendenceById(dayOfAtencenceId);
-
-  if (!patient || !dayOfAtencence) {
+  
+  if (!dayOfAtencence) {
     return {
-      status: 404,
       data: {
-        message: 'PacientId ou day-of-id Invalido'
+        message: 'Os dados do dia de consulta informado não foram encontrados',
+      },
+      status: 404,
+    }
+  }
+
+  const patient = await patientsModel.getPatientById(patientId);
+
+  if (!patient) {
+    const service = await serviceModel.getServiceById(serviceId)
+
+    if (!service) {
+      return {
+        status: 404,
+        data: {
+          message: 'Serviço não encontrado'
+        }
       }
+    }   
+
+    const newPatient = await patientsModel.createPatient({ address, birthDate, cpf, name, phone });
+
+    const appointmentCreated = await appointmentModel.createAppointment({
+      dayOfAtencenceId,
+      patientId: newPatient.id,
+      imgURL,
+    });
+
+    await serviceModel.deleteServiceById(serviceId)
+
+    return {
+      status: 201,
+      data: appointmentCreated,
     }
   }
 
@@ -54,10 +87,31 @@ const createAppointment = async ({ dayOfAtencenceId, patientId, imgURL}: Appoint
   }
 }
 
+const deleteAppointmentById = async (id: string): Promise<ReturnServiceType> => {
+  const appointment = await appointmentModel.getAppointmentById(id)
+
+  if (!appointment) {
+    return {
+      status: 404,
+      data: {
+        message: 'Agendamento não encontrado'
+      }
+    }
+  }
+
+  const appointmentDeleted = await appointmentModel.deleteAppointmentById(id);
+
+  return {
+    status: 204,
+    data: appointmentDeleted,
+  }
+}
+
 const appointmentService = {
   getAllAppointment,
   updateAppointment,
-  createAppointment
+  createAppointment,
+  deleteAppointmentById,
 }
 
 export default appointmentService

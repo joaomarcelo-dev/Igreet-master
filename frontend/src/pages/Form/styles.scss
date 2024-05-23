@@ -1,14 +1,15 @@
-main.main-form {
+main.main-form.flex_center {
   background-image: url(../../assets/img/bachgroud-form.svg);
   background-size: contain;
   width: 100wh;
   height: 100vh;
+  flex-direction: column;
 }
 
 
 .container-form.flex_center {
   padding-top: 50px;
-  align-items: start;
+  max-width: 650px;
 }
 
 .content-profile-found.flex_center {

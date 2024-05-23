@@ -12,15 +12,15 @@ import { imgProfileDefault } from "../../global/conf/imagesDefault";
 import { useEffect, useState } from "react";
 import AlertBox from "../../components/AlertBox";
 import AppointmentCard from "../../components/AppointmentCard";
-import { getAllAppointments, updateAppointment } from "../../api/web.api";
+import { deleteAppointment, getAllAppointments, updateAppointment } from "../../api/web.api";
 import { AppointmentType, UpdateAppointmentProp } from "../../Types/Appointment.type";
 import RefreshComponent from "../../components/RefreshComponent";
-import MessageAlert from "../../components/MessageAlert";
 
 
 export default function Home({ navigation }) {
   const [alertVisible, setAlertVisible] = useState({
-    visible: false,
+    visibleAlertDelet: false,
+    visibleAlertConfirm: false,
     id: '',
   })
   const [allAppointments, setallAppointments] = useState<AppointmentType[]>([]);
@@ -36,6 +36,12 @@ export default function Home({ navigation }) {
     console.log(data);
     
   }
+
+  const handleDeleteAppointment = async (id: string) => {
+    const { data } = await deleteAppointment(id);
+    console.log(data);
+    
+  }
   
   const handleGetAllAppointment = async () => {
     const { data: allAppointments } = await getAllAppointments();         
@@ -47,14 +53,27 @@ export default function Home({ navigation }) {
       <AlertBox
         message={`Deseja mesmo alterar o estado do paciente?`}
         onNoPress={() => {
-          setAlertVisible({ ...alertVisible, visible: false, id: '' });
+          setAlertVisible({ ...alertVisible, visibleAlertConfirm: false, id: '' });
         }}
         onYesPress={async () => {
-          setAlertVisible({ ...alertVisible, visible: false, });
+          setAlertVisible({ ...alertVisible, visibleAlertConfirm: false, });
           await handleUpdateAppointment({ id: alertVisible.id, status: true });
           await handleGetAllAppointment();
         }}
-        visible={alertVisible.visible}
+        visible={alertVisible.visibleAlertConfirm}
+      />
+
+      <AlertBox
+        message={`Deseja mesmo deletar o agendamento do paciente?`}
+        onNoPress={() => {
+          setAlertVisible({ ...alertVisible, visibleAlertDelet: false, id: '' });
+        }}
+        onYesPress={async () => {
+          setAlertVisible({ ...alertVisible, visibleAlertDelet: false, });
+          await handleDeleteAppointment(alertVisible.id);
+          await handleGetAllAppointment();
+        }}
+        visible={alertVisible.visibleAlertDelet}
       />
 
       <RefreshComponent handleRefresh={async () => {
@@ -171,10 +190,13 @@ export default function Home({ navigation }) {
                 textViewMore="Ver histórico"
                 textNotFoundItens="Nenhum atendimento pendente"
                 textButton="Marcar como concluido"
-                actionsButton={(id: string) => {
-                  setAlertVisible({ ...alertVisible, visible: !alertVisible.visible, id, });
-                }}
                 appointment={ allAppointments[0] }
+                actionsButton={(id: string) => {
+                  setAlertVisible({ ...alertVisible, visibleAlertConfirm: !alertVisible.visibleAlertConfirm, id, });
+                }}
+                deleteAppointment={(id: string) => {
+                  setAlertVisible({ ...alertVisible, visibleAlertDelet: !alertVisible.visibleAlertDelet, id, });
+                }}
               />
             </View>
 
@@ -189,8 +211,12 @@ export default function Home({ navigation }) {
                           id={ appointment.id }
                           index={ index }
                           appintmentData={appointment}
-                          funCheck={() => {}}
-                          funDelet={() => {}}
+                          funCheck={(id: string) => {
+                            setAlertVisible({ ...alertVisible, visibleAlertConfirm: !alertVisible.visibleAlertConfirm, id, });
+                          }}
+                          funDelet={(id: string) => {
+                            setAlertVisible({ ...alertVisible, visibleAlertDelet: !alertVisible.visibleAlertDelet, id, });
+                          }}
                           setIndexOption={setIndexOption}
                         />
                       )

@@ -13,5 +13,8 @@ appointmentRouter.route('/')
 .post(
   appointmentController.createAppointment,
 )
+.delete(
+  appointmentController.deleteAppointmentById,
+)
 
 export default appointmentRouter;

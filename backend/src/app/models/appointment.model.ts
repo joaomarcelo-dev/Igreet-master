@@ -37,7 +37,13 @@ const createAppointment = async ({ dayOfAtencenceId, patientId, imgURL }: Appoin
     patientId,
     imgURL,
   }
-})
+});
+
+const deleteAppointmentById = async (id: string) => prisma.appointments.delete({
+  where: {
+    id,
+  }
+});
 
 
 const appointmentModel = {
@@ -45,6 +51,7 @@ const appointmentModel = {
   updateAppointment,
   getAppointmentById,
   createAppointment,
+  deleteAppointmentById,
 }
 
 export default appointmentModel;
