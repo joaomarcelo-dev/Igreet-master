@@ -1,0 +1,139 @@
+main.main-form {
+  background-image: url(../../assets/img/bachgroud-form.svg);
+  background-size: contain;
+  width: 100wh;
+  height: 100vh;
+}
+
+
+.container-form.flex_center {
+  padding-top: 50px;
+  align-items: start;
+}
+
+.content-profile-found.flex_center {
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 30px 20px 15px;
+  flex-direction: column;
+  margin: 30px 20px;
+}
+
+.section-select-user-consult-card {
+  padding: 0 20px;
+  width: 100%;
+}
+
+.content-buttons.flex_center {
+  gap: 20px;
+}
+
+.button-options {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  font-size: 0.8rem;
+
+}
+
+.now-patient {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.now-patient:disabled {
+  background-color: rgb(153, 153, 153);
+  color: white;
+}
+
+.mark-consult {
+  background-color: rgb(42, 185, 107);
+  color: white;
+}
+
+.mark-consult:disabled {
+  background-color: rgb(153, 153, 153);
+  color: white;
+}
+
+.form {
+  background-color: white;
+  width: 90%;
+  padding: 45px 30px;
+  border-radius: 20px;
+  // border: 1px solid black;
+  box-shadow: -1px 14px 25px 1px rgba(0,0,0,0.75);
+}
+
+.title {
+  text-align: center;
+}
+
+p.text-info-form {
+  color: #a1a1a1;
+  font-size: 0.9rem;
+  margin-top: 20px;
+}
+
+.content-input.flex_center {
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+input.input-form,
+select.select-form  {
+  border: none;
+  border-bottom: 1px solid #b3b3b3;
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 8px 10px;
+  outline: none;
+  font-size: 0.9rem;
+  color: black;
+  width: 100%;
+}
+
+
+.button-submit {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  background-color: dodgerblue;
+  margin-top: 25px;
+  border-radius: 7px;
+  color: white;
+}
+
+.button-submit:hover {
+  background-color: skyblue;
+  color: black;
+}
+
+
+.content-service-not-found.flex_center {
+  background-color: white;
+  padding: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+.title-not-found {
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.button-redirect {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 5px 40px;
+  background-color: #25d366;
+}

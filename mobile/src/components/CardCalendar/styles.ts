@@ -9,7 +9,8 @@ const ContainerStyle = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginVertical: 4,
   },
 
   lineColor: {
@@ -28,6 +29,7 @@ const ContainerStyle = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
+    marginRight: 8
   },
 
   containerDataInfo: {

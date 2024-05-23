@@ -8,9 +8,16 @@ const getAllPatientByPhoneNumber = async (phone: string) => prisma.patients.find
   }
 })
 
+const getPatientById = async (id: string) => prisma.patients.findUnique({
+  where: {
+    id,
+  }
+})
+
 const patientsModel = {
   getAllPatients,
-  getAllPatientByPhoneNumber
+  getAllPatientByPhoneNumber,
+  getPatientById
 }
 
 export default patientsModel;

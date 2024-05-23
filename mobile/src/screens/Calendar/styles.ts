@@ -31,6 +31,14 @@ const ListCardStyle = StyleSheet.create({
 
   contentCards: {
     marginTop: 15
+  },
+
+  textNotFound: {
+    fontSize: 19,
+    fontWeight: 'bold',
+    color: colors.divider,
+    marginTop: 30,
+    textAlign: 'center'
   }
 });
 
@@ -39,6 +47,10 @@ const ModalNewDayOfAtendenceStyle = StyleSheet.create({
     padding: 20,
     width: '100%',
     paddingHorizontal: 20,
+    backgroundColor: 'white',
+    borderTopStartRadius: 15,
+    borderTopEndRadius: 15,
+    marginTop: -10,
   },
 
   title: {
@@ -57,7 +69,7 @@ const ModalNewDayOfAtendenceStyle = StyleSheet.create({
   },
 
   containerLabel: {
-    marginTop: 20,
+    marginTop: 10,
 
   },
 
@@ -72,13 +84,19 @@ const ModalNewDayOfAtendenceStyle = StyleSheet.create({
   },
 
   inputTitle: {
-    
+    height: 80,
+  },
+
+  containerNotifications: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginVertical: 20
   },
 
   containerHour: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop:  30,
+    justifyContent: 'space-around',
+    marginTop: 15,
   },
 
   containerInputHour: {
@@ -112,6 +130,10 @@ const ModalNewDayOfAtendenceStyle = StyleSheet.create({
 
   buttonConfirm: {
     backgroundColor: colors.success
+  },
+
+  buttonDisabled: {
+    backgroundColor: colors.disabled,
   },
 
   textButtonClose: {

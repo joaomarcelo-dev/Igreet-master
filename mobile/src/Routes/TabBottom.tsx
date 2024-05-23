@@ -2,12 +2,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import ServicesList from '../screens/ServicesList';
 import Users from '../screens/Users';
 import Calendar from '../screens/Calendar';
 import Settings from '../screens/Settings';
 import Profile from '../screens/Profile';
 import NewAppointment from '../screens/NewAppointment';
+import MessageAlert from '../components/MessageAlert';
 
 export default function TabBottom() {
   const TabBottom = createBottomTabNavigator();
@@ -25,11 +25,6 @@ export default function TabBottom() {
           tabBarIcon: () => <Ionicons name='home-outline' size={25} />,
           tabBarLabel: '',
         }}
-      />
-
-      <TabBottom.Screen
-        name="ServicesList"
-        component={ ServicesList }
       />
 
       <TabBottom.Screen

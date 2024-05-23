@@ -15,6 +15,7 @@ import AppointmentCard from "../../components/AppointmentCard";
 import { getAllAppointments, updateAppointment } from "../../api/web.api";
 import { AppointmentType, UpdateAppointmentProp } from "../../Types/Appointment.type";
 import RefreshComponent from "../../components/RefreshComponent";
+import MessageAlert from "../../components/MessageAlert";
 
 
 export default function Home({ navigation }) {

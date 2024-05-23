@@ -59,11 +59,11 @@ export default function Profile() {
             type="switch"
           />
 
-          <OptionItem
+          {/* <OptionItem
             icon={{ name: 'water-outline' }}
             title="Lembrete de água"
             type="switch"
-          />
+          /> */}
         </View>
 
         <View style={ OptionsUserLogStyle.container }>

@@ -1,8 +1,12 @@
 import prisma from "../../providers/prisma.provider"
+import { AppointmentInputType } from "../../types/Appointment.type";
 
 const getAllAppointment = async () => prisma.appointments.findMany({
   include: {
     patient: true,
+  },
+  orderBy: {
+    createAt: 'asc'
   }
 });
 
@@ -27,10 +31,20 @@ const getAppointmentById = async (id: string) => prisma.appointments.findFirst({
   }
 });
 
+const createAppointment = async ({ dayOfAtencenceId, patientId, imgURL }: AppointmentInputType) => prisma.appointments.create({
+  data: {
+    dayOfAtencenceId,
+    patientId,
+    imgURL,
+  }
+})
+
+
 const appointmentModel = {
   getAllAppointment,
   updateAppointment,
   getAppointmentById,
+  createAppointment,
 }
 
 export default appointmentModel;

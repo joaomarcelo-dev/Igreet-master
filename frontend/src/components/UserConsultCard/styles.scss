@@ -1,0 +1,21 @@
+.content-user-consult-card.flex_center {
+  padding: 15px 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+
+  margin-top: 10px;
+}
+
+.label-user-consult-card.flex_center {
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.name-user-consult-card {
+  font-size: 1rem;
+}
+
+.input-check-box-user-consult-card {
+  transform: scale(1.6);
+}

@@ -1,0 +1,44 @@
+.whatsApp-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: initial;
+  background-image: linear-gradient(-180deg, #00d775, #00bd68);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.562) 3px 4px 4px;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+  width: 200px;
+  outline: 0;
+  overflow: hidden;
+  padding: 20px;
+  pointer-events: auto;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: top;
+  white-space: nowrap;
+  gap: 20px;
+  z-index: 9;
+  border: 0;
+  svg {
+    fill: #ffffff;
+    /* stroke: #ffffff; */
+    pointer-events: none;
+  }
+}
+
+.whatsApp-button:hover {
+  background: #00bd68;
+}
+
+.whatsApp-button:active {
+  scale: 0.9;
+}
+
+.text-whatsapp {
+  text-decoration: none;
+}

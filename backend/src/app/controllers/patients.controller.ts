@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, query } from "express";
 import patientsService from "../services/patients.service";
 
 const getAllPatients = async (req: Request, res: Response) => {
@@ -12,7 +12,6 @@ const getAllPatients = async (req: Request, res: Response) => {
   const { data, status } = await patientsService.getAllPatients();
   return res.status(status).json(data);
 }
-
 
 const patientsController = {
   getAllPatients,

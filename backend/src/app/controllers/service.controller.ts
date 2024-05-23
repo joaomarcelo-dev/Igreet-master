@@ -3,8 +3,9 @@ import serviceService from "../services/service.service";
 import { ServiceInputType } from "../../types/Service.type";
 
 const createService = async (req: Request, res: Response) => {
-  const { imgURL, phone }:Omit<ServiceInputType, 'code'> = req.body;
+  const { imgURL, phone }:Omit<ServiceInputType, 'code'> = req.body;  
   const { data, status } = await serviceService.createService({ imgURL, phone });
+
   return res.status(status).json(data);
 }
 

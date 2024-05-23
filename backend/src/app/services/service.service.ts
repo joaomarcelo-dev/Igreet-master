@@ -3,6 +3,7 @@ import { ServiceInputType } from "../../types/Service.type";
 import utils from "../../utils";
 import serviceModel from "../models/service.model";
 
+import { v4 as uuidV4 } from 'uuid';
 
 const createService = async ({ imgURL, phone }: Omit<ServiceInputType, 'code'>): Promise<ReturnServiceType> => {
   const service = await serviceModel.getServiceByPhone(phone);
@@ -15,7 +16,7 @@ const createService = async ({ imgURL, phone }: Omit<ServiceInputType, 'code'>):
   }
 
   const serviceCreated = await serviceModel.createService({
-    code: utils.getRandom(6).toString(),
+    code: uuidV4().slice(0, 8),
     imgURL,
     phone,
   });

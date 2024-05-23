@@ -15,3 +15,6 @@ export type UpdateAppointmentProp = {
   id: string;
   status: boolean;
 }
+
+
+export type AppointmentInputType = Omit<AppointmentType, 'id' | 'complet' | 'updateAt' | 'createAt' | 'patient'>

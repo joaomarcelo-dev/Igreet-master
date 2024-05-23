@@ -4,7 +4,7 @@ import { colors } from "../../global";
 const HeaderStyles = StyleSheet.create({
   container: {
     paddingTop: 30,
-    paddingBottom: 15,
+    paddingBottom: 30,
     paddingHorizontal: 20,
     backgroundColor: colors.primary,
     display: 'flex',

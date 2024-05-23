@@ -7,5 +7,11 @@ daysOfAtendenceRouter.route('/')
 .get(
   DaysOfAtendenceController.getAllDaysOfAtendence
 )
+.post(
+  DaysOfAtendenceController.createDayOfAtendence
+)
+.put(
+  DaysOfAtendenceController.deletDaysOfAtendenceById,
+)
 
 export default daysOfAtendenceRouter;

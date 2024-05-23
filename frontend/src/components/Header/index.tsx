@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import './style.scss';
 
-const imgProfileDefault = 'https://www.iconpacks.net/icons/5/free-no-profile-picture-icon-15257-thumb.png';
+type HeaderProps = {
+  title: string
+}
 
-export default function Header() {
+export default function Header({ title }: HeaderProps) {
   const navigate = useNavigate();
 
   return (
@@ -13,15 +15,9 @@ export default function Header() {
         className='title-header'
         onClick={() => navigate('/')}
       >
-        UBS Master
+        { title }
       </h1>
-      <nav>
-        <img
-          className='header-img-profile'
-          src={imgProfileDefault}
-          alt=""
-        />
-      </nav>
+      <div />
     </header>
   )
 }

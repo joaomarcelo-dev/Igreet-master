@@ -12,10 +12,10 @@ const createService = async ({ code, imgURL, phone }: ServiceInputType) => prism
 const getServiceByPhone = async (phone: string) => prisma.service.findFirst({
   where: {
     phone,
-  }
+  },
 });
 
-const getServiceByCode = async (code: string) => prisma.service.findFirst({
+const getServiceByCode = async (code: string) => prisma.service.findUnique({
   where: {
     code,
   }

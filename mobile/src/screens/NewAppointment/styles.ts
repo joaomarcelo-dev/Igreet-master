@@ -29,7 +29,17 @@ const ContainerStyle = StyleSheet.create({
     borderRadius: 10,
     marginTop: 20,
     fontSize: 16
-  }
+  },
+
+  buttonOption: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 10,
+  },
+
+  buttonConfirm: {
+    backgroundColor: colors.success
+  },
 
 });
 

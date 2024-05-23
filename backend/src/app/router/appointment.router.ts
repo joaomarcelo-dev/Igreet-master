@@ -10,5 +10,8 @@ appointmentRouter.route('/')
 .put(
   appointmentController.updateAppointment,
 )
+.post(
+  appointmentController.createAppointment,
+)
 
 export default appointmentRouter;

@@ -42,11 +42,13 @@ model Appointments {
 }
 
 model DaysOfAtendence {
-  id        String @id @default(uuid())
-  date      String
-  hourStart String
-  hourEnd   String
-  title     String
+  id           String  @id @default(uuid())
+  date         String
+  hourStart    String
+  hourEnd      String
+  title        String
+  active       Boolean @default(true)
+  notification Boolean @default(false)
 
   Appointments Appointments[]
 }
@@ -54,7 +56,7 @@ model DaysOfAtendence {
 model Service {
   id       String   @id @default(uuid())
   code     String   @unique
-  phone    String
+  phone    String   @unique
   imgURL   String
   createAt DateTime @default(now())
 }
