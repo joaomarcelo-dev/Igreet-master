@@ -2,7 +2,7 @@ import axios from 'axios';
 import { AppointmentInputType, UpdateAppointmentProp } from '../Types/Appointment.type';
 import { DaysOfAtendenceInputType } from '../Types/DaysOfAtendence.type';
 
-const BASE_URL = 'http://10.0.98.6:3333';
+const BASE_URL = 'https://igreet-master.vercel.app';
 
 type AxiosRequest = {
   data?: any;

@@ -10,7 +10,7 @@ import serviceRouter from './router/service.router';
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: '*',
+  origin: ['*', 'https://igreet-master-dtw8.vercel.app/'],
   methods: [
     'GET', 'POST', 'PUT', 'DELETE', 'OPTIONS',
     'HEAD', 'PATCH', 'CONNECT', 'TRACE', 'PURGE',
