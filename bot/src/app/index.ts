@@ -402,11 +402,14 @@ const messages: { [key in State]: (venom: Whatsapp, message: Message, userState:
 
 const startVenom = async (venom: Whatsapp) => {
   venom.onMessage(async (message) => {
+
     if (!userState[message.from]) {
       userState[message.from] = { step: 'initial' };
     }
+    
     const state = userState[message.from];
     await messages[state.step](venom, message, state);
+    
   });
 };
 
