@@ -6,6 +6,7 @@ import appointmentRouter from './router/appointment.router';
 import patientsRouter from './router/patients.router';
 import daysOfAtendenceRouter from './router/daysOfAtendence.router';
 import serviceRouter from './router/service.router';
+import loginRouter from './router/login.router';
 
 const app = express();
 app.use(express.json());
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
  return res.json({ message: 'Hello World' });
 })
 
+app.use('/login', loginRouter)
 app.use('/appointment', appointmentRouter);
 app.use('/patient', patientsRouter);
 app.use('/days-of-atendence', daysOfAtendenceRouter);

@@ -10,11 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Adms {
-  id       String  @id @default(uuid())
+model Login {
+  id       String @id @default(uuid())
   photo    String
   name     String
-  email    String?
+  email    String
   password String
 }
 
