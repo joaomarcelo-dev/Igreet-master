@@ -6,7 +6,7 @@ import { DayOfAtencenceType } from "../../Types/DaysOfAtendence.type";
 
 import moment from 'moment';
 
-import { Calendar as CalendarComponent, LocaleConfig } from 'react-native-calendars';
+import { Calendar as CalendarComponent } from 'react-native-calendars';
 
 import HeaderScreen from "../../components/HeaderScreen";
 import { CalendarStyle, ListCardStyle, ModalNewDayOfAtendenceStyle } from "./styles";
@@ -14,34 +14,34 @@ import CardCalendar from "../../components/CardCalendar";
 import { colors } from "../../global";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-LocaleConfig.locales['pt-br'] = {
-  monthNames: [
-    'Janeiro',
-    'Fevereiro',
-    'Março',
-    'Abril',
-    'Maio',
-    'Junho',
-    'Julho',
-    'Agosto',
-    'Setembro',
-    'Outubro',
-    'Novembro',
-    'Dezembro'
-  ],
-  monthNamesShort: [
-    'Jan.', 'Fev.', 'Mar.', 'Abr.', 'Mai.', 'Jun.', 'Jul.', 'Ago.', 'Set.', 'Out.', 'Nov.', 'Dez.'
-  ],
-  dayNames: [
-    'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'
-  ],
-  dayNamesShort: [
-    'Dom.', 'Seg.', 'Ter.', 'Qua.', 'Qui.', 'Sex.', 'Sáb.'
-  ],
-  today: 'Hoje'
-};
+// LocaleConfig.locales['pt-br'] = {
+//   monthNames: [
+//     'Janeiro',
+//     'Fevereiro',
+//     'Março',
+//     'Abril',
+//     'Maio',
+//     'Junho',
+//     'Julho',
+//     'Agosto',
+//     'Setembro',
+//     'Outubro',
+//     'Novembro',
+//     'Dezembro'
+//   ],
+//   monthNamesShort: [
+//     'Jan.', 'Fev.', 'Mar.', 'Abr.', 'Mai.', 'Jun.', 'Jul.', 'Ago.', 'Set.', 'Out.', 'Nov.', 'Dez.'
+//   ],
+//   dayNames: [
+//     'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'
+//   ],
+//   dayNamesShort: [
+//     'Dom.', 'Seg.', 'Ter.', 'Qua.', 'Qui.', 'Sex.', 'Sáb.'
+//   ],
+//   today: 'Hoje'
+// };
 
-LocaleConfig.defaultLocale = 'pt-br';
+// LocaleConfig.defaultLocale = 'pt-br';
 
 const convertDate = (dateStr: string) => {
   const [day, month, year] = dateStr.split('-');
