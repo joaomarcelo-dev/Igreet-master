@@ -4,7 +4,7 @@ import { colors } from "../../global";
 const ContainerStyle = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f7',
+    backgroundColor: '#FFF',
     alignItems: 'center',
   },
 });
@@ -43,31 +43,8 @@ const UserListStyle = StyleSheet.create({
   },
 });
 
-const ConfirmModalStyle = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    paddingVertical: 30,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-
-  buttonConfirm: {
-    backgroundColor: colors.confirm_color,
-    paddingHorizontal: 30,
-    paddingVertical: 7,
-    borderRadius: 15
-  },
-
-  textConfirm: {
-    fontSize: 15,
-  }
-})
-
 export {
   ContainerStyle,
   FormStyle,
   UserListStyle,
-  ConfirmModalStyle
 }

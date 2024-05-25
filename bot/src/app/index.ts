@@ -317,7 +317,7 @@ const messages: { [key in State]: (venom: Whatsapp, message: Message, userState:
   },
   sendDaysOfConsult: async (venom, message) => {
     const { data }: { data: DayOfAtencenceType[] } = await getAllDaysOfAtendence();
-    await venom.sendText(message.from, `Os dias de atendimento disponíveis são:\n\n${data.map((day, index) => `🗓 Dia - ${formateDate(day.date)} - Hora: ${day.hourStart}\n`).join('')}\n\n Tenha um ótimo dia! 🌅🌞😉`);
+    await venom.sendText(message.from, `Os dias de atendimento disponíveis são:\n\n${data.map((day, index) => `🗓 Dia - ${formateDate(day.date)} - Hora: ${day.hourStart}\n`).join('')}\n\n Se deseja marcar uma consulta, por favor, me envie uma mensagem novamente e selecione a opção de numero 2️⃣ 🙂\nTenha um ótimo dia! 🌅🌞😉`);
     delete userState[message.from];
   },
 
@@ -403,13 +403,14 @@ const messages: { [key in State]: (venom: Whatsapp, message: Message, userState:
 const startVenom = async (venom: Whatsapp) => {
   venom.onMessage(async (message) => {
 
-    if (!userState[message.from]) {
-      userState[message.from] = { step: 'initial' };
+    if (!message.isGroupMsg) {
+      if (!userState[message.from]) {
+        userState[message.from] = { step: 'initial' };
+      }
+      
+      const state = userState[message.from];
+      await messages[state.step](venom, message, state);
     }
-    
-    const state = userState[message.from];
-    await messages[state.step](venom, message, state);
-    
   });
 };
 

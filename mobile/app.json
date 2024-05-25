@@ -26,7 +26,10 @@
       "package": "com.anonymous.mobile",
       "permissions": [
         "SCHEDULE_EXACT_ALARM"
-      ]
+      ],
+      "notification": {
+        "icon": "./local/assets/notification-icon.png"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

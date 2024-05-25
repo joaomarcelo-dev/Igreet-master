@@ -10,6 +10,11 @@ const ContainerStyle = StyleSheet.create({
     margin: 10,
   },
 
+  contentInitialInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
   text: {
     color: colors.black,
     fontSize: 15,
@@ -17,16 +22,50 @@ const ContainerStyle = StyleSheet.create({
     marginVertical: 2,
   },
 
-  containerCheck: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
+  containerDetail: {
+    marginTop: 10
   },
 
-  checkbox: {
-    backgroundColor: colors.white,
-    borderColor: colors.white,
-    color: colors.white,
+  textDetail: {
+    marginVertical: 2,
+    color: colors.black,
+    fontSize: 13,
+  },
+
+  containerButtonOptions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+
+  iconArgend: {
+    color: colors.primary,
+  },
+
+  buttonArgendConsult: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+    backgroundColor: colors.blackOpacity,
+    padding: 10,
+    borderRadius: 10,
+    gap: 7,
+    width: '85%'
+  },
+
+  textArgend: {
+    color: colors.fontColorOpacty,
+    fontSize: 13,
+    fontWeight: 'bold',
+  },
+
+  buttonDeletUser: {
+    backgroundColor: 'red',
+    padding: 10,
+    marginBottom: -18,
+    borderRadius: 10
   }
 });
 

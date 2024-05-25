@@ -16,40 +16,58 @@ export default function TabBottom() {
     <TabBottom.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarShowLabel: false,
+        tabBarBadgeStyle: {
+          display: 'none'
+        }
       }}
     >
       <TabBottom.Screen
         name="Home"
         component={ Home }
         options={{
-          tabBarIcon: () => <Ionicons name='home-outline' size={25} />,
-          tabBarLabel: '',
+          tabBarButton: () => null,
         }}
       />
 
       <TabBottom.Screen
         name="Users"
         component={ Users }
+        options={{
+          tabBarButton: () => null,
+        }}
       />
 
       <TabBottom.Screen
         name="Calendar"
         component={ Calendar }
+        options={{
+          tabBarButton: () => null,
+        }}
       />
 
       <TabBottom.Screen
         name="Settings"
         component={ Settings }
+        options={{
+          tabBarButton: () => null,
+        }}
       />
 
       <TabBottom.Screen
         name="Profile"
         component={ Profile }
+        options={{
+          tabBarButton: () => null,
+        }}
       />
 
       <TabBottom.Screen
         name='NewAppointment'
         component={ NewAppointment }
+        options={{
+          tabBarButton: () => null,
+        }}
       />
     </TabBottom.Navigator>
   )

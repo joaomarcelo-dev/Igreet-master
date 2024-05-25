@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { ConfirmModalStyle, ContainerStyle, FormStyle, UserListStyle } from "./styles";
+import { ContainerStyle, FormStyle, UserListStyle } from "./styles";
 
 import HeaderScreen from "../../components/HeaderScreen";
 import CardUser from "../../components/CardUser";
@@ -18,24 +18,7 @@ type ParamList = {
 };
 
 export default function Users({ navigation }) {
-  const [usersSelected, setUsersSelected] = useState([]);
   const [allPatients, setAllPatients] = useState<PatientType[]>([]);
-  const [handlePatients, setHandlePatients] = useState<PatientType[]>([]);
-
-  const { params } = useRoute<RouteProp<ParamList>>()  
-
-  const handleChangeUserSelected = (userId: string, checkState: boolean) => {
-    if (checkState) {
-      setUsersSelected(usersSelected.filter((users) => users !== userId));
-      return;
-    }
-
-    setUsersSelected([...usersSelected, userId]);
-  };
-
-  const makeAnAppointment = () => {
-    setUsersSelected([]);
-  }
 
   useEffect(() => {
     handleGetAllPatients();
@@ -51,7 +34,7 @@ export default function Users({ navigation }) {
       await handleGetAllPatients();
     }}>
       <>
-        <HeaderScreen title="Usuários" selects={usersSelected.length} />
+        <HeaderScreen title="Usuários" />
 
         <View style={ ContainerStyle.container }>
           <View style={ FormStyle.container }>
@@ -76,14 +59,7 @@ export default function Users({ navigation }) {
                 return (
                   <CardUser
                     key={ patient.id }
-                    userId={ patient.id }
-                    selectType={ params?.isSelect }
-                    birthDate={ patient.birthDate }
-                    cpf={ patient.cpf }
-                    name={ patient.name }
-                    phoneNumber={ patient.phone }
-                    hadleChangeSelect={handleChangeUserSelected}
-                    checked={ usersSelected.includes(patient.id) }
+                    patient={ patient }
                   />
                 )
               })
@@ -91,17 +67,6 @@ export default function Users({ navigation }) {
 
           </ScrollView>
         </View>
-        {
-          usersSelected.length > 0 &&
-          <View style={ ConfirmModalStyle.container }>
-            <TouchableOpacity
-              style={ ConfirmModalStyle.buttonConfirm }
-              onPress={ makeAnAppointment }
-            >
-              <Text style={ ConfirmModalStyle.textConfirm }>Marcar consulta</Text>
-            </TouchableOpacity>
-          </View>
-        }
       </>
     </RefreshComponent>
   );

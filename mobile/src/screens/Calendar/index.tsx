@@ -7,18 +7,12 @@ import { DayOfAtencenceType } from "../../Types/DaysOfAtendence.type";
 import moment from 'moment';
 
 import { Calendar as CalendarComponent, LocaleConfig } from 'react-native-calendars';
+
 import HeaderScreen from "../../components/HeaderScreen";
 import { CalendarStyle, ListCardStyle, ModalNewDayOfAtendenceStyle } from "./styles";
 import CardCalendar from "../../components/CardCalendar";
 import { colors } from "../../global";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-
-import {
-  TextField,
-  FilledTextField,
-  OutlinedTextField,
-} from 'react-native-material-textfield';
-
 
 LocaleConfig.locales['pt-br'] = {
   monthNames: [
@@ -153,7 +147,7 @@ export default function Calendar({ navigation }) {
         }}
 
       />
-      <ScrollView style={{ backgroundColor: 'white' }}>
+      <View style={{ backgroundColor: 'white' }}>
         <HeaderScreen title="Calendário" />
 
         {
@@ -346,7 +340,7 @@ export default function Calendar({ navigation }) {
             }
           </>
         </RefreshComponent>
-      </ScrollView>
+      </View>
     </>
   );
 }

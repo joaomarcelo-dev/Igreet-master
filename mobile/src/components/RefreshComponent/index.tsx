@@ -15,7 +15,7 @@ export default function RefreshComponent({ children, handleRefresh }: RefreshCom
   return (
     <FlatList
       data={[0]}
-      renderItem={ () =>  children }
+      renderItem={ () =>  <ScrollView>{ children }</ScrollView> }
       refreshing={ refreshing }
       onRefresh={ refresh }
       contentContainerStyle={{
