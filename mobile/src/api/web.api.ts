@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { AppointmentInputType, UpdateAppointmentProp } from '../Types/Appointment.type';
 import { DaysOfAtendenceInputType } from '../Types/DaysOfAtendence.type';
+import store from '../redux/store';
+import appActions from '../redux/actions/app.actions';
 
 const BASE_URL = 'https://igreet-master.vercel.app';
 
@@ -13,6 +15,11 @@ type AxiosRequest = {
 
 const requestAxios = async ({ data, url, method, query }: AxiosRequest) => axios[method](`${BASE_URL}${url}?${query}`, {
   ...data
+}).then((response) => {
+  store.dispatch(appActions.setRequestStatus({ success: true, visible: true }));
+  return response;
+}).catch(() => {
+  store.dispatch(appActions.setRequestStatus({ success: false, visible: true }));
 });
 
 // =========================/ Appointment /================================================================ //

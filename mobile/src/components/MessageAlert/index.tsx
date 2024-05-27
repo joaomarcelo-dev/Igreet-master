@@ -1,18 +1,19 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import { ContainerStyle } from "./styles";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootReducerType } from "../../Types/RootReducer.type";
 
-type MessageAlertProp = {
-  load: boolean
-}
 
-export default function MessageAlert({ load }: MessageAlertProp) {
-  const [visible, setVisible] = useState(true);
+export default function MessageAlert() {
+  const [visible, setVisible] = useState(false);
   const [porcent, setPorcent] = useState(100);
+  const { requestStatus } = useSelector((root: RootReducerType) => root.app);
 
   useEffect(() => {
-    setVisible(true)
-  }, [load]);
+    setVisible(requestStatus.visible);
+    console.log(requestStatus);
+  }, [requestStatus]);
 
   useEffect(() => {
     if (visible && porcent > 0) {
@@ -40,9 +41,12 @@ export default function MessageAlert({ load }: MessageAlertProp) {
     <View style={ ContainerStyle.container }>
       <View style={[
         ContainerStyle.containerMessage,
-        ContainerStyle.successFull
+        requestStatus.success ? ContainerStyle.successFull : ContainerStyle.error
       ]}>
-        <Text style={ ContainerStyle.text }>Sucesso na requisição!</Text>
+        <View>
+          <Text style={ ContainerStyle.text }>{ requestStatus.success ? 'Sucesso na requisição!' : 'Erro na requisição'}</Text>
+        </View>
+
         <View style={ ContainerStyle.loadContainer }>
           <View
             style={[ ContainerStyle.load, { width: `${porcent}%` } ]}

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { createDaysOfAtendence, deleteDaysOfAtendence, getAllDaysOfAtendence } from "../../api/web.api";
 import { DayOfAtencenceType } from "../../Types/DaysOfAtendence.type";
 
-import moment from 'moment';
 
 import { Calendar as CalendarComponent } from 'react-native-calendars';
 
@@ -53,15 +52,12 @@ const handleDaysOfAtendenc = (days: DayOfAtencenceType[]) => {
     const formattedDate = item.date;
     acc[formattedDate] = {
       selected: true,
-      selectedColor:'blue' 
+      selectedColor: 'blue' 
     };
     return acc;
   }, {});
 }
 
-const formatDateExtension = (dateStr) => {
-  return moment(dateStr).locale('pt-br').format('D [de] MMMM [de] YYYY')
-};
 
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import RefreshComponent from "../../components/RefreshComponent";
@@ -71,8 +67,6 @@ import { Switch } from "react-native-elements";
 export default function Calendar({ navigation }) {
   const [allDaysOfAtendence, setAllDaysOfAtendence] = useState<DayOfAtencenceType[]>([]);
   const [visibleModalNewDayOfAtendenc, setVisibleModalNewDayOfAtendenc] = useState<boolean>(false);
-  const [timeStart, setTimeStart] = useState(new Date());
-  const [timeEnd, setTimeEnd] = useState(new Date());
   const [showTimeSelectStart, setShowTimeSelectStart] = useState(false);
   const [showTimeSelectEnd, setShowTimeSelectEnd] = useState(false);
   const [currentSetting, setcurrentSetting] = useState('from');
@@ -96,13 +90,13 @@ export default function Calendar({ navigation }) {
 
   const onChange = (event: DateTimePickerEvent, selectedDate: Date) => {
     if (currentSetting === 'start') {
-      const currentDate = selectedDate || timeStart
+      const currentDate = selectedDate || formData.hourStart
       setShowTimeSelectStart(Platform.OS === 'ios');
-      setFormData({ ...formData, hourStart: currentDate })
+      setFormData({ ...formData, hourStart: currentDate });
     } else {
-      const currentDate = selectedDate || timeEnd;
+      const currentDate = selectedDate || formData.hourEnd;
       setShowTimeSelectEnd(Platform.OS === 'ios');
-      setFormData({ ...formData, hourEnd: currentDate })
+      setFormData({ ...formData, hourEnd: currentDate });
     }    
   };
 
@@ -153,7 +147,7 @@ export default function Calendar({ navigation }) {
         {
           visibleModalNewDayOfAtendenc && (
             <View style={ ModalNewDayOfAtendenceStyle.container }>
-              <Text style={ ModalNewDayOfAtendenceStyle.title }>{ formatDateExtension(formData.daySelect) }</Text>
+              <Text style={ ModalNewDayOfAtendenceStyle.title }>{ formData.daySelect }</Text>
 
               <View style={ ModalNewDayOfAtendenceStyle.containerLabel }>
                 <Text>Titulo:</Text>
@@ -203,7 +197,7 @@ export default function Calendar({ navigation }) {
                         is24Hour={true}
                         display="default"
                         onChange={onChange}
-                        onTouchCancel={() => console.log('Canceleando')}
+                        onTouchCancel={() => console.log('Cancelando')}
                       />
                     }
                   </>
@@ -233,7 +227,7 @@ export default function Calendar({ navigation }) {
                         is24Hour={true}
                         display="default"
                         onChange={onChange}
-                        onTouchCancel={() => console.log('Canceleando')}
+                        onTouchCancel={() => console.log('Cancelando')}
                       />
                     }
                   </>
@@ -321,7 +315,7 @@ export default function Calendar({ navigation }) {
                                 <CardCalendar
                                   key={ day.id }
                                   title={ day.title }
-                                  day={ formatDateExtension(day.date) }
+                                  day={ convertDate(day.date) }
                                   hourStart={ day.hourStart }
                                   hourEnd={ day.hourEnd }
                                   notification={ day.notification }

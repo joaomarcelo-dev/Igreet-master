@@ -29,11 +29,11 @@ const ContainerStyle = StyleSheet.create({
   },
 
   successFull: {
-    backgroundColor: colors.success
+    backgroundColor: colors.success,
   },
 
   error: {
-
+    backgroundColor: colors.error,
   },
 
   loadContainer: {
