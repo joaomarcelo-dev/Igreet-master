@@ -11,7 +11,7 @@ import HeaderScreen from "../../components/HeaderScreen";
 
 export default function Profile() {
   return (
-    <ScrollView>
+    <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
       <HeaderScreen
         title="Perfil"
       />

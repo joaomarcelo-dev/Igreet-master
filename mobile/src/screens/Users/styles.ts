@@ -6,6 +6,7 @@ const ContainerStyle = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
     alignItems: 'center',
+    height: '100%',
   },
 });
 

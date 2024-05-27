@@ -3,8 +3,9 @@ import { AppointmentInputType, UpdateAppointmentProp } from '../Types/Appointmen
 import { DaysOfAtendenceInputType } from '../Types/DaysOfAtendence.type';
 import store from '../redux/store';
 import appActions from '../redux/actions/app.actions';
+import { PatientInputType } from '../Types/Patient.type';
 
-const BASE_URL = 'https://igreet-master.vercel.app';
+const BASE_URL = 'http://10.0.98.2:3333';
 
 type AxiosRequest = {
   data?: any;
@@ -13,19 +14,27 @@ type AxiosRequest = {
   query?: string
 }
 
-const requestAxios = async ({ data, url, method, query }: AxiosRequest) => axios[method](`${BASE_URL}${url}?${query}`, {
-  ...data
-}).then((response) => {
-  store.dispatch(appActions.setRequestStatus({ success: true, visible: true }));
+const requestAxios = async ({ data, url, method, query }: AxiosRequest) => {
+  store.dispatch(appActions.setLoading(true));
+
+  const response = await axios[method](`${BASE_URL}${url}?${query}`, {
+    ...data
+  }).then((response) => {
+    store.dispatch(appActions.setRequestStatus({ success: true, visible: true }));
+    return response;
+  }).finally(() => {
+    store.dispatch(appActions.setLoading(false));
+  });
+
+
+
   return response;
-}).catch(() => {
-  store.dispatch(appActions.setRequestStatus({ success: false, visible: true }));
-});
+}
 
 // =========================/ Appointment /================================================================ //
 export const getAllAppointments = async () => requestAxios({ url: '/appointment', method: 'get' });
 export const updateAppointment = async (data: UpdateAppointmentProp) => requestAxios({ url: '/appointment', method: 'put', data, });
-export const createAppointment = async ({ dayOfAtencenceId, imgURL, patientId }: AppointmentInputType) => requestAxios({ method: 'post', url: '/appointment', data: { dayOfAtencenceId, imgURL, patientId } });
+export const createAppointment = async (data: AppointmentInputType & PatientInputType & { appId: string }) => requestAxios({ method: 'post', url: '/appointment', data, });
 export const deleteAppointment = async (id: string) => requestAxios({ method: 'delete', url: '/appointment', query: `id=${id}` });
 
 // =========================/ Patients /=================================================================== //

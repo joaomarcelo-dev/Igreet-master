@@ -13,6 +13,7 @@ const verify = (token: string) => {
   return jwt.verify(token, secret);
 };
 
+
 const jwtProvider = {
   sign,
   verify,

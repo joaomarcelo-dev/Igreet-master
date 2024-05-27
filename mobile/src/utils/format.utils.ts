@@ -9,8 +9,20 @@ const formatNumberPhoneVenom = (input: string) => {
   }
 };
 
+const formatInputDate = (input: string) => {
+  const date = input.replace(/\D/g, '');
+  if (date.length <= 8) {
+    return date
+      .replace(/(\d{2})(\d)/, '$1/$2')
+      .replace(/(\d{2})(\d)/, '$1/$2')
+      .replace(/(\d{4})(\d{1,2})/, '$1-$2')
+      .replace(/(-\d{2})\d+?$/, '$1');
+  }
+}
+
 const formatUtils = {
   formatNumberPhoneVenom,
+  formatInputDate,
 }
 
 export default formatUtils;

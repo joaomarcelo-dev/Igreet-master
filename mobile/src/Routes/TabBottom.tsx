@@ -8,6 +8,7 @@ import Settings from '../screens/Settings';
 import Profile from '../screens/Profile';
 import NewAppointment from '../screens/NewAppointment';
 import MessageAlert from '../components/MessageAlert';
+import Login from '../screens/Login';
 
 export default function TabBottom() {
   const TabBottom = createBottomTabNavigator();
@@ -19,9 +20,14 @@ export default function TabBottom() {
         tabBarShowLabel: false,
         tabBarBadgeStyle: {
           display: 'none'
-        }
+        },
       }}
     >
+      {/* <TabBottom.Screen
+        name="Login"
+        component={ Login }
+      /> */}
+
       <TabBottom.Screen
         name="Home"
         component={ Home }

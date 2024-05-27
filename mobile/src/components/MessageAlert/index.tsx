@@ -11,7 +11,8 @@ export default function MessageAlert() {
   const { requestStatus } = useSelector((root: RootReducerType) => root.app);
 
   useEffect(() => {
-    setVisible(requestStatus.visible);
+    setVisible(true);
+    
     console.log(requestStatus);
   }, [requestStatus]);
 
@@ -41,7 +42,7 @@ export default function MessageAlert() {
     <View style={ ContainerStyle.container }>
       <View style={[
         ContainerStyle.containerMessage,
-        requestStatus.success ? ContainerStyle.successFull : ContainerStyle.error
+        ContainerStyle.successFull
       ]}>
         <View>
           <Text style={ ContainerStyle.text }>{ requestStatus.success ? 'Sucesso na requisição!' : 'Erro na requisição'}</Text>

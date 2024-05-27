@@ -11,6 +11,7 @@ import MessageAlert from './src/components/MessageAlert';
 import { Provider } from 'react-redux';
 
 import store from './src/redux/store';
+import Loading from './src/components/Loading';
 
 export default function App() {
   useEffect(() => {
@@ -22,11 +23,13 @@ export default function App() {
       <Provider store={ store }>
         <Routers />
 
+
         <StatusBar
           backgroundColor={ colors.primary }
           barStyle='light-content'
         />
 
+        <Loading />
         <MessageAlert />
       </Provider>
     </>

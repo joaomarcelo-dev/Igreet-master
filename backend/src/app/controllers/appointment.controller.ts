@@ -17,6 +17,9 @@ const updateAppointment = async (req: Request, res: Response) => {
 const createAppointment = async (req: Request, res: Response) => {  
   const { dayOfAtencenceId, patientId, imgURL, address, birthDate, cpf, name, phone, serviceId }: AppointmentInputType & PatientInputType & { serviceId: string } = req.body;
   const { data, status } = await appointmentService.createAppointment({ dayOfAtencenceId, patientId, imgURL, address, birthDate, cpf, name, phone, serviceId });
+
+  console.log(data, status);
+  
   return res.status(status).json(data);
 }
 

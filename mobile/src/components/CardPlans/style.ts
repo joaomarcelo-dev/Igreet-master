@@ -25,7 +25,8 @@ const CardPlansStyle = StyleSheet.create({
   },
 
   textMoreOptions: {
-    color: colors.fontColorOpacty
+    color: colors.fontColorOpacty,
+    paddingVertical: 5,
   },
 
   containerList: {

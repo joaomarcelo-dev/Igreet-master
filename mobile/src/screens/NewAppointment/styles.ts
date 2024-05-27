@@ -3,43 +3,66 @@ import { colors } from "react-native-elements";
 
 const ContainerStyle = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    paddingTop: 40
+    paddingTop: 40,
+    backgroundColor: 'white',
+  },
+
+  title: {
+    fontSize: 17,
+    fontWeight: '600',
   },
 
   inputLabel: {
     width: '90%',
     marginVertical: 5,
+    flexDirection: 'row',
+    gap: 6,
+    alignItems: 'center',
   },
 
   borderSelect: {
-    borderWidth: 0.8,
-    borderColor: colors.black,
-    borderRadius: 10,
+    borderBottomWidth: 0.4,
+    borderBottomColor: colors.black,
     marginVertical: 10,
+    width: '90%'
   },
 
-  textInputDetail: {
-    borderWidth: 0.4,
+  textInput: {
+    borderBottomWidth: 0.4,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    borderColor: colors.black,
+    borderBottomColor: colors.black,
     borderRadius: 10,
-    marginTop: 20,
-    fontSize: 16
+    marginTop: 7,
+    fontSize: 16,
+    width: '90%'
   },
 
   buttonOption: {
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 10,
+    width: '90%',
+    marginTop: 20,
   },
 
   buttonConfirm: {
-    backgroundColor: colors.success
+    backgroundColor: 'dodgerblue'
   },
+
+  buttonDisabled: {
+    backgroundColor: colors.disabled,
+  },
+
+  textButtonConfirm: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 15
+  }
 
 });
 

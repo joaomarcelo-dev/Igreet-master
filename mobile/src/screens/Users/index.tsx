@@ -30,44 +30,46 @@ export default function Users({ navigation }) {
   }
 
   return (
-    <RefreshComponent handleRefresh={ async () => {
-      await handleGetAllPatients();
-    }}>
-      <>
-        <HeaderScreen title="Usuários" />
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <RefreshComponent handleRefresh={ async () => {
+        await handleGetAllPatients();
+      }}>
+        <>
+          <HeaderScreen title="Usuários" />
 
-        <View style={ ContainerStyle.container }>
-          <View style={ FormStyle.container }>
-            <View style={ FormStyle.conatainerSearch }>
-              <TextInput
-                style={ FormStyle.input }
-                placeholder="Nome"
-              />
-              <TouchableOpacity>
-                <MaterialCommunityIcons
-                  name="account-search-outline"
-                  size={24}
-                  color="#000"
+          <View style={ ContainerStyle.container }>
+            <View style={ FormStyle.container }>
+              <View style={ FormStyle.conatainerSearch }>
+                <TextInput
+                  style={ FormStyle.input }
+                  placeholder="Nome"
                 />
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <ScrollView style={ UserListStyle.container }>
-            {
-              allPatients.map((patient) => {
-                return (
-                  <CardUser
-                    key={ patient.id }
-                    patient={ patient }
+                <TouchableOpacity>
+                  <MaterialCommunityIcons
+                    name="account-search-outline"
+                    size={24}
+                    color="#000"
                   />
-                )
-              })
-            }
+                </TouchableOpacity>
+              </View>
+            </View>
 
-          </ScrollView>
-        </View>
-      </>
-    </RefreshComponent>
+            <ScrollView style={ UserListStyle.container }>
+              {
+                allPatients.map((patient) => {
+                  return (
+                    <CardUser
+                      key={ patient.id }
+                      patient={ patient }
+                    />
+                  )
+                })
+              }
+
+            </ScrollView>
+          </View>
+        </>
+      </RefreshComponent>
+    </View>
   );
 }
