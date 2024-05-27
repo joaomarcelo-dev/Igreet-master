@@ -9,9 +9,12 @@ import Profile from '../screens/Profile';
 import NewAppointment from '../screens/NewAppointment';
 import MessageAlert from '../components/MessageAlert';
 import Login from '../screens/Login';
+import { useSelector } from 'react-redux';
+import { RootReducerType } from '../Types/RootReducer.type';
 
 export default function TabBottom() {
   const TabBottom = createBottomTabNavigator();
+  const { token } = useSelector((root: RootReducerType) => root.user);  
 
   return (
     <TabBottom.Navigator
@@ -23,58 +26,64 @@ export default function TabBottom() {
         },
       }}
     >
-      {/* <TabBottom.Screen
-        name="Login"
-        component={ Login }
-      /> */}
-
-      <TabBottom.Screen
-        name="Home"
-        component={ Home }
-        options={{
-          tabBarButton: () => null,
-        }}
-      />
-
-      <TabBottom.Screen
-        name="Users"
-        component={ Users }
-        options={{
-          tabBarButton: () => null,
-        }}
-      />
-
-      <TabBottom.Screen
-        name="Calendar"
-        component={ Calendar }
-        options={{
-          tabBarButton: () => null,
-        }}
-      />
-
-      <TabBottom.Screen
-        name="Settings"
-        component={ Settings }
-        options={{
-          tabBarButton: () => null,
-        }}
-      />
-
-      <TabBottom.Screen
-        name="Profile"
-        component={ Profile }
-        options={{
-          tabBarButton: () => null,
-        }}
-      />
-
-      <TabBottom.Screen
-        name='NewAppointment'
-        component={ NewAppointment }
-        options={{
-          tabBarButton: () => null,
-        }}
-      />
+      {
+        token ? (
+          <>
+              <TabBottom.Screen
+                name="Home"
+                component={ Home }
+                options={{
+                  tabBarButton: () => null,
+                }}
+              />
+        
+              <TabBottom.Screen
+                name="Users"
+                component={ Users }
+                options={{
+                  tabBarButton: () => null,
+                }}
+              />
+        
+              <TabBottom.Screen
+                name="Calendar"
+                component={ Calendar }
+                options={{
+                  tabBarButton: () => null,
+                }}
+              />
+        
+              <TabBottom.Screen
+                name="Settings"
+                component={ Settings }
+                options={{
+                  tabBarButton: () => null,
+                }}
+              />
+        
+              <TabBottom.Screen
+                name="Profile"
+                component={ Profile }
+                options={{
+                  tabBarButton: () => null,
+                }}
+              />
+        
+              <TabBottom.Screen
+                name='NewAppointment'
+                component={ NewAppointment }
+                options={{
+                  tabBarButton: () => null,
+                }}
+              />
+          </>
+        ) : (
+          <TabBottom.Screen
+          name="Login"
+          component={ Login }
+          />
+        )
+      }
     </TabBottom.Navigator>
   )
 }

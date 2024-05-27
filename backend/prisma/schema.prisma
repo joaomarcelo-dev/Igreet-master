@@ -38,7 +38,7 @@ model Appointments {
   imgURL           String?
 
   patient        Patients        @relation(fields: [patientId], references: [id])
-  dayofatendence DaysOfAtendence @relation(fields: [dayOfAtencenceId], references: [id])
+  dayofatendence DaysOfAtendence @relation(fields: [dayOfAtencenceId], references: [id], onDelete: Cascade)
 }
 
 model DaysOfAtendence {

@@ -19,9 +19,30 @@ const getAllPatientByPhoneNumber = async (phone: string): Promise<ReturnServiceT
   }
 }
 
+const deletePatient = async (id: string): Promise<ReturnServiceType> => {
+  const patient = await patientsModel.getPatientById(id);
+
+  if (!patient) {
+    return {
+      data: {
+        message: 'Paciente não encontrado',
+      },
+      status: 404,
+    }
+  }
+
+  const patientDeleted = await patientsModel.deletePatient(patient.id);
+
+  return {
+    status: 204,
+    data: patientDeleted,
+  }
+}
+
 const patientsService = {
   getAllPatients,
   getAllPatientByPhoneNumber,
+  deletePatient,
 }
 
 export default patientsService;

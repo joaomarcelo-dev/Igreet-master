@@ -12,6 +12,8 @@ const colors = {
 
   blackOpacity: 'rgba(0, 0, 0, 0.1)',
   fontColorOpacty: 'rgba(0, 0, 0, 0.6)',
+
+  disabled: '#6f737e'
 };  
 
 

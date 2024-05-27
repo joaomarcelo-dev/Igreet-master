@@ -5,11 +5,11 @@ import store from '../redux/store';
 import appActions from '../redux/actions/app.actions';
 import { PatientInputType } from '../Types/Patient.type';
 
-const BASE_URL = 'http://10.0.98.2:3333';
+const BASE_URL = 'http://192.168.1.227:3333';
 
 type AxiosRequest = {
   data?: any;
-  url: '/appointment' | '/patient' | '/days-of-atendence';
+  url: '/appointment' | '/patient' | '/days-of-atendence' | '/login';
   method: 'get' | 'post' | 'put' | 'delete';
   query?: string
 }
@@ -18,10 +18,16 @@ const requestAxios = async ({ data, url, method, query }: AxiosRequest) => {
   store.dispatch(appActions.setLoading(true));
 
   const response = await axios[method](`${BASE_URL}${url}?${query}`, {
-    ...data
+    ...data,
+    headers: {
+      'Authorization': `Bearer ${store.getState().user.token}`,
+    }
   }).then((response) => {
     store.dispatch(appActions.setRequestStatus({ success: true, visible: true }));
     return response;
+  }).catch((e) => {
+    // store.dispatch(appActions.setRequestStatus({ success: false, visible: true }));
+    return e
   }).finally(() => {
     store.dispatch(appActions.setLoading(false));
   });
@@ -39,8 +45,12 @@ export const deleteAppointment = async (id: string) => requestAxios({ method: 'd
 
 // =========================/ Patients /=================================================================== //
 export const getAllPatients = async () => requestAxios({ url: '/patient', method: 'get' });
+export const deletePatient = async (id: string) => requestAxios({ method: 'delete', url: '/patient', query: `id=${id}` })
 
 // =========================/ Days Of Atendence /========================================================== //
 export const getAllDaysOfAtendence = async () => requestAxios({ url: '/days-of-atendence', method: 'get' });
 export const createDaysOfAtendence = async ({ date, hourEnd, hourStart, title, notification }: DaysOfAtendenceInputType) => requestAxios({ url: '/days-of-atendence', method: 'post', data: { date, hourStart, hourEnd, title, notification } });
 export const deleteDaysOfAtendence = async (id: string) => requestAxios({ method: 'put', url: '/days-of-atendence', data: { id }})
+
+// =========================/ Login  /========================================================== //
+export const loginUser = async (data: {email: string, password: string }) => requestAxios({ method: 'post', url: '/login', data, });

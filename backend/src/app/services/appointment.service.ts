@@ -52,16 +52,16 @@ const createAppointment = async ({ dayOfAtencenceId = '', patientId = '', imgURL
   const patient = await patientsModel.getPatientById(patientId);
 
   if (!patient) {
-    const service = await serviceModel.getServiceById(serviceId)
+    // const service = await serviceModel.getServiceById(serviceId)
 
-    if (!service) {
-      return {
-        status: 404,
-        data: {
-          message: 'Serviço não encontrado'
-        }
-      }
-    }   
+    // if (!service) {
+    //   return {
+    //     status: 404,
+    //     data: {
+    //       message: 'Serviço não encontrado'
+    //     }
+    //   }
+    // }   
 
     const newPatient = await patientsModel.createPatient({ address, birthDate, cpf, name, phone });
 
@@ -71,7 +71,9 @@ const createAppointment = async ({ dayOfAtencenceId = '', patientId = '', imgURL
       imgURL,
     });
 
-    await serviceModel.deleteServiceById(serviceId)
+    if (serviceId) {
+      await serviceModel.deleteServiceById(serviceId)
+    }
 
     return {
       status: 201,

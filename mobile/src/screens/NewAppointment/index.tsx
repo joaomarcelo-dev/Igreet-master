@@ -14,11 +14,13 @@ import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Feather from 'react-native-vector-icons/Feather'
 import formatUtils from "../../utils/format.utils";
+import { useNavigation } from "@react-navigation/native";
 
 const { EXPO_PUBLIC_CODE_APP } = process.env
 
-export default function NewAppointment({ navigation }) {
+export default function NewAppointment() {
   const [allDaysOfAtendence, setAllDaysOfAtendence] = useState<DayOfAtencenceType[]>([]);
+  const navigation = useNavigation()
 
   const [formData, setFormData] = useState<AppointmentInputType & PatientInputType>({
     address: 'Pov. Boa Vista do Cassiano',
@@ -39,9 +41,13 @@ export default function NewAppointment({ navigation }) {
 
   const handlePostPatient = async () => {
     const { status, data } = await createAppointment({ ...formData, appId: EXPO_PUBLIC_CODE_APP });
-        
+    
+    console.log(status === 201);
+    
+
     if (status === 201) {
-      navigation('/Home');
+      navigation.goBack();
+      
       setFormData({
         address: '',
         birthDate: '',

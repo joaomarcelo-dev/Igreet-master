@@ -49,11 +49,11 @@ const convertDate = (dateStr: string) => {
 
 const handleDaysOfAtendenc = (days: DayOfAtencenceType[]) => {
   return days.reduce((acc, item) => {
-    const formattedDate = item.date;
-    acc[formattedDate] = {
+    acc[item.date] = {
       selected: true,
       selectedColor: 'blue' 
     };
+    
     return acc;
   }, {});
 }

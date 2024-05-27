@@ -21,6 +21,7 @@ const loginSingIn = async ({ email, password }: LoginSingInType): Promise<Return
     status: 200,
     data: {
       token,
+      user: login,
     }
   }
 }

@@ -12,21 +12,20 @@ export default function MessageAlert() {
 
   useEffect(() => {
     setVisible(true);
-    
-    console.log(requestStatus);
+    setPorcent(100);
   }, [requestStatus]);
 
   useEffect(() => {
     if (visible && porcent > 0) {
       const interval = setInterval(() => {
         setPorcent(prevPorcent => {
-          if (prevPorcent <= 1) {
+          if (prevPorcent <= 4) {
             clearInterval(interval);
             setVisible(false);
             setPorcent(100)
             return 0;
           }
-          return prevPorcent - 3;
+          return prevPorcent - 4;
         });
       }, 20);
 

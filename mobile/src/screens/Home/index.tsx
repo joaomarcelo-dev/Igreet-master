@@ -15,6 +15,8 @@ import AppointmentCard from "../../components/AppointmentCard";
 import { deleteAppointment, getAllAppointments, updateAppointment } from "../../api/web.api";
 import { AppointmentType, UpdateAppointmentProp } from "../../Types/Appointment.type";
 import RefreshComponent from "../../components/RefreshComponent";
+import { useSelector } from "react-redux";
+import { RootReducerType } from "../../Types/RootReducer.type";
 
 
 export default function Home({ navigation }) {
@@ -23,6 +25,9 @@ export default function Home({ navigation }) {
     visibleAlertConfirm: false,
     id: '',
   })
+
+  const { user } = useSelector((root: RootReducerType) => root.user)
+
   const [allAppointments, setallAppointments] = useState<AppointmentType[]>([]);
   const [indexOption, setIndexOption] = useState<number | null>(null)
 
@@ -94,7 +99,7 @@ export default function Home({ navigation }) {
               >
                 Olá,
                 {`\n`}
-                João Marcelo
+                { user.name }
               </Text>
             </TouchableOpacity>
 
@@ -146,6 +151,7 @@ export default function Home({ navigation }) {
                   <TouchableOpacity
                     style={ SpeedAccessStyle.button }
                     onPress={ () => navigation.navigate('Settings')}
+                    disabled={true}
                   >
                     <MaterialIcons
                       name="settings"

@@ -3,11 +3,10 @@ import { colors } from "../../global";
 
 const ContainerStyle = StyleSheet.create({
   container: {
-    width: '95%',
     backgroundColor: colors.blackOpacity,
     padding: 15,
     borderRadius: 10,
-    margin: 10,
+    marginVertical: 5,
   },
 
   contentInitialInfo: {

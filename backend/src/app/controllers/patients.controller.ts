@@ -13,8 +13,18 @@ const getAllPatients = async (req: Request, res: Response) => {
   return res.status(status).json(data);
 }
 
+const deletePatient = async (req: Request, res: Response) => {
+  const { id } = req.query;
+  if (!id || typeof id !== 'string') return res.json({ message: 'Tipo de ID inválido' });
+  
+  const { data, status } = await patientsService.deletePatient(id);
+
+  return res.status(status).json(data);
+}
+
 const patientsController = {
   getAllPatients,
+  deletePatient,
 }
 
 export default patientsController;

@@ -11,10 +11,10 @@ const authToken = async (req: Request, res: Response, next: NextFunction) => {
   const [, token] = authorization.split(' ')
 
   try {
-    jwtProvider.verify(token)
+    jwtProvider.verify(token)    
     next()
   } catch (e) {
-    res.status(401).json({ message: 'Token Inválido' })
+    res.status(401).json({ message: 'Token Inválido' });
   }
 }
 

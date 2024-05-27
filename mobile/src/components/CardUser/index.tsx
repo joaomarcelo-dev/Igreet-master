@@ -11,10 +11,12 @@ import formatUtils from "../../utils/format.utils";
 
 type CardUserProps = {
   patient: PatientType
+  deletPatientFun: (id: string) => void
 }
 
-export default function CardUser({ patient }: CardUserProps) {
+export default function CardUser({ patient, deletPatientFun }: CardUserProps) {
   const [visibleOptions, setVisibleOptions] = useState<boolean>(false)
+
   return (
     <TouchableOpacity
       style={ ContainerStyle.container }
@@ -63,7 +65,10 @@ export default function CardUser({ patient }: CardUserProps) {
               </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={ ContainerStyle.buttonDeletUser }>
+            <TouchableOpacity
+              style={ ContainerStyle.buttonDeletUser }
+              onPress={() => deletPatientFun(patient.id)}
+            >
               <MaterialCommunityIcons
                 name="trash-can-outline"
                 size={20}

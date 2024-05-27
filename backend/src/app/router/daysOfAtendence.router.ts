@@ -1,5 +1,6 @@
 import { Router } from "express";
 import DaysOfAtendenceController from "../controllers/daysOfAtendence.controller";
+import authMiddleware from "../middleware/auth.middleware";
 
 const daysOfAtendenceRouter = Router();
 
@@ -8,9 +9,11 @@ daysOfAtendenceRouter.route('/')
   DaysOfAtendenceController.getAllDaysOfAtendence
 )
 .post(
-  DaysOfAtendenceController.createDayOfAtendence
+  // authMiddleware.authToken,
+  DaysOfAtendenceController.createDayOfAtendence,
 )
 .put(
+  // authMiddleware.authToken,
   DaysOfAtendenceController.deletDaysOfAtendenceById,
 )
 

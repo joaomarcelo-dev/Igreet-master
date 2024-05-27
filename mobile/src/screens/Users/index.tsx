@@ -7,18 +7,17 @@ import HeaderScreen from "../../components/HeaderScreen";
 import CardUser from "../../components/CardUser";
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getAllPatients } from "../../api/web.api";
+import { deletePatient, getAllPatients } from "../../api/web.api";
 import { PatientType } from "../../Types/Patient.type";
 import RefreshComponent from "../../components/RefreshComponent";
-
-type ParamList = {
-  Detail: {
-    isSelect: boolean;
-  };
-};
+import AlertBox from "../../components/AlertBox";
 
 export default function Users({ navigation }) {
   const [allPatients, setAllPatients] = useState<PatientType[]>([]);
+  const [visibleAlert, setVisibleAlert] = useState({
+    visible: false,
+    id: '',
+  });
 
   useEffect(() => {
     handleGetAllPatients();
@@ -29,8 +28,31 @@ export default function Users({ navigation }) {
     setAllPatients(allPatients);
   }
 
+  const handleDeletPatient = async (id: string) => {
+    const { status, data } = await deletePatient(id);
+
+    if (status === 204) {
+      const newPatientsList = allPatients.filter((patient) => patient.id !== id);
+
+      setAllPatients(newPatientsList);
+      
+    }
+    
+  }
+  
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <AlertBox
+        message="Tem certeza de que deseja deletar esse páciente?"
+        onNoPress={() => setVisibleAlert({ visible: false, id: ''})}
+        onYesPress={async () => {
+          await handleDeletPatient(visibleAlert.id);
+          setVisibleAlert({ visible: false, id: ''})
+        }}
+        visible={visibleAlert.visible}
+      />
+
+
       <RefreshComponent handleRefresh={ async () => {
         await handleGetAllPatients();
       }}>
@@ -61,6 +83,12 @@ export default function Users({ navigation }) {
                     <CardUser
                       key={ patient.id }
                       patient={ patient }
+                      deletPatientFun={(id: string) => {
+                        setVisibleAlert({
+                          id,
+                          visible: true,
+                        })
+                      }}
                     />
                   )
                 })

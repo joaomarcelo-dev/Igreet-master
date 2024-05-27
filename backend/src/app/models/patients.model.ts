@@ -29,9 +29,6 @@ const deletePatient = async (id: string) => prisma.patients.delete({
   where: {
     id,
   },
-  select: {
-    Appointments: true,
-  }
 });
 
 const patientsModel = {
@@ -39,6 +36,7 @@ const patientsModel = {
   getAllPatientByPhoneNumber,
   getPatientById,
   createPatient,
+  deletePatient,
 }
 
 export default patientsModel;
