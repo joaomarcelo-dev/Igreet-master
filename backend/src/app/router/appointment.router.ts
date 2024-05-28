@@ -10,11 +10,11 @@ appointmentRouter.route('/')
   appointmentController.getAllAppointment
 )
 .put(
-  authMiddleware.authToken,
+  // authMiddleware.authToken,
   appointmentController.updateAppointment,
 )
 .post(
-  // authMiddleware.authToken,
+  authMiddleware.authToken,
   appointmentController.createAppointment,
 )
 .delete(
