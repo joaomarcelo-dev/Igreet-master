@@ -5,7 +5,9 @@ import store from '../redux/store';
 import appActions from '../redux/actions/app.actions';
 import { PatientInputType } from '../Types/Patient.type';
 
-const BASE_URL = 'http://192.168.1.227:3333';
+const { EXPO_PUBLIC_API_URL } = process.env
+
+const BASE_URL = 'https://igreet-master.vercel.app';
 
 type AxiosRequest = {
   data?: any;

@@ -27,7 +27,7 @@ export default function Login() {
         <View>
           <TextInput
             style={ FormLoginStyle.input }
-            placeholder="Email"
+            placeholder="Usuário"
             onChangeText={(text) => setFormData({ ...formData, email: text })}
           />
 
