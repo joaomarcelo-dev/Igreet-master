@@ -40,12 +40,69 @@ const UserListStyle = StyleSheet.create({
     padding: 10,
     backgroundColor: '#fff',
     borderRadius: 10,
-    marginVertical: 5,
   },
 });
+
+const FormSelectDay = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    padding: 20,
+    backgroundColor: colors.secondary,
+    width: '100%',
+    borderTopStartRadius: 10,
+    borderTopEndRadius: 10,
+    zIndex: 9999999999999,
+
+  },
+
+  title: {
+    textAlign: 'center',
+    fontSize: 15,
+    fontWeight: 'bold'
+  },
+
+  selectStyle: {
+    borderWidth: 1,
+    borderColor: colors.black,
+    borderRadius: 10,
+    marginVertical: 10
+  },
+
+  containerButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    gap: 20,
+  },
+
+  buttonOption: {
+    height: 50,
+    justifyContent: 'center',
+    padding: 10,
+    borderRadius: 7,
+  },
+
+  buttonDelet: {
+    backgroundColor: 'red'
+  },
+
+  buttonAproved: {
+    backgroundColor: colors.confirm_color
+  },
+
+  textButtonDelet: {
+    color: colors.white
+  },
+
+  buttonDisabled: {
+    backgroundColor: colors.disabled
+  }
+})
 
 export {
   ContainerStyle,
   FormStyle,
   UserListStyle,
+  FormSelectDay
 }

@@ -1,10 +1,10 @@
 export type PatientType = {
   id: string;
-  name: string;
-  phone: string;
-  cpf: string;
-  birthDate: string;
-  address: string;
+  name?: string;
+  phone?: string;
+  cpf?: string;
+  birthDate?: string;
+  address?: string;
 }
 
 export type PatientInputType = Omit<PatientType, 'id'>

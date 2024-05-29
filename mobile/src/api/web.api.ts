@@ -40,7 +40,7 @@ const requestAxios = async ({ data, url, method, query }: AxiosRequest) => {
 // =========================/ Appointment /================================================================ //
 export const getAllAppointments = async () => requestAxios({ url: '/appointment', method: 'get' });
 export const updateAppointment = async (data: UpdateAppointmentProp) => requestAxios({ url: '/appointment', method: 'put', data, });
-export const createAppointment = async (data: AppointmentInputType & PatientInputType & { appId: string }) => requestAxios({ method: 'post', url: '/appointment', data, });
+export const createAppointment = async (data: AppointmentInputType & PatientInputType & { appId?: string }) => requestAxios({ method: 'post', url: '/appointment', data, });
 export const deleteAppointment = async (id: string) => requestAxios({ method: 'delete', url: '/appointment', query: `id=${id}` });
 
 // =========================/ Patients /=================================================================== //

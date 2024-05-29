@@ -2,13 +2,13 @@ import { PatientType } from "./Patient.type";
 
 export type AppointmentType = {
   id: string
-  patientId: string;
+  patientId?: string;
   complet: boolean;
-  dayOfAtencenceId: string;
+  dayOfAtencenceId?: string;
   createAt: Date;
   updateAt: Date;
   patient: PatientType;
-  imgURL: string;
+  imgURL?: string;
 }
 
 export type UpdateAppointmentProp = {

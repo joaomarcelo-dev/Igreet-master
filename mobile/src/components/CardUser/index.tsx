@@ -10,11 +10,12 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import formatUtils from "../../utils/format.utils";
 
 type CardUserProps = {
-  patient: PatientType
-  deletPatientFun: (id: string) => void
+  patient: PatientType;
+  deletPatientFun: (id: string) => void;
+  markConsultFun: (id: string) => void;
 }
 
-export default function CardUser({ patient, deletPatientFun }: CardUserProps) {
+export default function CardUser({ patient, deletPatientFun, markConsultFun }: CardUserProps) {
   const [visibleOptions, setVisibleOptions] = useState<boolean>(false)
 
   return (
@@ -52,7 +53,9 @@ export default function CardUser({ patient, deletPatientFun }: CardUserProps) {
           <View style={ ContainerStyle.containerButtonOptions }>
             <TouchableOpacity
               style={ ContainerStyle.buttonArgendConsult }
-              onPress={ () => {}}
+              onPress={ () => {
+                markConsultFun(patient.id);
+              }}
             >
               <Ionicons
                 name="calendar-clear"

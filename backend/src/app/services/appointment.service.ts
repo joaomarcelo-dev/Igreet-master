@@ -6,8 +6,6 @@ import DaysOfAtendenceModel from "../models/daysOfAtendence.model";
 import patientsModel from "../models/patients.model";
 import serviceModel from "../models/service.model";
 
-import express from 'express';
-
 const getAllAppointment = async (): Promise<ReturnServiceType> => {
   const allAppointment = await appointmentModel.getAllAppointment();
 
@@ -49,7 +47,9 @@ const createAppointment = async ({ dayOfAtencenceId = '', patientId = '', imgURL
     }
   }
 
-  if (token_valid) {
+  const patient = await patientsModel.getPatientById(patientId);
+
+  if (token_valid && !patient) {
     const newPatient = await patientsModel.createPatient({ address, birthDate, cpf, name, phone });
 
     const appointmentCreated = await appointmentModel.createAppointment({
@@ -63,9 +63,7 @@ const createAppointment = async ({ dayOfAtencenceId = '', patientId = '', imgURL
       data: appointmentCreated,
     }
   }
-
-  const patient = await patientsModel.getPatientById(patientId);
-
+  
   if (!patient) {
     const service = await serviceModel.getServiceById(serviceId)
 
@@ -96,6 +94,8 @@ const createAppointment = async ({ dayOfAtencenceId = '', patientId = '', imgURL
       data: appointmentCreated,
     }
   }
+
+
 
   const appointmentCreated = await appointmentModel.createAppointment({ dayOfAtencenceId, patientId, imgURL });
   
