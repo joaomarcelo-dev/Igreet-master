@@ -7,6 +7,9 @@ const getAllDaysOfAtendence = async () => prisma.daysOfAtendence.findMany({
   },
   where: {
     active: true,
+  },
+  include: {
+    Appointments: true
   }
 })
 

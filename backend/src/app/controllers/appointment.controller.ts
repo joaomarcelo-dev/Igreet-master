@@ -16,10 +16,12 @@ const updateAppointment = async (req: Request, res: Response) => {
 
 const createAppointment = async (req: Request, res: Response) => {  
   const { dayOfAtencenceId, patientId, imgURL, address, birthDate, cpf, name, phone, serviceId }: AppointmentInputType & PatientInputType & { serviceId: string } = req.body;
-  const { data, status } = await appointmentService.createAppointment({ dayOfAtencenceId, patientId, imgURL, address, birthDate, cpf, name, phone, serviceId });
+  const { token_valid } = res.locals;
 
-  console.log(data, status);
+  console.log(token_valid);
   
+
+  const { data, status } = await appointmentService.createAppointment({ dayOfAtencenceId, patientId, imgURL, address, birthDate, cpf, name, phone, serviceId, token_valid });  
   return res.status(status).json(data);
 }
 

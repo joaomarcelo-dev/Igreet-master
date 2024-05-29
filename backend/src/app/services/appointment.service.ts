@@ -4,9 +4,9 @@ import { ReturnServiceType } from "../../types/ReturnService.type";
 import appointmentModel from "../models/appointment.model";
 import DaysOfAtendenceModel from "../models/daysOfAtendence.model";
 import patientsModel from "../models/patients.model";
-
-import {query} from 'express';
 import serviceModel from "../models/service.model";
+
+import express from 'express';
 
 const getAllAppointment = async (): Promise<ReturnServiceType> => {
   const allAppointment = await appointmentModel.getAllAppointment();
@@ -37,7 +37,7 @@ const updateAppointment = async ({ id, status }: UpdateAppointmentProp): Promise
   }
 }
 
-const createAppointment = async ({ dayOfAtencenceId = '', patientId = '', imgURL, address, birthDate, cpf, name, phone, serviceId = '' }: AppointmentInputType & PatientInputType & { serviceId: string }): Promise<ReturnServiceType> => {
+const createAppointment = async ({ dayOfAtencenceId = '', patientId = '', imgURL, address, birthDate, cpf, name, phone, serviceId = '', token_valid }: AppointmentInputType & PatientInputType & { serviceId: string, token_valid: boolean }): Promise<ReturnServiceType> => {
   const dayOfAtencence = await DaysOfAtendenceModel.getDaysOfAtendenceById(dayOfAtencenceId);
   
   if (!dayOfAtencence) {
@@ -49,19 +49,35 @@ const createAppointment = async ({ dayOfAtencenceId = '', patientId = '', imgURL
     }
   }
 
+  if (token_valid) {
+    const newPatient = await patientsModel.createPatient({ address, birthDate, cpf, name, phone });
+
+    const appointmentCreated = await appointmentModel.createAppointment({
+      dayOfAtencenceId,
+      patientId: newPatient.id,
+      imgURL,
+    });
+
+    return {
+      status: 201,
+      data: appointmentCreated,
+    }
+  }
+
   const patient = await patientsModel.getPatientById(patientId);
 
   if (!patient) {
-    // const service = await serviceModel.getServiceById(serviceId)
+    const service = await serviceModel.getServiceById(serviceId)
 
-    // if (!service) {
-    //   return {
-    //     status: 404,
-    //     data: {
-    //       message: 'Serviço não encontrado'
-    //     }
-    //   }
-    // }   
+    if (!service) {
+      return {
+        status: 404,
+        data: {
+          message: 'Serviço não encontrado'
+        }
+      }
+    }
+    
 
     const newPatient = await patientsModel.createPatient({ address, birthDate, cpf, name, phone });
 
