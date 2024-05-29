@@ -7,7 +7,7 @@ import { PatientInputType } from '../Types/Patient.type';
 
 const { EXPO_PUBLIC_API_URL } = process.env
 
-const BASE_URL = 'https://igreet-master.vercel.app';
+const BASE_URL = EXPO_PUBLIC_API_URL || 'http://10.0.98.2:3333';
 
 type AxiosRequest = {
   data?: any;
@@ -33,8 +33,6 @@ const requestAxios = async ({ data, url, method, query }: AxiosRequest) => {
   }).finally(() => {
     store.dispatch(appActions.setLoading(false));
   });
-
-
 
   return response;
 }

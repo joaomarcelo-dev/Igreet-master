@@ -8,6 +8,8 @@ type ServiceCardPropType = {
   funCheck: (id: string) => void,
   appintmentData: AppointmentType,
   setIndexOption: (index: number | null) => void,
+  handleButtons?: boolean;
+  viewInfo?: 'all' | 'default'
 }
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -17,7 +19,7 @@ import { Image } from "react-native";
 import { imgProfileDefault } from "../../global/conf/imagesDefault";
 import { useState } from "react";
 
-export default function AppointmentCard({ id, index, funCheck, funDelet, appintmentData, setIndexOption }: ServiceCardPropType) {
+export default function AppointmentCard({ id, index, funCheck, funDelet, appintmentData, setIndexOption, handleButtons = true, viewInfo }: ServiceCardPropType) {
   const [visibleOptions, setVisibleOptions] = useState<boolean>(false)
 
   return (
@@ -56,31 +58,44 @@ export default function AppointmentCard({ id, index, funCheck, funDelet, appintm
             <View>
               <Text style={ ContainerStyle.textMoreInfo }>CPF: { appintmentData.patient.cpf }</Text>
               <Text style={ ContainerStyle.textMoreInfo }>Phone: { appintmentData.patient.phone }</Text>
-            </View>
 
-            <View style={ ContainerStyle.containerButtonOptions }>
-              <TouchableOpacity
-                onPress={() => funDelet(id)}
-                style={[ ContainerStyle.buttonOption, ContainerStyle.buttonDelet ]}
-              >
-                <MaterialCommunityIcons
-                  name="trash-can-outline"
-                  size={25}
-                  color={'white'}
-                />
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={() => funCheck(id)}
-                style={[ ContainerStyle.buttonOption, ContainerStyle.buttonAproved ]}
-              >
-                <MaterialCommunityIcons
-                  name="check"
-                  size={25}
-                  color={'green'}
-                />
-              </TouchableOpacity>
+              {
+                viewInfo === 'all' && (
+                  <>
+                    <Text style={ ContainerStyle.textMoreInfo }>Nascimento: { appintmentData.patient.birthDate }</Text>
+                    <Text style={ ContainerStyle.textMoreInfo }>Endereço: { appintmentData.patient.address }</Text>
+                  </>
+                )
+              }
             </View>
+            {
+              handleButtons && (
+
+                <View style={ ContainerStyle.containerButtonOptions }>
+                  <TouchableOpacity
+                    onPress={() => funDelet(id)}
+                    style={[ ContainerStyle.buttonOption, ContainerStyle.buttonDelet ]}
+                  >
+                    <MaterialCommunityIcons
+                      name="trash-can-outline"
+                      size={25}
+                      color={'white'}
+                    />
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => funCheck(id)}
+                    style={[ ContainerStyle.buttonOption, ContainerStyle.buttonAproved ]}
+                  >
+                    <MaterialCommunityIcons
+                      name="check"
+                      size={25}
+                      color={'green'}
+                    />
+                  </TouchableOpacity>
+                </View>
+              )
+            }
           </View>
         }
       </TouchableOpacity>

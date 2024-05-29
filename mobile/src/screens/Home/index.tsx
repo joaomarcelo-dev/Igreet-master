@@ -124,8 +124,7 @@ export default function Home({ navigation }) {
                 <View style={ SpeedAccessStyle.containerButtons }>
                   <TouchableOpacity
                     style={ SpeedAccessStyle.button }
-                    onPress={ () => navigation.navigate('ServicesList') }
-                    disabled={true}
+                    onPress={ () => navigation.navigate('SendDocument') }
                   >
                     <Octicons
                       name="list-unordered"
@@ -151,7 +150,6 @@ export default function Home({ navigation }) {
                   <TouchableOpacity
                     style={ SpeedAccessStyle.button }
                     onPress={ () => navigation.navigate('Settings')}
-                    disabled={true}
                   >
                     <MaterialIcons
                       name="settings"
@@ -194,6 +192,7 @@ export default function Home({ navigation }) {
               <CardPlans
                 nameSection="Lista de Atendimento"
                 textViewMore="Ver histórico"
+                funViewMore={() => navigation.navigate('AppointmentHistory')}
                 textNotFoundItens="Nenhum atendimento pendente"
                 textButton="Marcar como concluido"
                 appointment={ allAppointments[0] }

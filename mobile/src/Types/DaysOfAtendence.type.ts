@@ -1,3 +1,5 @@
+import { AppointmentType } from "./Appointment.type"
+
 export type DayOfAtencenceType = {
   id: string
   date: string
@@ -5,6 +7,7 @@ export type DayOfAtencenceType = {
   hourEnd: string
   title: string
   notification: boolean;
+  Appointments: AppointmentType[]
 }
 
-export type DaysOfAtendenceInputType = Omit<DayOfAtencenceType, 'id'>
+export type DaysOfAtendenceInputType = Omit<DayOfAtencenceType, 'id' |'Appointments'>

@@ -4,13 +4,16 @@ import Home from '../screens/Home';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Users from '../screens/Users';
 import Calendar from '../screens/Calendar';
-import Settings from '../screens/Settings';
 import Profile from '../screens/Profile';
 import NewAppointment from '../screens/NewAppointment';
 import MessageAlert from '../components/MessageAlert';
 import Login from '../screens/Login';
 import { useSelector } from 'react-redux';
 import { RootReducerType } from '../Types/RootReducer.type';
+import AppointmentHistory from '../screens/AppointmentHistory';
+import Notifications from '../screens/Notifications';
+import Settings from '../screens/Settings';
+import SendDocument from '../screens/SendDocument';
 
 export default function TabBottom() {
   const TabBottom = createBottomTabNavigator();
@@ -76,6 +79,31 @@ export default function TabBottom() {
                   tabBarButton: () => null,
                 }}
               />
+
+              <TabBottom.Screen
+                name='AppointmentHistory'
+                component={ AppointmentHistory }
+                options={{
+                  tabBarButton: () => null,
+                }}
+              />
+
+              <TabBottom.Screen
+                name='Notifications'
+                component={ Notifications }
+                options={{
+                  tabBarButton: () => null,
+                }}
+              />
+
+              <TabBottom.Screen
+                name='SendDocument'
+                component={ SendDocument }
+                options={{
+                  tabBarButton: () => null,
+                }}
+              />
+
           </>
         ) : (
           <TabBottom.Screen

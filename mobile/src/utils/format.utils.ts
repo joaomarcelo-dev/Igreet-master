@@ -20,9 +20,15 @@ const formatInputDate = (input: string) => {
   }
 }
 
+const convertDate = (dateStr: string) => {
+  const [day, month, year] = dateStr.split('-');
+  return `${year}/${month}/${day}`;
+}
+
 const formatUtils = {
   formatNumberPhoneVenom,
   formatInputDate,
+  convertDate,
 }
 
 export default formatUtils;

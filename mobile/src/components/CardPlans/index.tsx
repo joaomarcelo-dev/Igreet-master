@@ -12,15 +12,16 @@ type CardPlansPropType = {
   textButton: string,
   actionsButton: (id: string) => void,
   deleteAppointment: (id: string) => void,
+  funViewMore: () => void,
   appointment: AppointmentType
 }
 
-export default function CardPlans({ nameSection, textButton, textNotFoundItens, textViewMore, actionsButton, appointment, deleteAppointment }: CardPlansPropType) {  
+export default function CardPlans({ nameSection, textButton, textNotFoundItens, textViewMore, actionsButton, appointment, deleteAppointment, funViewMore }: CardPlansPropType) {  
   return (
     <View style={ CardPlansStyle.container }>
       <View style={ CardPlansStyle.topOptions }>
         <Text style={ CardPlansStyle.textNameCard }>{ nameSection }</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={funViewMore}>
           <Text style={ CardPlansStyle.textMoreOptions }>{ textViewMore }</Text>
         </TouchableOpacity>
       </View>

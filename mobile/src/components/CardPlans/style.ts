@@ -44,6 +44,8 @@ const CardPlansStyle = StyleSheet.create({
   textNotFoundItens: {
     textAlign: 'center',
     fontSize: 17,
+    paddingVertical: 20,
+    color: colors.disabled
   },
 
   contentInfo: {

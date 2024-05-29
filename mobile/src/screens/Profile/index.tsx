@@ -8,8 +8,16 @@ import { ContainerStyle } from "../Home/styles";
 import OptionItem from "../../components/OptionItem";
 import { ConteinerButtonsOptionsStyle, OptionsUserLogStyle } from "../../components/OptionItem/styles";
 import HeaderScreen from "../../components/HeaderScreen";
+import { useDispatch } from "react-redux";
+import userActions from "../../redux/actions/user.actions";
 
 export default function Profile() {
+  const dispatch = useDispatch();
+
+  const handleLogOut = () => {
+    dispatch(userActions.logOut());
+  }
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
       <HeaderScreen
@@ -65,7 +73,9 @@ export default function Profile() {
             <Text style={ OptionsUserLogStyle.texts }>Trocar sua senha</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleLogOut}
+          >
             <Text style={ OptionsUserLogStyle.texts }>Sair</Text>
           </TouchableOpacity>
         </View>
