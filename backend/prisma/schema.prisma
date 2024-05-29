@@ -37,8 +37,8 @@ model Appointments {
   createAt         DateTime @default(now())
   imgURL           String?
 
-  patient        Patients        @relation(fields: [patientId], references: [id])
-  dayofatendence DaysOfAtendence @relation(fields: [dayOfAtencenceId], references: [id], onDelete: Cascade)
+  patient        Patients        @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  dayofatendence DaysOfAtendence @relation(fields: [dayOfAtencenceId], references: [id])
 }
 
 model DaysOfAtendence {
