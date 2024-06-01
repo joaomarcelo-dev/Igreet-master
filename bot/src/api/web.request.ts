@@ -24,6 +24,6 @@ type PostService = {
 }
 
 export const postService = async ({ imgURL, phone }: PostService) => requestServer({ method: 'post', url: '/service', data: { imgURL, phone } });
-export const getAllDaysOfAtendence = async () => requestServer({ method: 'get', url: '/days-of-atendence', });
+export const getAllDaysOfAtendence = async () => requestServer({ method: 'get', url: '/days-of-atendence', query: 'status=true' });
 export const getPatientsByPhoneNumber = async (phoneNumber: string) => requestServer({ method: 'get', url: '/patient', query: `phoneNumber=${phoneNumber}`  })
 export const postAppointment = async (data: AppointmentInputType) => requestServer({ method: 'post', url: '/appointment', data, })

@@ -3,7 +3,9 @@ import DaysOfAtendenceService from "../services/daysOfAtendence.service";
 import { DaysOfAtendenceInputType } from "../../types/DaysOfAtendence.type";
 
 const getAllDaysOfAtendence = async (req: Request, res: Response) => {
-  const { data, status } = await DaysOfAtendenceService.getAllDaysOfAtendence();
+  const { status: statusRequest } = req.query;
+
+  const { data, status } = await DaysOfAtendenceService.getAllDaysOfAtendence(statusRequest);
   return res.status(status).json(data);
 };
 

@@ -7,7 +7,7 @@ import { PatientInputType } from '../Types/Patient.type';
 
 const { EXPO_PUBLIC_API_URL } = process.env
 
-const BASE_URL = 'http://192.168.1.227:3333';
+const BASE_URL = 'https://igreet-master.vercel.app';
 
 type AxiosRequest = {
   data?: any;
@@ -48,7 +48,7 @@ export const getAllPatients = async () => requestAxios({ url: '/patient', method
 export const deletePatient = async (id: string) => requestAxios({ method: 'delete', url: '/patient', query: `id=${id}` })
 
 // =========================/ Days Of Atendence /========================================================== //
-export const getAllDaysOfAtendence = async () => requestAxios({ url: '/days-of-atendence', method: 'get' });
+export const getAllDaysOfAtendence = async (status?: 'true') => requestAxios({ url: '/days-of-atendence', method: 'get', query: `status=${status}` });
 export const createDaysOfAtendence = async ({ date, hourEnd, hourStart, title, notification }: DaysOfAtendenceInputType) => requestAxios({ url: '/days-of-atendence', method: 'post', data: { date, hourStart, hourEnd, title, notification } });
 export const deleteDaysOfAtendence = async (id: string) => requestAxios({ method: 'put', url: '/days-of-atendence', data: { id }})
 

@@ -1,24 +1,45 @@
 import prisma from "../../providers/prisma.provider";
 import { DaysOfAtendenceInputType } from "../../types/DaysOfAtendence.type";
 
-const getAllDaysOfAtendence = async () => prisma.daysOfAtendence.findMany({
-  orderBy: {
-    date: 'asc'
-  },
-  where: {
-    active: true,
-  },
-  include: {
-    Appointments: {
-      include: {
-        patient: true,
+const getAllDaysOfAtendence = async (status: any) => {
+  if (status === 'true') {
+    return prisma.daysOfAtendence.findMany({
+      orderBy: {
+        date: 'desc'
       },
       where: {
-        complet: true
+        active: status === 'true',
+      },
+      include: {
+        Appointments: {
+          include: {
+            patient: true,
+          },
+          where: {
+            complet: true
+          }
+        }
+      }
+    });
+  }
+
+  return prisma.daysOfAtendence.findMany({
+    orderBy: {
+      date: 'desc'
+    },
+    include: {
+      Appointments: {
+        include: {
+          patient: true,
+        },
+        where: {
+          complet: true
+        }
       }
     }
-  }
-})
+  });
+
+} 
 
 const createDayOfAtendence = async ({ date, hourEnd, hourStart, title, notification }: DaysOfAtendenceInputType) => prisma.daysOfAtendence.create({
   data: {

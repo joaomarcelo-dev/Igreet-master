@@ -18,6 +18,7 @@ import { AppointmentType } from "../../Types/Appointment.type";
 import { Image } from "react-native";
 import { imgProfileDefault } from "../../global/conf/imagesDefault";
 import { useState } from "react";
+import formatUtils from "../../utils/format.utils";
 
 export default function AppointmentCard({ id, index, funCheck, funDelet, appintmentData, setIndexOption, handleButtons = true, viewInfo }: ServiceCardPropType) {
   const [visibleOptions, setVisibleOptions] = useState<boolean>(false)
@@ -57,7 +58,7 @@ export default function AppointmentCard({ id, index, funCheck, funDelet, appintm
           <View style={ ContainerStyle.moreInfo }>
             <View>
               <Text style={ ContainerStyle.textMoreInfo }>CPF: { appintmentData.patient.cpf }</Text>
-              <Text style={ ContainerStyle.textMoreInfo }>Phone: { appintmentData.patient.phone }</Text>
+              <Text style={ ContainerStyle.textMoreInfo }>Phone: { `${appintmentData.patient.phone ? formatUtils.formatNumberPhoneVenom(appintmentData.patient.phone) : 'Não informado'}` }</Text>
 
               {
                 viewInfo === 'all' && (

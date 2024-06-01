@@ -47,7 +47,7 @@ export default function CardUser({ patient, deletPatientFun, markConsultFun }: C
           <View>
             <Text style={ ContainerStyle.textDetail }>Nascimento: { patient.birthDate }</Text>
             <Text style={ ContainerStyle.textDetail }>CPF: { patient.cpf }</Text>
-            <Text style={ ContainerStyle.textDetail }>Telefone: { formatUtils.formatNumberPhoneVenom(patient.phone) }</Text>
+            <Text style={ ContainerStyle.textDetail }>Telefone: { patient.phone ? formatUtils.formatNumberPhoneVenom(patient.phone) : 'Não informado'}</Text>
           </View>
 
           <View style={ ContainerStyle.containerButtonOptions }>

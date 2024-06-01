@@ -17,14 +17,13 @@ export default function AppointmentHistorySection({ appointments, day }: Appoint
 
   return (
     <View style={ ContainerStyle.contente }>
-      <View>
+      <View style={ ContainerStyle.containerDate }>
+        <View style={ ContainerStyle.line } />
         <Text style={ ContainerStyle.textDate }>{ formatUtils.convertDate(day.date) } __ ( {appointments.length} )</Text>
       </View>
 
       {
-        appointments.map((appointment, index) => {
-          console.log(appointment);
-          
+        appointments.map((appointment, index) => {          
           return (
             <AppointmentCard
               key={ appointment.id }

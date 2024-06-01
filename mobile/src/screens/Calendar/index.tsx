@@ -84,7 +84,7 @@ export default function Calendar({ navigation }) {
   }, []);
   
   const handleGetAllDaysOfAtendence = async () => {
-    const { data: allDaysOfAtendence } = await getAllDaysOfAtendence();    
+    const { data: allDaysOfAtendence } = await getAllDaysOfAtendence('true');    
     setAllDaysOfAtendence(allDaysOfAtendence);  
   }
 
@@ -285,7 +285,7 @@ export default function Calendar({ navigation }) {
                 <>
                   <CalendarComponent
                     style={ CalendarStyle.calendar } 
-                    current={'2024-05-01'}
+                    current={'2024-06-01'}
                     markedDates={ handleDaysOfAtendenc(allDaysOfAtendence) }
                     markingType={'dot'}
                     onDayPress={(date) => {
