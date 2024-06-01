@@ -18,7 +18,7 @@ export default function AppointmentHistorySection({ appointments, day }: Appoint
   return (
     <View style={ ContainerStyle.contente }>
       <View>
-        <Text style={ ContainerStyle.textDate }>{ formatUtils.convertDate(day.date) }</Text>
+        <Text style={ ContainerStyle.textDate }>{ formatUtils.convertDate(day.date) } __ ( {appointments.length} )</Text>
       </View>
 
       {

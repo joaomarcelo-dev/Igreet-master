@@ -83,16 +83,6 @@ export default function Users({ navigation }) {
         visible={visibleAlert.visible}
       />
 
-      <AlertBox
-        message="Tem certeza de que deseja marcar um consulta para esse paciente?"
-        onNoPress={() => setVisibleAlert({ visible: false, id: ''})}
-        onYesPress={async () => {
-          await handleDeletPatient(visibleAlert.id);
-          setVisibleAlert({ visible: false, id: ''})
-        }}
-        visible={visibleAlert.visible}
-      />
-
 
       <RefreshComponent handleRefresh={ async () => {
         await handleGetAllPatients();

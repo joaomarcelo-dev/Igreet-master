@@ -7,7 +7,7 @@ import { PatientInputType } from '../Types/Patient.type';
 
 const { EXPO_PUBLIC_API_URL } = process.env
 
-const BASE_URL = EXPO_PUBLIC_API_URL || 'http://10.0.98.2:3333';
+const BASE_URL = 'http://192.168.1.227:3333';
 
 type AxiosRequest = {
   data?: any;
@@ -28,7 +28,7 @@ const requestAxios = async ({ data, url, method, query }: AxiosRequest) => {
     store.dispatch(appActions.setRequestStatus({ success: true, visible: true }));
     return response;
   }).catch((e) => {
-    // store.dispatch(appActions.setRequestStatus({ success: false, visible: true }));
+    store.dispatch(appActions.setRequestStatus({ success: false, visible: true }));
     return e
   }).finally(() => {
     store.dispatch(appActions.setLoading(false));

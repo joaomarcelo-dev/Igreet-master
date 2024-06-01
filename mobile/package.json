@@ -7,7 +7,7 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "build": "npx eas build --platform android --profile apk"
+    "build": "eas build --platform android --profile apk"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
