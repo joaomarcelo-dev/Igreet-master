@@ -35,7 +35,7 @@ export default function NewAppointment() {
 
 
   const handleGetDaysOfAtendence = async () => {
-    const { data: allDaysOfAtendence } = await getAllDaysOfAtendence();
+    const { data: allDaysOfAtendence } = await getAllDaysOfAtendence('true');
     setAllDaysOfAtendence(allDaysOfAtendence);
   }
 
@@ -63,7 +63,7 @@ export default function NewAppointment() {
 
   useEffect(() => {
     handleGetDaysOfAtendence
-  }, [])
+  }, []);
 
   const sendDisabled = !formData.name || !formData.cpf || !formData.birthDate || !formData.dayOfAtencenceId || !formData.address;
 

@@ -52,7 +52,7 @@ export default function Users({ navigation }) {
   }
 
   const handleGetAllDaysOfAtendence = async () => {
-    const { data: allDaysOfAtendence } = await getAllDaysOfAtendence();
+    const { data: allDaysOfAtendence } = await getAllDaysOfAtendence('true');
     setAllDaysOfAtendence(allDaysOfAtendence);
   }
 
