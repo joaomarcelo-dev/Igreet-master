@@ -14,7 +14,7 @@ appointmentRouter.route('/')
   appointmentController.updateAppointment,
 )
 .post(
-  authMiddleware.authToken,
+  // authMiddleware.authToken,
   appointmentController.createAppointment,
 )
 .delete(
