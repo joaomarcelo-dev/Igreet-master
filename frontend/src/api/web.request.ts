@@ -15,6 +15,6 @@ export const requestServer = ({ data, method, url, parms }: RequestProps) => axi
   
 
 export const getService = async (code: string) => requestServer({ method: 'get', url: '/service', parms: `code=${code}` });
-export const getAllDaysOfAtendence = async () => requestServer({ method: 'get', url: '/days-of-atendence' });
+export const getAllDaysOfAtendence = async () => requestServer({ method: 'get', url: '/days-of-atendence', parms: 'status=true' });
 export const getPatientByPhoneNumber = async (phoneNumber: string) => requestServer({ method: 'get', url: '/patient', parms: `phoneNumber=${phoneNumber}` });
 export const postAppointment = async (data : PatientInputType & AppointmentInputType & { serviceId: string }) => requestServer({ method: 'post', url: '/appointment', data, });
