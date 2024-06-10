@@ -302,12 +302,16 @@ const messages: { [key in State]: (venom: Whatsapp, message: Message, userState:
       await messages.sendDaysOfConsult(venom, message, userState[message.from]);
     } else if (choice === '2') {
       const { data }: { data: PatientType[] } = await getPatientsByPhoneNumber(message.from);
+      const { data: daysOfAtendence }: { data: DayOfAtencenceType[] } = await getAllDaysOfAtendence();
+      if (!daysOfAtendence.length) return await venom.sendText(message.from, 'Ops... Não temos nenhum dia para consulta disponivel ainda!')
+        
       if (!data.length) {
         const { data: service } = await postService({ imgURL: message.sender.profilePicThumbObj.eurl, phone: message.from });
         await venom.sendText(message.from, `Por favor preencha o formulário no link a seguir: ${BASE_URL_FRONT}/form/${service.code}`);
         delete userState[message.from];
         return;
       }
+
       userState[message.from].step = 'markConsult';
       userState[message.from].data = { patients: data };
       await messages.markConsult(venom, message, userState[message.from]);
@@ -315,9 +319,11 @@ const messages: { [key in State]: (venom: Whatsapp, message: Message, userState:
       await venom.sendText(message.from, 'Opção inválida. Por favor, digite 1 para verificar os dias disponíveis ou 2 para agendar uma consulta.');
     }
   },
+
   sendDaysOfConsult: async (venom, message) => {
     const { data }: { data: DayOfAtencenceType[] } = await getAllDaysOfAtendence();
-    await venom.sendText(message.from, `Os dias de atendimento disponíveis são:\n\n${data.map((day, index) => `🗓 Dia - ${formateDate(day.date)} - Hora: ${day.hourStart}\n`).join('')}\n\n Se deseja marcar uma consulta, por favor, me envie uma mensagem novamente e selecione a opção de numero 2️⃣ 🙂\nTenha um ótimo dia! 🌅🌞😉`);
+    if (!data.length) return await venom.sendText(message.from, 'Ops... Não temos nenhum dia para consulta disponivel ainda!')
+    await venom.sendText(message.from, `Os dias de atendimento disponíveis são:\n\n${data.map((day, index) => `🗓 Dia - ${formateDate(day.date)} - Hora: ${day.hourStart}\n`).join('')}\n\n Se deseja marcar uma consulta, por favor, me envie uma mensagem novamente e selecione a opção de numero 2️⃣ \nObrigado e volte sempre`);
     delete userState[message.from];
   },
 
