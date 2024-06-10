@@ -289,7 +289,7 @@ const formateDate = (date: string) => {
   return `${day}/${mouth}/${year}`
 }
 
-const messages: { [key in State]: (venom: Whatsapp, message: Message, userState: UserState) => Promise<void> } = {
+const messages: { [key in State]: (venom: Whatsapp, message: Message, userState: UserState) => Promise<any> } = {
   initial: async (venom, message) => {
     await venom.sendText(message.from, '🤖 Olá, tudo bem? Por favor digite o número da ação desejada de acordo com a ordem abaixo ⬇️:\n\n1️⃣ - Verificar os dias disponíveis\n2️⃣ - Agendar uma consulta');
     userState[message.from].step = 'waitingForInitialChoice';
